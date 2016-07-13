@@ -1,25 +1,20 @@
-/**
- * @TODO:
- *     - src to build?
- *     - grunt task for less/css
- *     - grunt task for js
- *     - organize files by components (8-1)
- *         - change template .html files to .tpl.html
- *         - move src/vendor to vendor/
- */
-
 module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        /** clean up old stuff */
+        clean: {
+            build: 'build'
+        },
         /** less pre-compiler */
         less: {
             app: {
                 options: {
                     // compress: true,
                     // sourceMap: true,
-                    // sourceMapFilename: 'src/css/app.css.min.map',
+                    // sourceMapFileInline: true,
+                    // sourceMapFilename: 'app.min.css.map',
                     // sourceMapBasepath: 'build/css',
                     plugins: [
                         new (require('less-plugin-autoprefix'))({ browsers: ['last 2 versions', '> 1%'] }),
@@ -27,89 +22,185 @@ module.exports = function(grunt) {
                     ]
                 },
                 files: {
-                    'src/css/app.min.css': 'src/less/app.less',
+                    'build/css/app.min.css': 'src/less/app.less',
                 }
             }
         },
-        /** copy stuff as needed */
+        /** copy stuff to build directory */
         copy: {
             fonts: {
-                files: [
+                src: [
+                    'src/vendors/bower_components/material-design-iconic-font/dist/fonts/**/*'
+                ],
+                dest: 'build/fonts/',
+                flatten: true,
+                expand: true,
+                cwd: '.'
+            },
+            assets: {
+                src: [
+                    'fonts/**/*',
+                    'img/**/*',
+                    'data/**/*',
+                    'media/**/*'
+                ],
+                cwd: 'src/',
+                dest: 'build/',
+                expand: true
+            },
+            js: {
+                src: [
+                    'js/**/*'
+                ],
+                cwd: 'src/',
+                dest: 'build/',
+                expand: true
+            },
+            vendor: {
+                src: [
+                    'vendors/**/*'
+                ],
+                cwd: '.',
+                dest: 'build/'
+            },
+            views: {
+                src: [
+                    'views/**/*'
+                ],
+                cwd: 'src/',
+                dest: 'build/',
+                expand: true
+            },
+            html: {
+                src: ['*.html'],
+                cwd: 'src/',
+                dest: 'build/',
+                expand: true
+            }
+        },
+        /** replace text strings (i.e., urls, etc.) */
+        replace: {
+            templates: {
+                src: 'build/js/templates.js',
+                overwrite: true,
+                replacements: [
                     {
-                        src: [
-                            'src/vendors/bower_components/material-design-iconic-font/dist/fonts/**/*'
-                        ],
-                        dest: 'src/fonts/',
-                        flatten: true,
-                        expand: true,
-                        filter: 'isFile',
-                        cwd: '.',
-                        nonull: true
+                        from: 'src/template/',
+                        to: 'template/'
                     }
                 ]
             }
         },
         /** concatenate & register angular templates */
         ngtemplates: {
-          materialAdmin: {
-            src: ['src/template/**.html', 'src/template/**/**.html'],
-            dest: 'src/js/templates.js',
-            options: {
-              htmlmin: {
-                    collapseWhitespace: true,
-                    collapseBooleanAttributes: true
-              }
+            app: {
+                src: ['src/template/**/*.html'],
+                dest: 'build/js/templates.js',
+                options: {
+                    module: 'materialAdmin',
+                    htmlmin: {
+                        collapseWhitespace: true,
+                        collapseBooleanAttributes: true
+                    }
+                }
             }
-          }
         },
         /** serve it up */
         browserSync: {
             dev: {
                 bsFiles: {
                     src: [
-                        'src/assets/*.css',
-                        'src/*.js',
-                        'src/src/**/*.js',
-                        'src/*.html'
+                        'build/css/*.css',
+                        'build/js/*.js',
+                        'build/**/*.html',
+                        'build/data/**/*',
+                        'build/fonts/**/*',
+                        'build/img/**/*',
+                        'build/media/**/*'
                     ]
                 },
                 options: {
                     watchTask: true,
-                    server: 'src',
+                    server: 'build',
                     port: 8080
                 }
             }
         },
         /** watch files for changes and build incrementally */
         watch: {
-            a: {
-                files: ['src/less/**/*.less'], // which files to watch
-                tasks: ['less'],
+            css: {
+                files: ['src/less/**/*.less'],
+                tasks: ['less']
+            },
+            templates: {
+                files: ['<%= ngtemplates.app.src %>'],
+                tasks: ['ngtemplates', 'replace:templates']
+            },
+            js: {
+                files: ['<%= copy.js.src %>'],
+                tasks: ['copy:js'],
                 options: {
-                    nospawn: true
+                    cwd: {
+                        files: '<%= copy.js.cwd %>'
+                    },
+                    spawn: false
                 }
             },
-            b: {
-                files: ['src/template/**/*.html'], // which files to watch
-                tasks: ['ngtemplates'],
+            views: {
+                files: ['<%= copy.views.src %>'],
+                tasks: ['copy:views'],
                 options: {
-                    nospawn: true
+                    cwd: {
+                        files: '<%= copy.views.cwd %>'
+                    },
+                    spawn: false
+                }
+            },
+            html: {
+                files: ['<%= copy.html.src %>'],
+                tasks: ['copy:html'],
+                options: {
+                    cwd: {
+                        files: '<%= copy.html.cwd %>'
+                    },
+                    spawn: false
+                }
+            },
+            assets: {
+                files: ['<%= copy.assets.src %>'],
+                tasks: ['copy:assets'],
+                options: {
+                    cwd: {
+                        files: '<%= copy.assets.cwd %>'
+                    },
+                    spawn: false
                 }
             }
         }
     });
 
+    grunt.event.on('watch', function (action, filepath) {
+        grunt.config('copy.assets.src', filepath.replace('src/', ''));
+        grunt.config('copy.js.src', filepath.replace('src/', ''));
+        grunt.config('copy.views.src', filepath.replace('src/', ''));
+        grunt.config('copy.html.src', filepath.replace('src/', ''));
+    });
+
     // Load the plugin that provides the "less" task.
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-text-replace');
 
     // Default task(s).
     grunt.registerTask('default', [
+        'clean',
         // js
         'ngtemplates',
+        'replace',
         // css
         'less',
         // copy stuff

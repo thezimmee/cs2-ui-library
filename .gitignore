@@ -1,0 +1,5 @@
+# ignore build directory
+/build/
+
+# ignore vendors / 3rd party code (managed by npm/bower)
+/vendors/
