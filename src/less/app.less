@@ -1,56 +1,124 @@
-/*
- * Load Main Bootstrap LESS files
+/**
+ * app styles
+ * ----------
+ * we follow the 7-1 pattern (https://sass-guidelin.es/#the-7-1-pattern). styles are grouped and ordered as follows:
+ * 	- vendors (3rd party code that should never be modified)
+ * 	- abstracts (helpers that do not produce css, such as variables, mixins, extends, functions, etc.)
+ * 	- base (base/core code -- such as a reset -- that does not belong to a component or view)
+ * 	- components (self contained module)
+ * 	- layout (page layouts; could be included in components)
+ * 	- views (connects components to a particular "page" or "view")
+ * 	- themes (usually only applicable when distributing a framework)
  */
 
+
+/**
+ * vendors
+ * -------
+ * 3rd party code that should never be modified
+ */
+/** bootstrap */
+@import '../../vendors/bower_components/bootstrap/less/variables.less';
+@import '../../vendors/bower_components/bootstrap/less/mixins.less';
+// bootstrap reset and dependencies
+@import '../../vendors/bower_components/bootstrap/less/normalize.less';
+@import '../../vendors/bower_components/bootstrap/less/print.less';
+@import '../../vendors/bower_components/bootstrap/less/glyphicons.less';
+// bootstrap core
+@import '../../vendors/bower_components/bootstrap/less/scaffolding.less';
+@import '../../vendors/bower_components/bootstrap/less/type.less';
+@import '../../vendors/bower_components/bootstrap/less/code.less';
+// @import '../../vendors/bower_components/bootstrap/less/grid.less';
+@import '../../vendors/bower_components/bootstrap/less/tables.less';
+@import '../../vendors/bower_components/bootstrap/less/forms.less';
+@import '../../vendors/bower_components/bootstrap/less/buttons.less';
+// bootstrap css components
+@import '../../vendors/bower_components/bootstrap/less/component-animations.less';
+@import '../../vendors/bower_components/bootstrap/less/dropdowns.less';
+@import '../../vendors/bower_components/bootstrap/less/button-groups.less';
+@import '../../vendors/bower_components/bootstrap/less/input-groups.less';
+@import '../../vendors/bower_components/bootstrap/less/navs.less';
+@import '../../vendors/bower_components/bootstrap/less/navbar.less';
+@import '../../vendors/bower_components/bootstrap/less/breadcrumbs.less';
+@import '../../vendors/bower_components/bootstrap/less/pagination.less';
+@import '../../vendors/bower_components/bootstrap/less/pager.less';
+@import '../../vendors/bower_components/bootstrap/less/labels.less';
+@import '../../vendors/bower_components/bootstrap/less/badges.less';
+@import '../../vendors/bower_components/bootstrap/less/jumbotron.less';
+@import '../../vendors/bower_components/bootstrap/less/thumbnails.less';
+@import '../../vendors/bower_components/bootstrap/less/alerts.less';
+@import '../../vendors/bower_components/bootstrap/less/progress-bars.less';
+@import '../../vendors/bower_components/bootstrap/less/media.less';
+@import '../../vendors/bower_components/bootstrap/less/list-group.less';
+@import '../../vendors/bower_components/bootstrap/less/panels.less';
+@import '../../vendors/bower_components/bootstrap/less/responsive-embed.less';
+@import '../../vendors/bower_components/bootstrap/less/wells.less';
+@import '../../vendors/bower_components/bootstrap/less/close.less';
+// bootstrap javascript components
+@import '../../vendors/bower_components/bootstrap/less/modals.less';
+@import '../../vendors/bower_components/bootstrap/less/tooltip.less';
+@import '../../vendors/bower_components/bootstrap/less/popovers.less';
+@import '../../vendors/bower_components/bootstrap/less/carousel.less';
+// bootstrap utility classes
+@import '../../vendors/bower_components/bootstrap/less/utilities.less';
+@import '../../vendors/bower_components/bootstrap/less/responsive-utilities.less';
+
+/** vendor components */
 @import (inline) '../../vendors/bower_components/animate.css/animate.min.css';
 @import (inline) '../../vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
 @import (inline) '../../vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css';
 @import (inline) '../../vendors/bower_components/angular-loading-bar/src/loading-bar.css';
 @import (inline) '../../vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css';
-
-@import '../../vendors/bower_components/bootstrap/less/bootstrap';
-
-/*
- * LESS Plugins
- */
-@import 'inc/less-plugins/for'; 
-
-
-/*
- * Variable and Mixin
- */
-
-@import 'inc/variables';
-@import 'inc/mixin';
-
-/*
- * Load Font
- */
-@import 'inc/font';
-
-/*
- * Vendors
- */
 @import '../../vendors/weather-icons/weather-icons';
 @import '../../vendors/fileinput/fileinput';
 @import '../../vendors/bower_components/material-shadows/material-shadows';
 @import '../../vendors/bower_components/Waves/src/less/waves';
 
-/*
- * Load Website related LESS files
+
+/**
+ * abstracts
+ * ---------
+ * less helpers that does not directly produce css.
+ * variables, mixins, extends, functions, etc.
  */
-@import 'inc/generics';
-@import 'inc/bootstrap-overrides';
-@import 'inc/base';
+@import 'abstract/functions/for';
+@import 'abstract/variables';
+@import 'abstract/mixins';
+
+
+/**
+ * base
+ * ----
+ * global / core styles (such as a reset) that do not belong to a component or view
+ */
+@import 'base/bootstrap-overrides';
+@import 'base/base';
+@import 'base/layout';
+@import 'base/font';
+
+@import 'helpers/color-helpers';
+@import 'helpers/layout-helpers';
+@import 'helpers/font-helpers';
+@import 'helpers/grid-helpers';
+@import 'helpers/size-helpers';
+@import 'helpers/spacing-helpers';
+@import 'helpers/ui-helpers';
+
+
+/**
+ * components
+ * ----------
+ * self contained modules
+ */
 @import 'inc/list';
-@import 'inc/header';
-@import 'inc/sidebar';
+@import '../components/layout/header';
+@import '../components/navbar/navbar';
 @import 'inc/dropdown';
 @import 'inc/listview';
 @import 'inc/progress-bar';
 @import 'inc/chat';
 @import 'inc/tabs';
-@import 'inc/card';
+@import '../components/card/card';
 @import 'inc/chart';
 @import 'inc/widgets';
 @import 'inc/table';
@@ -83,11 +151,10 @@
 @import 'inc/skin';
 @import 'inc/preloader';
 
+/** print styles */
 @import 'inc/print';
 
-/*
- * Vendor Overrides
- */
+/** vendor overrides */
 @import 'inc/vendor-overrides/mediaelement';
 @import 'inc/vendor-overrides/fullcalendar';
 @import 'inc/vendor-overrides/chosen';

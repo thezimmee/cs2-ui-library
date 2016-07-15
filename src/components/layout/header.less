@@ -1,126 +1,52 @@
-/*
- * Common header classes & IDs
- * Do not remove this
+/**
+ * .header
+ * -------
+ * global page header
+ * 
+ * elements:
+ * modifiers:
  */
-.header-inner {
-    list-style: none;
-    padding: 17px 0;
-    margin-bottom: 0;
-    position: relative;
 
-    & > li {
-        &:not(.pull-right) {
-            float: left;
-        }
+.header {
+    &:extend(.row--large);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+    user-select: none;
 
-        &:not(:last-child) {
-            margin-right: -2px;
-        }
+    // &:not(.sidebar-toggled) {
+    //     &.header-up {
+    //         .translate3d(0, -70px, 0);
+    //     }
+    // }
+
+    @media (min-width: 768px) {
+        position: fixed;
+        z-index: 11;
+        width: 100%;
+        left: 0;
+        top: 0;
+        padding: 0 10px;
+    }
+
+    .logo a {
+        padding: 7px 10px;
     }
 }
 
-.logo {
-    a {
-        color: #fff;
-        text-transform: uppercase;
-        display: block;
-        font-size: 16px;
+.header__title {
+    color: @m-white;
+    flex-grow: 1;
+    font-size: 22px;
+
+    .header__action + & {
+        margin-left: 10px;
     }
 }
 
-#menu-trigger  {
-    width: 65px;
-    height: 35px;
-    cursor: pointer;
-
-    .line-wrap .line {
-        background-color: #fff;
-    }
-
-    &:before {
-        content: "";
-        position: absolute;
-        top: 13px;
-        left: 7px;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.22);
-        .transition(all);
-        .transition-duration(300ms);
-        .scale(0);
-        z-index: 0;
-    }
-
-    &.open {
-        &:before {
-            .scale(1);
-        }
-    }
-}
-
-.top-menu {
-    list-style: none;
-    padding: 0;
-
-    & > li {
-        display: inline-block;
-        margin: 0 1px;
-        vertical-align: top;
-        min-width: 50px;
-
-        @media (max-width: @screen-xs-max) {
-            position: static !important;
-        }
-
-        .dropdown-menu-lg {
-            padding: 0;
-
-            .lv-body {
-                min-height: 295px;
-                overflow-x: hidden;
-            }
-        }
-
-        &:not(#toggle-width) {
-            .hover-pop(rgba(0,0,0,0.12), 2px, 250ms, 0);
-        }
-
-        & > a {
-            color: #fff;
-            display: block;
-            text-align: center;
-            z-index: 1;
-            position: relative;
-
-            & > .tm-icon {
-                font-size: 24px;
-                line-height: 36px;
-            }
-
-            & > .tm-label {
-                line-height: 35px;
-                white-space: nowrap;
-                padding: 0 10px;
-                font-size: @font-size-base + 1;
-                text-transform: uppercase;
-            }
-
-            & > .tmn-counts {
-                position: absolute;
-                font-style: normal;
-                background: @m-red;
-                padding: 1px 5px;
-                border-radius: 2px;
-                right: 7px;
-                top: -3px;
-                font-size: 10px;
-                line-height: 15px;
-            }
-
-
-        }
-    }
+.header__local-actions,
+.header__global-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
     @media (max-width: @screen-xs-max) {
         .dropdown-menu-lg {
@@ -131,6 +57,54 @@
             right: 14px;
             top: 55px;
         }
+    }
+}
+
+.header__action {
+    display: inline-block;
+    min-width: 44px;
+
+    @media (max-width: @screen-xs-max) {
+        position: static !important;
+    }
+
+    .dropdown-menu-lg {
+        padding: 0;
+
+        .lv-body {
+            min-height: 295px;
+            overflow-x: hidden;
+        }
+    }
+
+    .tm-icon {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .tm-label {
+        line-height: 35px;
+        white-space: nowrap;
+        padding: 0 10px;
+        font-size: @font-size-base + 1;
+        text-transform: uppercase;
+    }
+
+    .tmn-counts {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 16px;
+        width: 16px;
+        position: absolute;
+        font-style: normal;
+        background: @m-red;
+        border-radius: 50%;
+        right: 2px;
+        top: 2px;
+        font-size: 10px;
+        overflow: hidden;
+        z-index: 1;
     }
 }
 
@@ -172,39 +146,13 @@
 
 
 
-/*
- * For header type 1 only
- * You may remove these if you opt header 2
- */
-#header {
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
-    min-height: @header-height;
-    .user-select(none);
-
-    &:not(.sidebar-toggled) {
-        &.header-up {
-            .translate3d(0, -70px, 0);
-        }
-    }
-
-    position: fixed;
-    z-index: 11;
-    width: 100%;
-    left: 0;
-    top: 0;
-    padding: 0 11px;
-
-    .logo a {
-        padding: 7px 10px;
-    }
-}
 
 #top-search-wrap {
     position: absolute;
     top: -65px;
     left: 0;
     width: 100%;
-    height: @header-height;
+    // height: @header-height;
     background: #fff;
     .transition(all);
     .transition-duration(300ms);
@@ -261,53 +209,17 @@
 }
 
 /* Full Width Layout */
-#toggle-width {
-    @media(min-width: @screen-lg-min) {
-        .toggle-switch {
-            margin: 9px 30px 0 0;
-
-            .ts-helper {
-                height: 11px;
-                width: 33px;
-
-                &:before {
-                    width: 20px;
-                    height: 20px;
-                    top: -5px;
-                }
-            }
-
-            input:checked + .ts-helper {
-                background: rgba(0, 0, 0, 0.26);
-                &:before {
-                    left: 18px;
-                    background: #fff;
-                }
-
-            }
-        }
-    }
-
-    @media(max-width: @screen-lg-min) {
-        display: none;
-    }
-}
-
 .sw-toggled {
     @media (min-width: @screen-lg-min) {
-        #header {
+        .header {
             padding-left: 15px;
-        }
-
-        #menu-trigger {
-            display: none;
         }
     }
 }
 
 /* For Stupid IE9 */
 .ie9 {
-    #header:not(.sidebar-toggled) {
+    .header:not(.sidebar-toggled) {
         &.header-up {
             display: none;
         }
@@ -323,7 +235,7 @@
  * You may remove these if you opt header 1
  */
 
-#header-2 {
+.header-2 {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 10;

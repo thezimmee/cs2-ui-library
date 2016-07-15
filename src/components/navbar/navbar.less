@@ -1,4 +1,4 @@
-#sidebar {
+.navbar {
     position: fixed;
     background: #fff;
     box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
@@ -12,7 +12,7 @@
     .transition(all);
     .transition-duration(300ms);
     
-    .sidebar-inner {
+    .navbar-inner {
         height: 100%;
         overflow-y: auto;
         width: @sidebar-left-width;
@@ -21,6 +21,92 @@
     &.toggled {
         .translate3d(0, 0, 0);
         .opacity(1);
+    }
+}
+
+.navbar-trigger  {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 44px;
+    position: relative;
+
+    .line-wrap .line {
+        background-color: #fff;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -22px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        .transition(all);
+        .transition-duration(300ms);
+        .scale(0);
+        z-index: 0;
+    }
+
+    &.open {
+        &:before {
+            .scale(1);
+        }
+    }
+}
+
+.sw-toggled {
+    @media (min-width: @screen-lg-min) {
+        .header-nav-trigger {
+            display: none;
+        }
+    }
+}
+
+/*
+ * Collapse Menu Icons
+ */
+.line-wrap {
+    width: 18px;
+    height: 12px;
+    .transition(all);
+    .transition-duration(300ms);
+    margin: 12px 20px;
+
+    .line{
+        width: 18px;
+        height: 2px;
+        .transition(all);
+        .transition-duration(300ms);
+
+        &.center {
+            margin: 3px 0;
+        }
+    }
+}
+
+&.open {
+    .line-wrap {
+        .rotate(180deg);
+
+        .line {
+            &.top {
+                width: 12px;
+                transform: translateX(8px) translateY(1px) rotate(45deg);
+                -webkit-transform: translateX(8px) translateY(1px) rotate(45deg);
+            }
+
+            &.bottom {
+                width: 12px;
+                transform: translateX(8px) translateY(-1px) rotate(-45deg);
+                -webkit-transform: translateX(8px) translateY(-1px) rotate(-45deg);
+            }
+        }
     }
 }
 
@@ -212,13 +298,13 @@
  */
 body {
     &:not(.sw-toggled) {
-        #sidebar {
+        .navbar {
             box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
         }
     }
 
     &.sw-toggled {
-        #sidebar {
+        .navbar {
             @media (min-width: @screen-lg-min) {
                 .translate3d(0, 0, 0) !important;
                 .opacity(1) !important;
@@ -236,14 +322,14 @@ body {
  * For Stupid IE9
  */
 .ie9 {
-    body.sw-toggled #sidebar {
+    body.sw-toggled .navbar {
         @media (min-width: @screen-lg-min) {
             display: block;
         }
     }
 
     body:not(.sw-toggled) {
-        #sidebar:not(.toggled) {
+        .navbar:not(.toggled) {
             display: none;
         }
     }

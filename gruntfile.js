@@ -79,25 +79,29 @@ module.exports = function(grunt) {
             }
         },
         /** replace text strings (i.e., urls, etc.) */
-        replace: {
-            templates: {
-                src: 'build/js/templates.js',
-                overwrite: true,
-                replacements: [
-                    {
-                        from: 'src/template/',
-                        to: 'template/'
-                    }
-                ]
-            }
-        },
+        // replace: {
+        //     templates: {
+        //         src: 'build/js/templates.js',
+        //         overwrite: true,
+        //         replacements: [
+        //             {
+        //                 from: 'src/template/',
+        //                 to: 'template/'
+        //             }
+        //         ]
+        //     }
+        // },
         /** concatenate & register angular templates */
         ngtemplates: {
             app: {
-                src: ['src/template/**/*.html'],
+                cwd: 'src/',
+                src: [
+                    'template/**/*.html',
+                    'components/**/*.tpl.html'
+                ],
                 dest: 'build/js/templates.js',
                 options: {
-                    module: 'materialAdmin',
+                    module: 'cloudspark',
                     htmlmin: {
                         collapseWhitespace: true,
                         collapseBooleanAttributes: true
@@ -129,40 +133,37 @@ module.exports = function(grunt) {
         /** watch files for changes and build incrementally */
         watch: {
             css: {
-                files: ['src/less/**/*.less'],
+                files: [
+                    'src/less/**/*.less',
+                    'src/components/**/*.less'
+                ],
                 tasks: ['less']
             },
             templates: {
-                files: ['<%= ngtemplates.app.src %>'],
-                tasks: ['ngtemplates', 'replace:templates']
+                files: [
+                    'src/template/**/*.html',
+                    'src/components/**/*.tpl.html'
+                ],
+                tasks: ['ngtemplates']
             },
             js: {
-                files: ['<%= copy.js.src %>'],
+                files: ['src/js/**/*'],
                 tasks: ['copy:js'],
                 options: {
-                    cwd: {
-                        files: '<%= copy.js.cwd %>'
-                    },
                     spawn: false
                 }
             },
             views: {
-                files: ['<%= copy.views.src %>'],
+                files: ['src/views/**/*.html'],
                 tasks: ['copy:views'],
                 options: {
-                    cwd: {
-                        files: '<%= copy.views.cwd %>'
-                    },
                     spawn: false
                 }
             },
             html: {
-                files: ['<%= copy.html.src %>'],
+                files: ['src/*.html'],
                 tasks: ['copy:html'],
                 options: {
-                    cwd: {
-                        files: '<%= copy.html.cwd %>'
-                    },
                     spawn: false
                 }
             },
@@ -200,7 +201,6 @@ module.exports = function(grunt) {
         'clean',
         // js
         'ngtemplates',
-        'replace',
         // css
         'less',
         // copy stuff

@@ -58,15 +58,31 @@
 }
 
 .btn-icon {
+    background: transparent;
+    border: 0;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: @m-white;
     width: 40px;
-    line-height: 42px;
     height: 40px;
     padding: 0;
-    text-align: center;
+    position: relative;
 
     .zmdi {
-        font-size: 17px;
+        font-size: 20px;
+        z-index: 1;
+    }
+
+    &--large {
+        .zmdi {
+            font-size: 24px;
+        }
+    }
+
+    &:not(.btn-icon--has-text) {
+        .hover-pop(rgba(0,0,0,0.12), 2px, 250ms, 0);
     }
 }
 

@@ -1,9 +1,23 @@
-materialAdmin
+cloudspark
     // =========================================================================
     // Base controller for common functions
     // =========================================================================
 
-    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService){
+    .controller('cloudsparkCtrl', function($timeout, $state, $scope, growlService){
+        var mactrl = this;
+
+        $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            if (toState.name === 'headers.textual-menu') {
+                mactrl.headerSrc = 'components/layout/header-textual-menu.tpl.html';
+            } else if (toState.name === 'headers.image-logo') {
+                mactrl.headerSrc = 'components/layout/header-image-logo.tpl.html';
+            } else if (toState.name === 'headers.mainmenu-on-top') {
+                mactrl.headerSrc = 'components/layout/header-top-menu.tpl.html';
+            } else {
+                mactrl.headerSrc = 'components/layout/header.tpl.html';
+            }
+        });
+
         //Welcome Message
         growlService.growl('Welcome back Mallinda!', 'inverse')
         
@@ -26,7 +40,7 @@ materialAdmin
         this.$state = $state;    
         
         //Close sidebar on click
-        this.sidebarStat = function(event) {
+        this.navbarClick = function(event) {
             if (!angular.element(event.target).parent().hasClass('active')) {
                 this.sidebarToggle.left = false;
             }
@@ -78,12 +92,12 @@ materialAdmin
 
         // Top Search
         this.openSearch = function(){
-            angular.element('#header').addClass('search-toggled');
+            angular.element('.header').addClass('search-toggled');
             angular.element('#top-search-wrap').find('input').focus();
         }
 
         this.closeSearch = function(){
-            angular.element('#header').removeClass('search-toggled');
+            angular.element('.header').removeClass('search-toggled');
         }
         
         // Get messages and notification for header

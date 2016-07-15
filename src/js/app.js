@@ -1,4 +1,4 @@
-var materialAdmin = angular.module('materialAdmin', [
+var cloudspark = angular.module('cloudspark', [
     'ngAnimate',
     'ngResource',
     'ui.router',

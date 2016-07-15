@@ -97,7 +97,7 @@
             </ul>
         </div>
 
-        <div class="card-body card-padding" data-ng-controller="photoCtrl as phctrl">                     
+        <div class="card-body" data-ng-controller="photoCtrl as phctrl">                     
 
             <ul class="p-grid">
                 <li data-ng-repeat="w in phctrl.photoOptions" data-ng-click="phctrl.photoGrid(w.value)" data-ng-class="{ 'active' : phctrl.photoColumnSize === w.value }">{{ w.column }}</li>
