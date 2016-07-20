@@ -5,12 +5,9 @@
 
 
 .navbar {
-    // position: fixed;
     background: #fff;
     box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-    // top: 65px;
     height: 100vh;
-    // transform: translate3d(-@sidebar-left-width, 0, 0);
     z-index: @zindex--navbar;
     width: @sidebar-left-width;
     will-change: margin-left;
@@ -19,10 +16,6 @@
     transition-timing-function: @transition-timing-function;
 
     @media (min-width: 768px) {
-        // opacity: 1;
-        // position: relative;
-        // top: auto;
-        // transform: none;
         margin-left: -@sidebar-left-width;
     }
     
@@ -40,13 +33,15 @@
 }
 
 .navbar--detached {
-    
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 }
 
 .navbar--open {
     .navbar {
-        // .translate3d(0, 0, 0);
-        // .opacity(1);
         margin-left: 0;
     }
 }
