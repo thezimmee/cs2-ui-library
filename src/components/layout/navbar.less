@@ -26,17 +26,20 @@
     }
 }
 
-.navbar--pinned {
-    .navbar {
-        margin-left: 0;
-    }
-}
-
 .navbar--detached {
     .navbar {
         position: fixed;
         top: 0;
         left: 0;
+    }
+}
+
+.navbar--pinned {
+    .navbar {
+        margin-left: 0;
+        position: static;
+        top: auto;
+        left: auto;
     }
 }
 

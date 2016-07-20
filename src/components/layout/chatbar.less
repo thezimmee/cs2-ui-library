@@ -16,10 +16,6 @@
     transition: margin-right @transition-duration;
     transition-timing-function: @transition-timing-function;
     z-index: @zindex--chatbar;
-    
-    &--open {
-        margin-right: 0;
-    }
 
     .chat-search {
         padding: 20px 20px 15px 20px;
@@ -45,6 +41,19 @@
         top: 0;
         right: 0;
     }
+}
+
+.chatbar--pinned {
+    .chatbar {
+        margin-right: 0;
+        position: static;
+        top: auto;
+        right: auto;
+    }
+}
+
+.chatbar--open {
+    margin-right: 0;
 }
 
 /*

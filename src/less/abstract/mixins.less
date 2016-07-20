@@ -106,6 +106,9 @@
             .scale3d(1,1,1);
             .opacity(1);
         }
+        &.active:before {
+            background-color: rgba(red(@background), green(@background), blue(@background), alpha(@background) * 2);
+        }
     }
 }
 
