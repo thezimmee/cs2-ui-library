@@ -1,198 +1,197 @@
-<!-- navbar trigger -->
-<div class="header__action">
-    <div class="navbar-trigger" data-target="mainmenu" data-toggle-sidebar data-model-left="mactrl.sidebarToggle.left" data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
-        <div class="line-wrap">
-            <div class="line top"></div>
-            <div class="line center"></div>
-            <div class="line bottom"></div>
-        </div>
-    </div>
-</div>
-
-<!-- page / view title -->
-<div class="header__title">
-    CloudSpark 2
-</div>
-
-<!-- page / view specific actions -->
-<div class="header__local-actions"></div>
-
-<!-- global actions on all pages / views -->
-<div class="header__global-actions">
-    <div class="header__action visible-lg">
-        <div class="toggle-switch">
-            <input id="tw-switch" type="checkbox" hidden="hidden" data-change-layout="mactrl.layoutType">
-            <label for="tw-switch" class="ts-helper"></label>
-        </div>
-    </div>
-    <div class="header__action" id="top-search">
-        <button class="btn-icon btn-icon--large" type="button" data-ng-click="hctrl.openSearch()"><i class="tm-icon zmdi zmdi-search"></i></button>
-    </div>
-    <div class="header__action dropdown" uib-dropdown>
-        <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
-            <i class="tm-icon zmdi zmdi-email"></i>
-            <i class="tmn-counts">6</i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
-            <div class="listview">
-                <div class="lv-header">
-                    Messages
-                </div>
-                <div class="lv-body">
-                    <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">{{ w.user }}</div>
-                                <small class="lv-small">{{ w.text }}</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="clearfix"></div>
-
-                <a class="lv-footer" href="">View All</a>
+<div class="header__row" data-search-toggle>
+    <!-- page / view title -->
+    <div class="header__title">
+        <!-- navbar trigger -->
+        <div class="navbar-trigger" data-ng-class="{'open': mactrl.drawers.navbar.open}" data-ng-click="mactrl.toggleDrawer('navbar');">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
             </div>
         </div>
+        CloudSpark 2
     </div>
-    <div class="header__action dropdown" uib-dropdown>
-        <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
-            <i class="tm-icon zmdi zmdi-notifications"></i>
-            <i class="tmn-counts">9</i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
-            <div class="listview" id="notifications">
-                <div class="lv-header">
-                    Notification
 
-                    <ul class="actions">
-                        <li>
-                            <a href="" data-ng-click="hctrl.clearNotification($event)">
-                                <i class="zmdi zmdi-check-all"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="lv-body">
-                    <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <div class="lv-title">{{ w.user }}</div>
-                                <small class="lv-small">{{ w.text }}</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+    <!-- page / view specific actions -->
+    <div class="header__local-actions"></div>
 
-                <div class="clearfix"></div>
-
-                <a class="lv-footer" href="">View Previous</a>
-            </div>
-
-        </div>
-    </div>
-    <div class="header__action dropdown hidden-xs" uib-dropdown>
-        <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
-            <i class="tm-icon zmdi zmdi-view-list-alt"></i>
-            <i class="tmn-counts">2</i>
-        </button>
-        <div class="dropdown-menu pull-right dropdown-menu-lg">
-            <div class="listview">
-                <div class="lv-header">
-                    Tasks
-                </div>
-                <div class="lv-body">
-                    <div class="lv-item">
-                        <div class="lv-title m-b-5">HTML5 Validation Report</div>
-
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
-                                <span class="sr-only">95% Complete (success)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lv-item">
-                        <div class="lv-title m-b-5">Google Chrome Extension</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">80% Complete (success)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lv-item">
-                        <div class="lv-title m-b-5">Social Intranet Projects</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                <span class="sr-only">20% Complete</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lv-item">
-                        <div class="lv-title m-b-5">Bootstrap Admin Template</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                <span class="sr-only">60% Complete (warning)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lv-item">
-                        <div class="lv-title m-b-5">Youtube Client App</div>
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                <span class="sr-only">80% Complete (danger)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-
-                <a class="lv-footer" href="">View All</a>
+    <!-- global actions on all pages / views -->
+    <div class="header__global-actions">
+        <div class="header__action visible-lg">
+            <div class="toggle-switch">
+                <input id="tw-switch" type="checkbox" hidden="hidden" data-dock-navbar-toggle="mactrl.drawers.navbar.pinned">
+                <label for="tw-switch" class="ts-helper"></label>
             </div>
         </div>
-    </div>
-    <div class="header__action dropdown" uib-dropdown>
-        <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
-            <i class="tm-icon zmdi zmdi-more-vert"></i>
-        </button>
-        <ul class="dropdown-menu dm-icon pull-right">
-            <li class="skin-switch hidden-xs">
-                <span ng-repeat="w in mactrl.skinList | limitTo : 6" class="ss-skin bgm-{{ w }}" data-ng-click="mactrl.skinSwitch(w)"></span>
-            </li>
-            <li class="divider hidden-xs"></li>
-            <li class="hidden-xs">
-                <a data-ng-click="hctrl.fullScreen()" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
-            </li>
-            <li>
-                <a data-ng-click="hctrl.clearLocalStorage()" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
-            </li>
-            <li>
-                <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
-            </li>
-            <li>
-                <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
-            </li>
-        </ul>
-    </div>
-    <div class="header__action hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
-        <button class="btn-icon btn-icon--large" type="button"><i class="tm-icon zmdi zmdi-comment-alt-text"></i></button>
-    </div>
-</div>
+        <div class="header__action" id="top-search">
+            <button class="btn-icon btn-icon--large" type="button" data-ng-click="hctrl.openSearch();"><i class="zmdi zmdi-search"></i></button>
+        </div>
+        <div class="header__action dropdown" uib-dropdown>
+            <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
+                <i class="zmdi zmdi-email"></i>
+                <i class="badge--top-right">6</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
+                <div class="listview">
+                    <div class="lv-header">
+                        Messages
+                    </div>
+                    <div class="lv-body">
+                        <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">{{ w.user }}</div>
+                                    <small class="lv-small">{{ w.text }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
-<!-- Top Search Content -->
-<div id="top-search-wrap">
-    <div class="tsw-inner">
-        <i id="top-search-close" class="zmdi zmdi-arrow-left" data-ng-click="hctrl.closeSearch()"></i>
-        <input type="text">
+                    <div class="clearfix"></div>
+
+                    <a class="lv-footer" href="">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="header__action dropdown" uib-dropdown>
+            <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
+                <i class="zmdi zmdi-notifications"></i>
+                <i class="badge--top-right">9</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
+                <div class="listview" id="notifications">
+                    <div class="lv-header">
+                        Notification
+
+                        <ul class="actions">
+                            <li>
+                                <a href="" data-ng-click="hctrl.clearNotification($event)">
+                                    <i class="zmdi zmdi-check-all"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lv-body">
+                        <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">{{ w.user }}</div>
+                                    <small class="lv-small">{{ w.text }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <a class="lv-footer" href="">View Previous</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="header__action dropdown hidden-xs" uib-dropdown>
+            <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
+                <i class="zmdi zmdi-view-list-alt"></i>
+                <i class="badge--top-right">2</i>
+            </button>
+            <div class="dropdown-menu pull-right dropdown-menu-lg">
+                <div class="listview">
+                    <div class="lv-header">
+                        Tasks
+                    </div>
+                    <div class="lv-body">
+                        <div class="lv-item">
+                            <div class="lv-title m-b-5">HTML5 Validation Report</div>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                                    <span class="sr-only">95% Complete (success)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lv-item">
+                            <div class="lv-title m-b-5">Google Chrome Extension</div>
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                    <span class="sr-only">80% Complete (success)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lv-item">
+                            <div class="lv-title m-b-5">Social Intranet Projects</div>
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                    <span class="sr-only">20% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lv-item">
+                            <div class="lv-title m-b-5">Bootstrap Admin Template</div>
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                    <span class="sr-only">60% Complete (warning)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lv-item">
+                            <div class="lv-title m-b-5">Youtube Client App</div>
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                    <span class="sr-only">80% Complete (danger)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <a class="lv-footer" href="">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="header__action dropdown" uib-dropdown>
+            <button class="btn-icon btn-icon--large" type="button" uib-dropdown-toggle>
+                <i class="zmdi zmdi-more-vert"></i>
+            </button>
+            <ul class="dropdown-menu dm-icon pull-right">
+                <li class="skin-switch hidden-xs">
+                    <span ng-repeat="w in mactrl.skinList | limitTo : 6" class="ss-skin bgm-{{ w }}" data-ng-click="mactrl.skinSwitch(w)"></span>
+                </li>
+                <li class="divider hidden-xs"></li>
+                <li class="hidden-xs">
+                    <a data-ng-click="hctrl.fullScreen()" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                </li>
+                <li>
+                    <a data-ng-click="hctrl.clearLocalStorage()" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
+                </li>
+                <li>
+                    <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
+                </li>
+                <li>
+                    <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
+                </li>
+            </ul>
+        </div>
+        <div class="header__action hidden-xs" data-ng-click="mactrl.toggleDrawer('chatbar');">
+            <button class="btn-icon btn-icon--large" data-ng-class="{'active': mactrl.drawers.chatbar.open}" type="button"><i class="zmdi zmdi-comment-alt-text"></i></button>
+        </div>
+    </div>
+
+    <!-- Top Search Content -->
+    <div class="header__search" data-ng-class="{'header__search--active': mactrl.showGlobalSearch}">
+        <div class="header__search-field">
+            <button class="header__close-search-button btn btn-link" type="button" data-ng-click="hctrl.closeSearch();"><i class="zmdi zmdi-arrow-left"></i></button>
+            <input class="header__search-input" type="text" placeholder="Type your search" data-global-search data-on-escape="hctrl.closeSearch();">
+        </div>
     </div>
 </div>

@@ -1,26 +1,53 @@
+/**
+ * .navbar
+ * -------
+ */
+
+
 .navbar {
-    position: fixed;
+    // position: fixed;
     background: #fff;
     box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-    top: 65px;
-    height: ~"calc(100% - 65px)";
-    .translate3d(-@sidebar-left-width, 0, 0);
-    z-index: 5;
+    // top: 65px;
+    height: 100vh;
+    // transform: translate3d(-@sidebar-left-width, 0, 0);
+    z-index: @zindex--navbar;
     width: @sidebar-left-width;
-    overflow: hidden;
-    .opacity(0);
-    .transition(all);
-    .transition-duration(300ms);
+    will-change: margin-left;
+    transition-property: margin-left;
+    transition-duration: @transition-duration;
+    transition-timing-function: @transition-timing-function;
+
+    @media (min-width: 768px) {
+        // opacity: 1;
+        // position: relative;
+        // top: auto;
+        // transform: none;
+        margin-left: -@sidebar-left-width;
+    }
     
     .navbar-inner {
         height: 100%;
         overflow-y: auto;
         width: @sidebar-left-width;
     }
+}
+
+.navbar--pinned {
+    .navbar {
+        margin-left: 0;
+    }
+}
+
+.navbar--detached {
     
-    &.toggled {
-        .translate3d(0, 0, 0);
-        .opacity(1);
+}
+
+.navbar--open {
+    .navbar {
+        // .translate3d(0, 0, 0);
+        // .opacity(1);
+        margin-left: 0;
     }
 }
 
@@ -31,7 +58,17 @@
     justify-content: center;
     height: 44px;
     width: 44px;
+    margin-left: -5px;
+    margin-right: 10px;
     position: relative;
+    transition-property: all;
+    transition-duration: @transition-duration;
+    transition-timing-function: @transition-timing-function;
+
+    .navbar--pinned & {
+        margin-left: -54px;
+        transform: scale(0);
+    }
 
     .line-wrap .line {
         background-color: #fff;
@@ -56,14 +93,6 @@
     &.open {
         &:before {
             .scale(1);
-        }
-    }
-}
-
-.sw-toggled {
-    @media (min-width: @screen-lg-min) {
-        .header-nav-trigger {
-            display: none;
         }
     }
 }
@@ -289,48 +318,6 @@
     &.active {
         & > ul {
             display: block;
-        }
-    }
-}
-
-/*
- * Full width layout
- */
-body {
-    &:not(.sw-toggled) {
-        .navbar {
-            box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-        }
-    }
-
-    &.sw-toggled {
-        .navbar {
-            @media (min-width: @screen-lg-min) {
-                .translate3d(0, 0, 0) !important;
-                .opacity(1) !important;
-                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-            }
-
-            @media (max-width: @screen-lg-min) {
-                box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-            }
-        }
-    }
-}
-
-/*
- * For Stupid IE9
- */
-.ie9 {
-    body.sw-toggled .navbar {
-        @media (min-width: @screen-lg-min) {
-            display: block;
-        }
-    }
-
-    body:not(.sw-toggled) {
-        .navbar:not(.toggled) {
-            display: none;
         }
     }
 }

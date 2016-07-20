@@ -1,5 +1,5 @@
 <ul class="header-inner clearfix">
-    <li id="menu-trigger" data-target="mainmenu" data-toggle-sidebar data-model-left="mactrl.sidebarToggle.left" data-ng-class="{ 'open': mactrl.sidebarToggle.left === true }">
+    <li id="menu-trigger" data-ng-class="{'open': mactrl.drawer.navbar.open}" data-ng-click="mactrl.toggleDrawer('navbar');">
         <div class="line-wrap">
             <div class="line top"></div>
             <div class="line center"></div>
@@ -14,12 +14,12 @@
     <li class="pull-right">
         <ul class="top-menu">
             <li id="top-search" data-ng-click="hctrl.openSearch()">
-                <a href=""><span class="tm-label">Search</span></a>
+                <a href="">Search</a>
             </li>
 
             <li class="dropdown" uib-dropdown>
                 <a uib-dropdown-toggle href="">
-                    <span class="tm-label">Messages</span>
+                    Messages
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg pull-right">
                     <div class="listview">
@@ -89,7 +89,7 @@
             </li>
             <li class="dropdown hidden-xs" uib-dropdown>
                 <a uib-dropdown-toggle href="">
-                    <span class="tm-label">Notification</span>
+                    Notification
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg pull-right">
                     <div class="listview" id="notifications">
@@ -169,7 +169,7 @@
             </li>
             <li class="hidden-xs">
                 <a target="_blank" href="https://wrapbootstrap.com/theme/superflat-simple-responsive-admin-theme-WB082P91H">
-                    <span class="tm-label">Link</span>
+                    Link
                 </a>
             </li>
         </ul>
@@ -178,10 +178,10 @@
 
 
 <!-- Top Search Content -->
-<div id="top-search-wrap">
-    <div class="tsw-inner">
-        <i id="top-search-close" data-ng-click="hctrl.closeSearch()" class="zmdi zmdi-arrow-left"></i>
-        <input type="text">
+<div class="header__search">
+    <div class="header__search-field">
+        <i data-ng-click="hctrl.closeSearch()" class="header__close-search-button zmdi zmdi-arrow-left"></i>
+        <input class="header__search-input" type="text">
     </div>
 </div>
 

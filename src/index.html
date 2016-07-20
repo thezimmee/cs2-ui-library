@@ -8,20 +8,20 @@
     <link href="css/app.min.css" rel="stylesheet" id="app-level">
 </head>
 
-<body data-ng-class="{ 'sw-toggled': mactrl.layoutType === '1'}">
+<body data-ng-class="{'navbar--pinned': mactrl.drawers.navbar.pinned}">
 
-    <div class="main-window">
-        <aside class="navbar" data-ng-include src="'components/navbar/navbar.tpl.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+    <div class="main-window" data-ng-class="{'navbar--open': mactrl.drawers.navbar.open}">
+        <aside class="navbar" data-ng-include src="'components/navbar/navbar.tpl.html'"></aside>
 
         <div class="main-container">
-            <header data-ng-class="mactrl.headerSrc === 'components/layout/header-top-menu.tpl.html' ? 'header-2' : 'header'" data-current-skin={{mactrl.currentSkin}} data-ng-include="mactrl.headerSrc" data-ng-controller="headerCtrl as hctrl"></header>
-
-            <aside class="chatbar" data-ng-include src="'template/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+            <header class="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="mactrl.headerSrc" data-ng-controller="headerCtrl as hctrl"></header>
 
             <div class="main-content" ui-view></div>
 
             <footer class="footer" data-ng-include src="'template/footer.html'"></footer>
         </div>
+
+        <aside class="chatbar" data-ng-include src="'template/chat.html'" data-ng-class="{'chatbar--open': mactrl.drawers.chatbar.open}"></aside>
     </div>
 
 

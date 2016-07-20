@@ -81,19 +81,3 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
         padding-right: 15px;
     }
 }
-
-body {
-    &.sw-toggled {
-        #content {
-            @media (min-width: @screen-lg-min) {
-                padding-left: @sidebar-left-width;
-            }
-
-            & > .container {
-                @media (min-width: @screen-lg-min) {
-                    width: ~"calc(100% - 30px)";
-                }
-            }
-        }
-    }
-}

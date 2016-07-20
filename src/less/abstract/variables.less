@@ -35,6 +35,22 @@
 @border-radius-base:        2px;
 @border-radius-large:       4px;
 @border-radius-small:       2px;
+/** z-index */
+// material specs
+@zindex--ground: 10;
+@zindex--raised: 20;
+// @zindex--30: 30;
+@zindex--app: 40;
+@zindex--alert: 60;
+@zindex--menu: 80;
+@zindex--submenu: 90;
+@zindex--header: 120;
+@zindex--drawer: 160;
+@zindex--dialog: 24;
+// specific elements
+@zindex--header: @zindex--app;
+@zindex--navbar: @zindex--app + 1;
+@zindex--chatbar: @zindex--app - 1;
 
 
 /**
@@ -296,3 +312,11 @@
  * miscellaneous
  */
 @card-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+
+
+/**
+ * animations & transitions
+ */
+@transition-timing-function: cubic-bezier(0.6, 0, 0.2, 1.2);
+@transition-timing-function--smooth: cubic-bezier(0.8, 0, 0.2, 1);
+@transition-duration: 400ms;

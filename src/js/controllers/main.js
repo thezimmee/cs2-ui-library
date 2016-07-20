@@ -6,6 +6,8 @@ cloudspark
     .controller('cloudsparkCtrl', function($timeout, $state, $scope, growlService){
         var mactrl = this;
 
+        mactrl.showGlobalSearch = false;
+
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             if (toState.name === 'headers.textual-menu') {
                 mactrl.headerSrc = 'components/layout/header-textual-menu.tpl.html';
@@ -27,14 +29,36 @@ cloudspark
            angular.element('html').addClass('ismobile');
         }
 
+
         // By default Sidbars are hidden in boxed layout and in wide layout only the right sidebar is hidden.
-        this.sidebarToggle = {
-            left: false,
-            right: false
+        this.drawers = {
+            navbar: {
+                open: false,
+                pinned: false
+            },
+            chatbar: {
+                open: false,
+                pinned: false
+            }
+        };
+        this.toggleDrawer = function (drawerName) {
+            mactrl.closeDrawers(drawerName);
+            mactrl.drawers[drawerName].open = !mactrl.drawers[drawerName].open;
+        }
+        this.openDrawer = function (drawerName) {
+            mactrl.closeDrawers(drawerName);
+            mactrl.drawers[drawerName].open = true;
+        }
+        this.closeDrawers = function (activeDrawer) {
+            for (var drawer in mactrl.drawers) {
+                if (drawer !== activeDrawer) {
+                    mactrl.drawers[drawer].open = false;
+                }
+            }
         }
 
         // By default template has a boxed layout
-        this.layoutType = localStorage.getItem('ma-layout-status');
+        this.drawers.navbar.pinned = JSON.parse(localStorage.getItem('navbar--pinned'));
         
         // For Mainmenu Active Class
         this.$state = $state;    
@@ -42,7 +66,7 @@ cloudspark
         //Close sidebar on click
         this.navbarClick = function(event) {
             if (!angular.element(event.target).parent().hasClass('active')) {
-                this.sidebarToggle.left = false;
+                mactrl.closeDrawers();
             }
         }
         
@@ -80,24 +104,29 @@ cloudspark
         this.skinSwitch = function (color) {
             this.currentSkin = color;
         }
-    
     })
 
 
     // =========================================================================
     // Header
     // =========================================================================
-    .controller('headerCtrl', function($timeout, messageService){
-
+    .controller('headerCtrl', function($scope, $timeout, messageService){
+        var hctrl = this;
+        var mactrl = $scope.mactrl;
 
         // Top Search
-        this.openSearch = function(){
-            angular.element('.header').addClass('search-toggled');
-            angular.element('#top-search-wrap').find('input').focus();
+        hctrl.openSearch = function(){
+            mactrl.showGlobalSearch = true;
+            angular.element('.header__search').find('input').focus();
         }
 
-        this.closeSearch = function(){
-            angular.element('.header').removeClass('search-toggled');
+        hctrl.closeSearch = function(){
+            mactrl.showGlobalSearch = false;
+            angular.element('.header__search').find('input').blur();
+        }
+
+        hctrl.toggleSearch = function(){
+            mactrl.showGlobalSearch ? hctrl.closeSearch() : hctrl.openSearch();
         }
         
         // Get messages and notification for header

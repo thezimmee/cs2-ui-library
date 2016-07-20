@@ -4,41 +4,39 @@ cloudspark
     // LAYOUT
     // =========================================================================
     
-    .directive('changeLayout', function(){
+    .directive('dockNavbarToggle', function(){
         
         return {
             restrict: 'A',
             scope: {
-                changeLayout: '='
+                dockNavbarToggle: '='
             },
             
             link: function(scope, element, attr) {
                 
                 //Default State
-                if(scope.changeLayout === '1') {
+                if (scope.dockNavbarToggle) {
                     element.prop('checked', true);
                 }
                 
                 //Change State
                 element.on('change', function(){
-                    if(element.is(':checked')) {
-                        localStorage.setItem('ma-layout-status', 1);
+                    if (element.is(':checked')) {
+                        localStorage.setItem('navbar--pinned', true);
                         scope.$apply(function(){
-                            scope.changeLayout = '1';
+                            scope.dockNavbarToggle = true;
                         })
                     }
                     else {
-                        localStorage.setItem('ma-layout-status', 0);
+                        localStorage.setItem('navbar--pinned', false);
                         scope.$apply(function(){
-                            scope.changeLayout = '0';
+                            scope.dockNavbarToggle = false;
                         })
                     }
                 })
             }
         }
     })
-
-
 
     // =========================================================================
     // MAINMENU COLLAPSE
@@ -150,4 +148,49 @@ cloudspark
         }
     })
 
-   
+    // =========================================================================
+    // KEY PRESSES
+    // =========================================================================
+    .directive('globalSearch', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attributes) {
+                if (attributes.onEscape) {
+                    element.on('focus', function () {
+                        element.on('keyup', function (event) {
+                            if (event.which === 27) {
+                                scope.$apply(function () {
+                                    scope.$eval(attributes.onEscape);
+                                });
+                            }
+                        });
+                    })
+                    .on('blur', function (event) {
+                        element.off('keyup');
+                    });
+                    scope.$on('$destroy', function () {
+                        element.off('keyup');
+                    });
+                }
+            }
+        }
+    })
+
+    .directive('searchToggle', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attributes) {
+                $('body').on('keydown.searchToggle', function (event) {
+                    if (event.which === 191 && event.shiftKey && !$(document.activeElement).is('input[type="text"], textarea')) {
+                        scope.$apply(function () {
+                            scope.hctrl.toggleSearch();
+                        });
+                        event.preventDefault();
+                    }
+                });
+                scope.$on('$destroy', function () {
+                    $('body').off('keydown.searchToggle');
+                });
+            }
+        }
+    })

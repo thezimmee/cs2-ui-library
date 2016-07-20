@@ -1,7 +1,7 @@
 /**
  * layout
  * ------
- * base styles for page layout(s).
+ * glues together common layout elements (sidebars, header, footer, etc)
  */
 
 /**
@@ -11,17 +11,24 @@
  *  - navbar off-screen to left
  *  wide screen:
  *  - header fixed
- *  - navbar docked at left with icons
+ *  - navbar pinned at left with icons
  */
 .main-window {
 	display: flex;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
 }
 
 .main-container {
 	flex-grow: 1;
+	overflow-y: auto;
 
     @media (min-width: 768px) {
-        padding-top: 64px;
+        margin-top: 64px;
     }
 }
 
@@ -29,4 +36,15 @@
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.navbar--open {
+	.header {
+		left: @sidebar-left-width;
+	}
+}
+.navbar--pinned {
+	.header {
+		left: @sidebar-left-width;
+	}
 }

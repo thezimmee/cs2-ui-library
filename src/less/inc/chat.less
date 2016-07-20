@@ -1,22 +1,35 @@
+/**
+ * .chatbar
+ * --------
+ */
+
+
 .chatbar {
-    position: fixed;
+    // position: fixed;
     background: #fff;
-    padding: 20px 0;
+    // padding: 20px 0;
+    min-width: 260px;
     width: 260px;
+    margin-right: -260px;
     box-shadow: 0 0 10px rgba(51, 51, 51, 0.38);
-    height: ~"calc(100% - 65px)";
-    right: -280px;
-    top: 65px;
-    .transition(all);
-    .transition-duration(300ms);
-    z-index: 10;
-    .opacity(0);
+    height: ~"calc(100% - 64px)";
+    margin-top: 64px;
+    overflow-y: auto;
+    // right: -280px;
+    // top: 65px;
+    // .transition(all);
+    // .transition-duration(300ms);
+    transition: margin-right @transition-duration;
+    transition-timing-function: @transition-timing-function;
+    z-index: @zindex--chatbar;
+    // opacity: 0;
     
-    &.toggled {
-        right: 0;
-        .opacity(1);
+    &--open {
+        margin-right: 0;
+        // right: 0;
+        // .opacity(1);
     }
-    
+
     .chat-search {
         padding: 20px 20px 15px 20px;
         
@@ -73,7 +86,7 @@
     .chatbar {
         right: 0;
         
-        &:not(.toggled) {
+        &:not(.chatbar--toggled) {
             display: none;
         }
     }
