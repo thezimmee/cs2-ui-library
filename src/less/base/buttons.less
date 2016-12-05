@@ -1,0 +1,33 @@
+/**
+ * .button
+ * -------
+ * buttons.
+ */
+
+
+// global focus / outline
+:focus {
+	outline-color: @c-dark--inactive;
+	outline-width: 2px;
+}
+
+.button {
+	appearance: none;
+	background-color: transparent;
+	border-radius: 0;
+	border-style: solid;
+	border-width: 0;
+	color: inherit;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+	transition-property: background-color;
+	transition-duration: @transition__duration;
+	transition-timing-function: @transition__timing;
+}

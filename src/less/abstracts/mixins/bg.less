@@ -1,0 +1,11 @@
+/**
+ * background color
+ * ----------------
+ * apply background color with dynamic light or dark text.
+ */
+
+
+.bg(@color) {
+	background-color: @color;
+	color: contrast(darken(@color, 14%), @c-dark, @c-light);
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html data-ng-app="cs2" data-ng-controller="appCtrl as appCtrl">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CloudSpark UI Library</title>
+	<link href="css/app.min.css" rel="stylesheet" id="app-level">
+</head>
+
+<body>
+
+	<div class="ds-main" data-ng-class="{'ds-navbar--open': appCtrl.drawers.navbar.open}">
+		<aside class="ds-navbar" data-ng-include src="'navbar/navbar.tpl.html'"></aside>
+
+		<main class="ds-main__container">
+			<header class="ds-header" data-ng-include src="'header/header.tpl.html'" data-ng-controller="headerCtrl as hCtrl"></header>
+
+			<div class="main-content" ui-view></div>
+
+			<footer class="footer" data-ng-include src="'app/footer.tpl.html'"></footer>
+		</main>
+
+		<aside class="chatbar" data-ng-include src="'template/chat.html'" data-ng-class="{'chatbar--open': appCtrl.drawers.chatbar.open}"></aside>
+	</div>
+
+	<!-- JS:js/app.min.js -->
+	<script src="js/vendor.js"></script>
+	<script src="js/app.annotated.js"></script>
+	<script src="js/templates.js"></script>
+	<!-- END -->
+</body>
+</html>

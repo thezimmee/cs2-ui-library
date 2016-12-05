@@ -1,0 +1,43 @@
+/**
+ * .header
+ * -------
+ * main app header.
+ */
+
+@header__height: 56px;
+@header__height--768: 64px;
+
+.ds-header {
+    &:extend(.ds-row--large);
+    .bg(@c-light-blue);
+    box-shadow: @shadow--2;
+    display: flex;
+    align-items: center;
+    transition-property: left;
+    transition-duration: @transition__duration;
+    transition-timing-function: @transition__timing;
+    user-select: none;
+    width: 100%;
+    z-index: 16;
+
+    @media (min-width: 768px) {
+        padding-left: 20px;
+        padding-right: 20px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    .ds-navbar--open & {
+        left: @navbar__width;
+    }
+}
+
+
+.ds-header__title {
+    display: flex;
+    align-items: center;
+    font-size: 1.3em;
+    font-weight: 300;
+}

@@ -1,0 +1,124 @@
+/**
+ * .navbar
+ * -------
+ * global navigation bar.
+ */
+
+@navbar__width: 235px;
+
+
+.ds-navbar {
+	background-color: #ccc;
+	box-shadow: @shadow--3;
+	height: 100vh;
+	width: @navbar__width;
+	will-change: margin-left;
+	transition-property: margin-left;
+	transition-duration: @transition__duration;
+	transition-timing-function: @transition__timing;
+	z-index: @z--bars;
+
+	@media (min-width: 768px) {
+		margin-left: -@navbar__width;
+	}
+}
+
+
+.ds-navbar--detached {
+	.ds-navbar {
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+}
+
+
+.ds-navbar--pinned {
+	.ds-navbar {
+		margin-left: 0;
+		position: static;
+		top: auto;
+		left: auto;
+	}
+}
+
+
+.ds-navbar--open {
+	.ds-navbar {
+		margin-left: 0;
+	}
+}
+
+
+.ds-navbar__toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	height: 44px;
+	width: 44px;
+	.ds-m-r();
+	outline: 0;
+	position: relative;
+	transform: rotate(0deg);
+	transition: transform @transition__duration @transition__timing;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.22);
+		transform: scale(0);
+		transition: all @transition__duration @transition__timing;
+	}
+
+	&:focus {
+		&:before {
+			transform: scale(1);
+		}
+	}
+
+	.ds-navbar--open & {
+		transform: rotate(-180deg);
+
+		&:before {
+			transform: scale(1);
+		}
+	}
+}
+.ds-navbar__toggle-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+	height: 24px;
+	width: 24px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -12px;
+	margin-top: -12px;
+	transition-property: all;
+	transition-duration: @transition__duration;
+	transition-timing-function: @transition__timing;
+
+	&:last-of-type {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	.ds-navbar--open & {
+		&:first-of-type {
+			opacity: 0;
+			transform: scale(0);
+		}
+		&:last-of-type {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+}

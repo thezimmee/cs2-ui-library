@@ -1,0 +1,53 @@
+/**
+ * .main
+ * -----
+ * main layout elements.
+ */
+
+
+/** defaults */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+html {
+	height: 100%;
+	overflow: hidden;
+	-ms-overflow-style: none;
+}
+body {
+	font-family: roboto, sans-serif;
+	height: 100%;
+	overflow-y: auto;
+	position: relative;
+	transition: opacity .5s;
+}
+
+/** main window */
+.ds-main {
+	display: flex;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	overflow: hidden;
+}
+
+/** main container */
+.ds-main__container {
+	flex-grow: 1;
+	overflow-y: auto;
+
+	@media (min-width: 768px) {
+		margin-top: @header__height--768;
+	}
+}
+
+/** main content area */
+.ds-main__content {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 20px;
+}

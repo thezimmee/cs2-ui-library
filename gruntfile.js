@@ -1,224 +1,321 @@
 module.exports = function(grunt) {
+	// show time it takes for each task
+	require('time-grunt-nowatch')(grunt);
 
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        /** clean up old stuff */
-        clean: {
-            build: 'build'
-        },
-        /** less pre-compiler */
-        less: {
-            app: {
-                options: {
-                    // compress: true,
-                    // sourceMap: true,
-                    // sourceMapFileInline: true,
-                    // sourceMapFilename: 'app.min.css.map',
-                    // sourceMapBasepath: 'build/css',
-                    plugins: [
-                        new (require('less-plugin-autoprefix'))({ browsers: ['last 2 versions', '> 1%'] }),
-                        new (require('less-plugin-clean-css'))()
-                    ]
-                },
-                files: {
-                    'build/css/app.min.css': 'src/less/app.less',
-                }
-            }
-        },
-        /** copy stuff to build directory */
-        copy: {
-            fonts: {
-                src: [
-                    'src/vendors/material-design-iconic-font/dist/fonts/**/*'
-                ],
-                dest: 'build/fonts/',
-                flatten: true,
-                expand: true,
-                cwd: '.'
-            },
-            assets: {
-                src: [
-                    'fonts/**/*',
-                    'img/**/*',
-                    'data/**/*',
-                    'media/**/*'
-                ],
-                cwd: 'src/',
-                dest: 'build/',
-                expand: true
-            },
-            js: {
-                src: [
-                    'js/**/*'
-                ],
-                cwd: 'src/',
-                dest: 'build/',
-                expand: true
-            },
-            vendor: {
-                src: [
-                    'vendors/**/*'
-                ],
-                cwd: '.',
-                dest: 'build/'
-            },
-            views: {
-                src: [
-                    'views/**/*'
-                ],
-                cwd: 'src/',
-                dest: 'build/',
-                expand: true
-            },
-            html: {
-                src: ['*.html'],
-                cwd: 'src/',
-                dest: 'build/',
-                expand: true
-            }
-        },
-        /** replace text strings (i.e., urls, etc.) */
-        // replace: {
-        //     templates: {
-        //         src: 'build/js/templates.js',
-        //         overwrite: true,
-        //         replacements: [
-        //             {
-        //                 from: 'src/template/',
-        //                 to: 'template/'
-        //             }
-        //         ]
-        //     }
-        // },
-        /** concatenate & register angular templates */
-        ngtemplates: {
-            app: {
-                cwd: 'src/',
-                src: [
-                    'template/**/*.html',
-                    'components/**/*.tpl.html'
-                ],
-                dest: 'build/js/templates.js',
-                options: {
-                    module: 'cloudspark',
-                    htmlmin: {
-                        collapseWhitespace: true,
-                        collapseBooleanAttributes: true
-                    }
-                }
-            }
-        },
-        /** properly inject angular dependencies */
-        ngAnnotate: {
-            options: {
-                add: true,
-                remove: true,
-                singleQuotes: true
-            },
-            dev: {}
-        },
-        /** serve it up */
-        browserSync: {
-            dev: {
-                bsFiles: {
-                    src: [
-                        'build/css/*.css',
-                        'build/js/*.js',
-                        'build/**/*.html',
-                        'build/data/**/*',
-                        'build/fonts/**/*',
-                        'build/img/**/*',
-                        'build/media/**/*'
-                    ]
-                },
-                options: {
-                    watchTask: true,
-                    server: 'build',
-                    port: 8080,
-                    browser: 'google chrome'
-                }
-            }
-        },
-        /** watch files for changes and build incrementally */
-        watch: {
-            css: {
-                files: [
-                    'src/less/**/*.less',
-                    'src/components/**/*.less'
-                ],
-                tasks: ['less']
-            },
-            templates: {
-                files: [
-                    'src/template/**/*.html',
-                    'src/components/**/*.tpl.html'
-                ],
-                tasks: ['ngtemplates']
-            },
-            js: {
-                files: ['src/js/**/*'],
-                tasks: ['copy:js'],
-                options: {
-                    spawn: false
-                }
-            },
-            views: {
-                files: ['src/views/**/*.html'],
-                tasks: ['copy:views'],
-                options: {
-                    spawn: false
-                }
-            },
-            html: {
-                files: ['src/*.html'],
-                tasks: ['copy:html'],
-                options: {
-                    spawn: false
-                }
-            },
-            assets: {
-                files: ['<%= copy.assets.src %>'],
-                tasks: ['copy:assets'],
-                options: {
-                    cwd: {
-                        files: '<%= copy.assets.cwd %>'
-                    },
-                    spawn: false
-                }
-            }
-        }
-    });
+	/**
+	 * path configuration
+	 */
+	var paths = {
+		less: {},
+		js: {},
+		fonts: {},
+		html: {},
+		browserSync: {},
+		watch: {},
+	};
+	paths.less = {
+		src: 'src/less/app.less',
+		dest: 'build/css/app.min.css',
+		watch: ['src/**/*.less']
+	};
+	paths.js.vendor = {
+		src: [
+			// angular
+			'vendors/angular/angular.min.js',
+			'vendors/angular-ui-router/release/angular-ui-router.min.js',
+		],
+		dest: 'build/js/vendor.js'
+	};
+	paths.js.templates = {
+		cwd: 'src/',
+		src: [
+			'**/*.tpl.html',
+		],
+		dest: 'build/js/templates.js',
+		options: {
+			module: 'cs2',
+			htmlmin: {
+				collapseWhitespace: true,
+				collapseBooleanAttributes: true
+			}
+		},
+		watch: ['src/**/*.tpl.html']
+	};
+	paths.js.app = {
+		src: [
+			// app js (angular)
+			'src/app/app.js',
+			'src/**/*.js',
+		],
+		dest: 'build/js/app.annotated.js',
+		watch: ['src/**/*.js']
+	};
+	paths.js.prod = {
+		src: [
+			paths.js.vendor.dest,
+			paths.js.app.dest,
+			paths.js.templates.dest,
+		],
+		dest: 'build/js/app.min.js'
+	};
+	paths.fonts = {
+		cwd: '.',
+		flatten: true,
+		expand: true,
+		src: [
+			'vendors/material-design-iconic-font/dist/fonts/**/*',
+			'vendors/roboto-fontface/fonts/Roboto/Roboto-Light.*',
+			'vendors/roboto-fontface/fonts/Roboto/Roboto-Regular.*',
+			'vendors/roboto-fontface/fonts/Roboto/Roboto-Medium.*',
+			'vendors/roboto-fontface/fonts/Roboto/Roboto-Bold.*'
+		],
+		dest: 'build/fonts/'
+	};
+	paths.html = {
+		cwd: 'src/',
+		expand: true,
+		src: [
+			// '*.html'
+			'index.html'
+		],
+		dest: 'build/',
+		watch: ['src/index.html']
+	};
+	paths.browserSync = {
+		bsFiles: {
+			src: [
+				'build/css/*.css',
+				'build/js/*.js',
+				'build/**/*.html',
+				'build/fonts/**/*',
+			]
+		},
+		options: {
+			watchTask: true,
+			server: 'build',
+			startPath: '/#/',
+			port: 8080,
+			browser: '/Applications/Google Chrome.app'
+		}
+	};
 
-    grunt.event.on('watch', function (action, filepath) {
-        grunt.config('copy.assets.src', filepath.replace('src/', ''));
-        grunt.config('copy.js.src', filepath.replace('src/', ''));
-        grunt.config('copy.views.src', filepath.replace('src/', ''));
-        grunt.config('copy.html.src', filepath.replace('src/', ''));
-    });
+	// paths.init() is to apply config properties programatically
+	paths.init = function () {
+		paths.js.vendor.watch = paths.js.vendor.src;
+	};
+	paths.init();
 
-    // Load the plugin that provides the "less" task.
-    grunt.loadNpmTasks('grunt-angular-templates');
-    grunt.loadNpmTasks('grunt-browser-sync');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-ng-annotate');
-    grunt.loadNpmTasks('grunt-text-replace');
 
-    // Default task(s).
-    grunt.registerTask('default', [
-        'clean',
-        // js
-        'ngtemplates',
-        // css
-        'less',
-        // copy stuff
-        'copy',
-        // serve
-        'browserSync',
-        'watch'
-    ]);
+	/**
+	 * task configuration
+	 */
+	var taskConfig = {};
+	/** clean up old stuff */
+	taskConfig.clean = {
+		build: 'build',
+	};
+	/** less pre-compiler */
+	taskConfig.less = {
+		options: {
+			// compress: true,
+			// sourceMap: true,
+			// sourceMapFileInline: true,
+			// sourceMapFilename: 'app.min.css.map',
+			// sourceMapBasepath: 'build/css',
+			plugins: [
+				new (require('less-plugin-autoprefix'))({ browsers: ['last 2 versions', '> 1%'] }),
+				new (require('less-plugin-clean-css'))()
+			]
+		},
+		app: paths.less
+	};
+	/** concatenate files */
+	taskConfig.concat = {
+		options: {
+			separator: ';',
+		},
+		vendor: paths.js.vendor,
+	};
+	/** concatenate & register angular templates */
+	taskConfig.ngtemplates = {
+		app: paths.js.templates
+	};
+	/** properly inject angular dependencies */
+	taskConfig.ngAnnotate = {
+		options: {
+			singleQuotes: true
+		},
+		dev: {
+			files: [paths.js.app]
+		}
+	};
+	/** minify js */
+	taskConfig.uglify = {
+		options: {},
+		prod: {
+			files: [paths.js.prod]
+		}
+	};
+	/** replace text patterns */
+	taskConfig.replace = {
+		prod: {
+			options: {
+				patterns: [
+					{
+						match: /<!-- JS:([^\s]+)[\s\S]*?END -->/g,
+						replacement: '<script src="$1"></script>'
+					},
+					// {
+					// 	match: /<!-- CSS:([^\s]+)[\s\S]*?END -->/g,
+					// 	replacement: '<link href="$1" rel="stylesheet" />'
+					// }
+				]
+			},
+			files: [{
+				expand: true,
+				src: ['build/**/*.html']
+			}]
+		}
+	};
+	/** copy stuff to build directory */
+	taskConfig.copy = {
+		fonts: paths.fonts,
+		html: paths.html
+	};
+	/** serve it up */
+	taskConfig.browserSync = {
+		dev: paths.browserSync
+	};
+	/** watch files for changes and build incrementally */
+	taskConfig.watch = {
+		css: {
+			files: paths.less.watch,
+			tasks: ['less'],
+			options: {
+				spawn: false
+			}
+		},
+		html: {
+			files: paths.html.watch,
+			tasks: ['copy:html'],
+			options: {
+				spawn: false
+			}
+		},
+	};
 
+
+	/**
+	 * default tasks (to be registered)
+	 */
+	var tasks = {
+		default: ['dev'],
+		dev: [
+			'clean:build',
+			// js
+			'ngtemplates',
+			'concat:vendor',
+			'ngAnnotate:dev',
+			// css
+			'less',
+			// copy stuff
+			'copy',
+		],
+		prod: [
+			'uglify:prod',
+			'replace:prod'
+		],
+		serve: ['browserSync', 'watch']
+	};
+
+
+	/**
+	 * task modifications / variations (passed as CLI args)
+	 */
+	var mode = 'DEVELOPMENT';
+	// --prod or -P flag vs default (dev)
+	if (grunt.option('prod') || grunt.option('P')) {
+		mode = 'PRODUCTION';
+		// update watchers for prod
+		taskConfig.watch.js = {
+			files: [
+				paths.js.vendor.watch,
+				paths.js.app.watch,
+				paths.js.templates.watch,
+			],
+			tasks: ['concat:vendor', 'ngtemplates', 'ngAnnotate:dev', 'uglify:prod'],
+			options: {
+				spawn: false
+			}
+		};
+		// add prod tasks
+		tasks.default.push('prod');
+	} else {
+		// update watchers for dev
+		taskConfig.watch.templates = {
+			files: paths.js.templates.watch,
+			tasks: ['ngtemplates'],
+			options: {
+				spawn: false
+			}
+		};
+		taskConfig.watch.vendorjs = {
+			files: paths.js.vendor.watch,
+			tasks: ['concat:vendor'],
+			options: {
+				spawn: false
+			}
+		};
+		taskConfig.watch.appjs = {
+			files: paths.js.app.watch,
+			tasks: ['ngAnnotate:dev'],
+			options: {
+				spawn: false
+			}
+		};
+	}
+	// --nowatch or -N: build only
+	if (grunt.option('nowatch') || grunt.option('N')) {
+		mode += ', BUILD-ONLY';
+	} else {
+		tasks.default.push('serve');
+	}
+
+	// log mode to console
+	grunt.log.write('Running in [%s] mode (%s)...\n', mode, tasks.default);
+
+
+	// init grunt config
+	grunt.initConfig(taskConfig);
+
+	// on watch event
+	// grunt.event.on('watch', function (action, filepath) {
+		// grunt.config('copy.assets.src', filepath.replace('src/', ''));
+		// grunt.config('copy.js.src', filepath.replace('src/', ''));
+		// grunt.config('copy.html.src', filepath.replace('src/', ''));
+	// });
+
+	// grunt plugins
+	grunt.loadNpmTasks('grunt-angular-templates');
+	grunt.loadNpmTasks('grunt-browser-sync');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-ng-annotate');
+	grunt.loadNpmTasks('grunt-replace');
+
+	// default task
+	grunt.registerTask('default', tasks.default);
+
+	// dev build task
+	grunt.registerTask('dev', tasks.dev);
+
+	// prepare for production
+	grunt.registerTask('prod', tasks.prod);
+
+	// serve task
+	grunt.registerTask('serve', tasks.serve);
 };
