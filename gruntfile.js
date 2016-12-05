@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         copy: {
             fonts: {
                 src: [
-                    'src/vendors/bower_components/material-design-iconic-font/dist/fonts/**/*'
+                    'src/vendors/material-design-iconic-font/dist/fonts/**/*'
                 ],
                 dest: 'build/fonts/',
                 flatten: true,
@@ -109,6 +109,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        /** properly inject angular dependencies */
+        ngAnnotate: {
+            options: {
+                add: true,
+                remove: true,
+                singleQuotes: true
+            },
+            dev: {}
+        },
         /** serve it up */
         browserSync: {
             dev: {
@@ -126,7 +135,8 @@ module.exports = function(grunt) {
                 options: {
                     watchTask: true,
                     server: 'build',
-                    port: 8080
+                    port: 8080,
+                    browser: 'google chrome'
                 }
             }
         },
@@ -194,6 +204,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-text-replace');
 
     // Default task(s).

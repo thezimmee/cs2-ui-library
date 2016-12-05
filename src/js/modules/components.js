@@ -1,4 +1,4 @@
-cloudspark
+app
 
     // =========================================================================
     // WEATHER WIDGET
@@ -31,7 +31,7 @@ cloudspark
                 });
             }
         }
-        
+
     })
 
 
@@ -51,7 +51,7 @@ cloudspark
             }
         }
     })
-    
+
     //A title with a text under
     .directive('swalText', function(){
         return {
@@ -84,16 +84,16 @@ cloudspark
             restrict: 'A',
             link: function(scope, element, attrs) {
                 element.click(function(){
-                    swal({   
-                        title: "Are you sure?",   
-                        text: "You will not be able to recover this imaginary file!",   
-                        type: "warning",   
-                        showCancelButton: true,   
-                        confirmButtonColor: "#DD6B55",   
-                        confirmButtonText: "Yes, delete it!",   
-                        closeOnConfirm: false 
-                    }, function(){   
-                        swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+                    swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        closeOnConfirm: false
+                    }, function(){
+                        swal("Deleted!", "Your imaginary file has been deleted.", "success");
                     });
                 });
             }
@@ -106,22 +106,22 @@ cloudspark
             restrict: 'A',
             link: function(scope, element, attrs) {
                 element.click(function(){
-                    swal({   
-                        title: "Are you sure?",   
-                        text: "You will not be able to recover this imaginary file!",   
-                        type: "warning",   
-                        showCancelButton: true,   
-                        confirmButtonColor: "#DD6B55",   
-                        confirmButtonText: "Yes, delete it!",   
-                        cancelButtonText: "No, cancel plx!",   
-                        closeOnConfirm: false,   
-                        closeOnCancel: false 
-                    }, function(isConfirm){   
-                        if (isConfirm) {     
-                            swal("Deleted!", "Your imaginary file has been deleted.", "success");   
-                        } else {     
-                            swal("Cancelled", "Your imaginary file is safe :)", "error");   
-                        } 
+                    swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "No, cancel plx!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    }, function(isConfirm){
+                        if (isConfirm) {
+                            swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                        } else {
+                            swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        }
                     });
                 });
             }
@@ -134,34 +134,34 @@ cloudspark
             restrict: 'A',
             link: function(scope, element, attrs) {
                 element.click(function(){
-                    swal({   
-                        title: "Sweet!",   
-                        text: "Here's a custom image.",   
-                        imageUrl: "img/thumbs-up.png" 
-                    });
-                });
-            }
-        }
-    })
-            
-    //Auto Close Timer
-    .directive('swalTimer', function(){
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs) {
-                element.click(function(){
-                     swal({   
-                        title: "Auto close alert!",   
-                        text: "I will close in 2 seconds.",   
-                        timer: 2000,   
-                        showConfirmButton: false 
+                    swal({
+                        title: "Sweet!",
+                        text: "Here's a custom image.",
+                        imageUrl: "img/thumbs-up.png"
                     });
                 });
             }
         }
     })
 
-    
+    //Auto Close Timer
+    .directive('swalTimer', function(){
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                element.click(function(){
+                     swal({
+                        title: "Auto close alert!",
+                        text: "I will close in 2 seconds.",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                });
+            }
+        }
+    })
+
+
 
     // =========================================================================
     // GROWL
@@ -212,10 +212,10 @@ cloudspark
                                         '</div>'
                     });
                 }
-                
+
                 element.on('click', function(e){
                     e.preventDefault();
-                    
+
                     var nFrom = attrs.from;
                     var nAlign = attrs.align;
                     var nIcons = attrs.icon;
@@ -224,10 +224,10 @@ cloudspark
                     var nAnimOut = attrs.animationOut;
 
                     notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
-            
+
                 })
-                
-                
+
+
             }
         }
     })

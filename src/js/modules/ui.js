@@ -1,9 +1,9 @@
-cloudspark
+app
 
     // =========================================================================
     // MALIHU SCROLL
     // =========================================================================
-    
+
     //On Custom Class
     .directive('cOverflow', ['scrollService', function(scrollService){
         return {

@@ -1,5 +1,14 @@
-# ignore build directory
+# build directory
 /build/
 
-# ignore vendors / 3rd party code (managed by npm/bower)
+# vendors / 3rd party code (managed by npm/bower)
 /vendors/
+
+# node files
+node_modules
+
+# macOS files
+.DS_Store
+
+# IDE files
+*.sublime-*

@@ -1,24 +1,24 @@
-cloudspark
+app
 
     // =========================================================================
     // LAYOUT
     // =========================================================================
-    
+
     .directive('dockNavbarToggle', function(){
-        
+
         return {
             restrict: 'A',
             scope: {
                 dockNavbarToggle: '='
             },
-            
+
             link: function(scope, element, attr) {
-                
+
                 //Default State
                 if (scope.dockNavbarToggle) {
                     element.prop('checked', true);
                 }
-                
+
                 //Change State
                 element.on('change', function(){
                     if (element.is(':checked')) {
@@ -50,10 +50,10 @@ cloudspark
                 modelLeft: '=',
                 modelRight: '='
             },
-            
+
             link: function(scope, element, attr) {
                 element.on('click', function(){
- 
+
                     if (element.data('target') === 'mainmenu') {
                         if (scope.modelLeft === false) {
                             scope.$apply(function(){
@@ -66,7 +66,7 @@ cloudspark
                             })
                         }
                     }
-                    
+
                     if (element.data('target') === 'chat') {
                         if (scope.modelRight === false) {
                             scope.$apply(function(){
@@ -78,16 +78,16 @@ cloudspark
                                 scope.modelRight = false;
                             })
                         }
-                        
+
                     }
                 })
             }
         }
-    
-    })
-    
 
-    
+    })
+
+
+
     // =========================================================================
     // SUBMENU TOGGLE
     // =========================================================================
@@ -109,7 +109,7 @@ cloudspark
     // =========================================================================
     // STOP PROPAGATION
     // =========================================================================
-    
+
     .directive('stopPropagate', function(){
         return {
             restrict: 'C',
@@ -136,14 +136,14 @@ cloudspark
     // =========================================================================
     // PRINT
     // =========================================================================
-    
+
     .directive('print', function(){
         return {
             restrict: 'A',
             link: function(scope, element){
                 element.click(function(){
                     window.print();
-                })   
+                })
             }
         }
     })

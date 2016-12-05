@@ -1,35 +1,35 @@
-cloudspark
-    
+app
+
     // =========================================================================
-    // Curved Line Chart 
+    // Curved Line Chart
     // =========================================================================
 
     .directive('curvedlineChart', function(){
         return {
             restrict: 'A',
             link: function(scope, element) {
-                
+
                 /* Make some random data for the Chart*/
 
                 var d1 = [];
                 var d2 = [];
                 var d3 = [];
-                
+
                 for (var i = 0; i <= 10; i += 1) {
                     d1.push([i, parseInt(Math.random() * 30)]);
                 }
-                
+
                 for (var i = 0; i <= 20; i += 1) {
                     d2.push([i, parseInt(Math.random() * 30)]);
-                }    
-                
+                }
+
                 for (var i = 0; i <= 10; i += 1) {
                     d3.push([i, parseInt(Math.random() * 30)]);
                 }
-    
-                
+
+
                 /* Chart Options */
-    
+
                 var options = {
                     series: {
                         shadowSize: 0,
@@ -65,7 +65,7 @@ cloudspark
                         show: false
                     }
                 };
-    
+
                 /* Let's create the chart */
 
                 $.plot($(element), [
@@ -93,16 +93,16 @@ cloudspark
         }
     })
 
-    
+
     // =========================================================================
     // Regular Line Charts
     // =========================================================================
-    
+
     .directive('lineChart', function(){
         return {
             restrict: 'A',
             link: function(scope, element){
-                
+
                 /* Make some random data for Recent Items chart */
 
                 var data = [];
@@ -139,15 +139,15 @@ cloudspark
                 var d1 = [];
                 var d2 = [];
                 var d3 = [];
-                
+
                 for (var i = 0; i <= 10; i += 1) {
                     d1.push([i, parseInt(Math.random() * 30)]);
                 }
-                
+
                 for (var i = 0; i <= 20; i += 1) {
                     d2.push([i, parseInt(Math.random() * 30)]);
-                }    
-                
+                }
+
                 for (var i = 0; i <= 10; i += 1) {
                     d3.push([i, parseInt(Math.random() * 30)]);
                 }
@@ -256,7 +256,7 @@ cloudspark
                         fillColor: '#FF9800'
                     }
                 });
-                
+
                 /* Let's create the chart */
                 $.plot($(element), barData, {
                     grid : {
@@ -311,9 +311,9 @@ cloudspark
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
-            
+
                 /* Make some random data*/
-    
+
                 var data = [];
                 var totalPoints = 300;
                 var updateInterval = 30;
@@ -398,7 +398,7 @@ cloudspark
                     }
                 });
 
-                /* Update */    
+                /* Update */
                 function update() {
                     plot.setData([getRandomData()]);
                     // Since the axes don't change, we don't need to call plot.setupGrid()
@@ -435,7 +435,7 @@ cloudspark
                         series: {
                             pie: {
                                 show: true,
-                                stroke: { 
+                                stroke: {
                                     width: 2,
                                 },
                             },
@@ -473,7 +473,7 @@ cloudspark
                             pie: {
                                 innerRadius: 0.5,
                                 show: true,
-                                stroke: { 
+                                stroke: {
                                     width: 2,
                                 },
                             },
@@ -507,5 +507,5 @@ cloudspark
     })
 
 
-    
-    
+
+

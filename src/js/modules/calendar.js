@@ -1,4 +1,4 @@
-cloudspark 
+app
 
     // =========================================================================
     // CALENDAR WIDGET
@@ -69,7 +69,7 @@ cloudspark
             }
         }
     })
-    
+
 
     // =========================================================================
     // MAIN CALENDAR
@@ -83,7 +83,7 @@ cloudspark
                 actionLinks: '=',
             },
             link: function(scope, element, attrs) {
-                
+
                 var date = new Date();
                 var d = date.getDate();
                 var m = date.getMonth();
@@ -187,19 +187,19 @@ cloudspark
                     //On Day Select
                     select: function(start, end, allDay) {
                         scope.select({
-                            start: start, 
+                            start: start,
                             end: end
                         });
                     }
                 });
-                
-                  
+
+
                 //Add action links in calendar header
                 element.find('.fc-toolbar').append($compile(scope.actionLinks)(scope));
             }
         }
     })
-    
+
 
     //Change Calendar Views
     .directive('calendarView', function(){
@@ -207,7 +207,7 @@ cloudspark
             restrict: 'A',
             link: function(scope, element, attrs) {
                 element.on('click', function(){
-                    $('#calendar').fullCalendar('changeView', attrs.calendarView);  
+                    $('#calendar').fullCalendar('changeView', attrs.calendarView);
                 })
             }
         }

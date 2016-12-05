@@ -1,4 +1,4 @@
-var cloudspark = angular.module('cloudspark', [
+var app = angular.module('cloudspark', [
     'ngAnimate',
     'ngResource',
     'ui.router',
@@ -6,6 +6,5 @@ var cloudspark = angular.module('cloudspark', [
     'angular-loading-bar',
     'oc.lazyLoad',
     'nouislider',
-    'ngTable'
+    // 'ngTable'
 ])
- 

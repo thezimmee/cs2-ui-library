@@ -1,9 +1,9 @@
-cloudspark
+app
 
     // =========================================================================
     // MEDIA ELEMENT
     // =========================================================================
-    
+
     .directive('mediaElement', function(){
         return {
             restrict: 'A',
@@ -11,22 +11,22 @@ cloudspark
                 element.mediaelementplayer();
             }
         }
-        
+
     })
 
 
     // =========================================================================
     // LIGHTBOX
     // =========================================================================
-    
+
     .directive('lightbox', function(){
         return {
             restrict: 'C',
             link: function(scope, element) {
                 element.lightGallery({
                     enableTouch: true
-                }); 
+                });
             }
         }
-        
+
     })
