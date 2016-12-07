@@ -19,9 +19,15 @@ html {
 body {
 	font-family: roboto, sans-serif;
 	height: 100%;
-	overflow-y: auto;
 	position: relative;
 	transition: opacity .5s;
+
+	& when (@header--fixed = true) {
+		overflow: hidden;
+	}
+	& when (@header--fixed = false) {
+		overflow-y: auto;
+	}
 }
 
 /** main window */
@@ -38,16 +44,34 @@ body {
 /** main container */
 .ds-main__container {
 	flex-grow: 1;
-	overflow-y: auto;
+
+	& when (@header--fixed = false) {
+		overflow-y: auto;
+	}
 
 	@media (min-width: 768px) {
-		margin-top: @header__height--768;
+		// margin-top: @header__height--768;
 	}
 }
 
 /** main content area */
 .ds-main__content {
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-top: 20px;
+	padding: @spu * 2;
+	width: 100vw;
+	transition: width @transition__duration;
+
+	& when (@navbar__pin-on-wide = true) {
+		@media (min-width: 1280px) {
+			width: ~"calc(100vw - @{navbar__width})";
+		}
+	}
+
+	& when (@header--fixed = true) {
+		height: ~"calc(100vh - @{header__height})";
+		overflow-y: auto;
+	}
+
+	.ds-navbar--open & {
+		width: 100vw;
+	}
 }

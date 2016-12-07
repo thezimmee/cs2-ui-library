@@ -4,6 +4,7 @@
  * main app header.
  */
 
+@header--fixed: false;
 @header__height: 56px;
 @header__height--768: 64px;
 
@@ -13,25 +14,26 @@
     box-shadow: @shadow--2;
     display: flex;
     align-items: center;
+    position: relative;
     transition-property: left;
     transition-duration: @transition__duration;
     transition-timing-function: @transition__timing;
     user-select: none;
     width: 100%;
-    z-index: 16;
+    z-index: @z--drawer - 1;
 
     @media (min-width: 768px) {
-        padding-left: 20px;
-        padding-right: 20px;
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
+        padding-left: @spu * 2;
+        padding-right: @spu * 2;
+        // position: fixed;
+        // left: 0;
+        // right: 0;
+        // top: 0;
     }
 
-    .ds-navbar--open & {
-        left: @navbar__width;
-    }
+    // .ds-navbar--open & {
+    //     left: @navbar__width;
+    // }
 }
 
 

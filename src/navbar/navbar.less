@@ -4,31 +4,47 @@
  * global navigation bar.
  */
 
-@navbar__width: 235px;
+@navbar__width: 320px;
+@navbar__pin-on-wide: true;
+@navbar__open-over-content: false;
 
 
 .ds-navbar {
-	background-color: #ccc;
-	box-shadow: @shadow--3;
+	background-color: #fff;
 	height: 100vh;
-	width: @navbar__width;
-	will-change: margin-left;
-	transition-property: margin-left;
+	min-width: @navbar__width;
+	margin-left: -@navbar__width;
+	position: relative;
+	will-change: margin-left, box-shadow;
+	transition-property: margin-left, box-shadow;
 	transition-duration: @transition__duration;
 	transition-timing-function: @transition__timing;
-	z-index: @z--bars;
+	z-index: @z--drawer;
 
-	@media (min-width: 768px) {
-		margin-left: -@navbar__width;
+	&:before {
+		background-color: inherit;
+		content: ' ';
+		width: 20px;
+		height: 100%;
+		position: absolute;
+		left: -20px;
+		top: 0;
 	}
-}
 
-
-.ds-navbar--detached {
-	.ds-navbar {
+	& when (@navbar__open-over-content = true) {
 		position: fixed;
 		top: 0;
 		left: 0;
+	}
+
+	& when (@navbar__pin-on-wide = true) {
+		@media (min-width: 1280px) {
+			box-shadow: @shadow--4;
+			margin-left: 0;
+			position: static;
+			top: auto;
+			left: auto;
+		}
 	}
 }
 
@@ -45,6 +61,7 @@
 
 .ds-navbar--open {
 	.ds-navbar {
+		box-shadow: @shadow--4;
 		margin-left: 0;
 	}
 }
@@ -62,6 +79,13 @@
 	position: relative;
 	transform: rotate(0deg);
 	transition: transform @transition__duration @transition__timing;
+
+	& when (@navbar__pin-on-wide = true) {
+		@media (min-width: 1280px) {
+			pointer-events: none;
+			display: none;
+		}
+	}
 
 	&:before {
 		content: "";
