@@ -1,5 +1,6 @@
 # build directory
 /build/
+/.temp/
 
 # vendors / 3rd party code (managed by npm/bower)
 /vendors/

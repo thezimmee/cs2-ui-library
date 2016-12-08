@@ -16,9 +16,11 @@
 		<main class="ds-main__container">
 			<header class="ds-header" data-ng-include src="'header/header.tpl.html'" data-ng-controller="headerCtrl as hCtrl"></header>
 
-			<div class="ds-main__content" ui-view></div>
+			<div class="ds-main__content">
+				<div class="ds-main__content-inner" ui-view></div>
 
-			<footer class="footer" data-ng-include src="'app/footer.tpl.html'"></footer>
+				<footer class="footer" data-ng-include src="'app/footer.tpl.html'"></footer>
+			</div>
 
 			<div class="ds-overlay" ng-class="{'ds-overlay--active': appCtrl.drawers.navbar.open}" ng-click="appCtrl.drawers.navbar.open = false;"></div>
 		</main>
@@ -28,6 +30,7 @@
 
 	<!-- JS:js/app.min.js -->
 	<script src="js/vendor.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 	<script src="js/app.annotated.js"></script>
 	<script src="js/templates.js"></script>
 	<!-- END -->

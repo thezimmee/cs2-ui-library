@@ -22,6 +22,7 @@
     "material-design-iconic-font": "2.2.0",
     "waves": "0.7.2",
     "normalize-css": "normalize.css#^5.0.0",
-    "roboto-fontface": "^0.6.0"
+    "roboto-fontface": "^0.6.0",
+    "highlightjs": "^9.8.0"
   }
 }

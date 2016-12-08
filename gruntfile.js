@@ -23,23 +23,37 @@ module.exports = function(grunt) {
 			// angular
 			'vendors/angular/angular.min.js',
 			'vendors/angular-ui-router/release/angular-ui-router.min.js',
+			// other
+			'vendors/highlightjs/highlight.pack.min.js',
 		],
 		dest: 'build/js/vendor.js'
 	};
+	paths.markdown = {
+		expand: true,
+		src: 'src/**/*.md',
+		dest: '.temp/',
+		ext: '.md.html',
+		rename: function (dest, src) {
+			return dest + src.replace('src/', '');
+		}
+	};
 	paths.js.templates = {
-		cwd: 'src/',
 		src: [
-			'**/*.tpl.html',
+			'src/**/*.tpl.html',
+			'.temp/**/*.md.html',
 		],
 		dest: 'build/js/templates.js',
 		options: {
 			module: 'cs2',
+			url: function (url) {
+				return url.replace('src/', '').replace('.temp/', '').replace('.md.html', '.tpl.html');
+			},
 			htmlmin: {
 				collapseWhitespace: true,
 				collapseBooleanAttributes: true
 			}
 		},
-		watch: ['src/**/*.tpl.html']
+		watch: ['src/**/*.tpl.html', 'src/**/*.md']
 	};
 	paths.js.app = {
 		src: [
@@ -113,6 +127,7 @@ module.exports = function(grunt) {
 	/** clean up old stuff */
 	taskConfig.clean = {
 		build: 'build',
+		temp: '.temp'
 	};
 	/** less pre-compiler */
 	taskConfig.less = {
@@ -135,6 +150,17 @@ module.exports = function(grunt) {
 			separator: ';',
 		},
 		vendor: paths.js.vendor,
+	};
+	/** markdown to html (then to templates) */
+	taskConfig.md2html = {
+		all: {
+			options: {
+				highlightjs: {
+					enabled: true
+				}
+			},
+			files: [paths.markdown],
+		}
 	};
 	/** concatenate & register angular templates */
 	taskConfig.ngtemplates = {
@@ -211,8 +237,10 @@ module.exports = function(grunt) {
 	var tasks = {
 		default: ['dev'],
 		dev: [
+			'clean:temp',
 			'clean:build',
 			// js
+			'md2html',
 			'ngtemplates',
 			'concat:vendor',
 			'ngAnnotate:dev',
@@ -254,7 +282,7 @@ module.exports = function(grunt) {
 		// update watchers for dev
 		taskConfig.watch.templates = {
 			files: paths.js.templates.watch,
-			tasks: ['ngtemplates'],
+			tasks: ['md2html', 'ngtemplates'],
 			options: {
 				spawn: false
 			}
@@ -304,11 +332,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-md2html');
 	grunt.loadNpmTasks('grunt-ng-annotate');
 	grunt.loadNpmTasks('grunt-replace');
 
 	// default task
 	grunt.registerTask('default', tasks.default);
+	grunt.registerTask('md', 'md2html');
 
 	// dev build task
 	grunt.registerTask('dev', tasks.dev);

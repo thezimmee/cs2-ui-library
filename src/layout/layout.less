@@ -13,6 +13,7 @@
 }
 html {
 	height: 100%;
+	line-height: 1.5;
 	overflow: hidden;
 	-ms-overflow-style: none;
 }
@@ -56,7 +57,7 @@ body {
 
 /** main content area */
 .ds-main__content {
-	padding: @spu * 2;
+	padding: (@spu * 2) (@spu * 2) (@spu * 4);
 	width: 100vw;
 	transition: width @transition__duration;
 
