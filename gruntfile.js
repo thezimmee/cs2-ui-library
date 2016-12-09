@@ -21,6 +21,8 @@ module.exports = function(grunt) {
 	};
 	paths.js.vendor = {
 		src: [
+			// jquery
+			'vendors/jquery/dist/jquery.min.js',
 			// angular
 			'vendors/angular/angular.min.js',
 			'vendors/angular-ui-router/release/angular-ui-router.min.js',
