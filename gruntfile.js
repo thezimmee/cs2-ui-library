@@ -133,7 +133,8 @@ module.exports = function(grunt) {
 	var taskConfig = {};
 	/** clean up old stuff */
 	taskConfig.clean = {
-		build: 'build',
+		dev: 'build',
+		prod: paths.js.prod.src,
 		temp: '.temp'
 	};
 	/** less pre-compiler */
@@ -246,6 +247,15 @@ module.exports = function(grunt) {
 			}
 		},
 	};
+	/** gh-pages deployment */
+	taskConfig['gh-pages'] = {
+		options: {
+			base: 'build',
+			message: grunt.option('msg') || '[Auto-generated commit]',
+			tag: grunt.option('tag') || ''
+		},
+		src: ['build/**/*']
+	};
 
 
 	/**
@@ -255,7 +265,7 @@ module.exports = function(grunt) {
 		default: ['dev'],
 		dev: [
 			'clean:temp',
-			'clean:build',
+			'clean:dev',
 			// js
 			'markdownit',
 			'ngtemplates',
@@ -268,7 +278,13 @@ module.exports = function(grunt) {
 		],
 		prod: [
 			'uglify:prod',
-			'replace:prod'
+			'replace:prod',
+			'clean:prod'
+		],
+		deploy: [
+			'dev',
+			'prod',
+			'ghpages'
 		],
 		serve: ['browserSync', 'watch']
 	};
@@ -279,7 +295,14 @@ module.exports = function(grunt) {
 	 */
 	var mode = 'DEVELOPMENT';
 	// --prod or -P flag vs default (dev)
-	if (grunt.option('prod') || grunt.option('P')) {
+	if (grunt.cli.tasks[0] === 'deploy') {
+		mode = 'DEPLOY';
+		// --nobuild or -N
+		if (grunt.option('nobuild') || grunt.option('N')) {
+			mode: 'DEPLOY, NO BUILD'
+			tasks.deploy = ['deploy'];
+		}
+	} else if (grunt.option('prod') || grunt.option('P')) {
 		mode = 'PRODUCTION';
 		// update watchers for prod
 		taskConfig.watch.js = {
@@ -319,15 +342,15 @@ module.exports = function(grunt) {
 			}
 		};
 	}
-	// --nowatch or -N: build only
-	if (grunt.option('nowatch') || grunt.option('N')) {
+	// --build or -B: build only
+	if (grunt.option('build') || grunt.option('B')) {
 		mode += ', BUILD-ONLY';
-	} else {
+	} else if (grunt.cli.tasks[0] !== 'deploy') {
 		tasks.default.push('serve');
 	}
 
 	// log mode to console
-	grunt.log.write('Running in [%s] mode (%s)...\n', mode, tasks.default);
+	grunt.log.write('Running in [%s] mode (%s)...\n', mode, grunt.cli.tasks[0] === 'deploy' ? 'dev,prod,deploy' : tasks.default);
 
 
 	// init grunt config
@@ -339,6 +362,18 @@ module.exports = function(grunt) {
 		// grunt.config('copy.js.src', filepath.replace('src/', ''));
 		// grunt.config('copy.html.src', filepath.replace('src/', ''));
 	// });
+
+	// gh-pages task
+	grunt.registerTask('ghpages', 'deploys to gh-pages', function () {
+		grunt.log.write('Deploying to github pages...');
+		var ghpages = require('gh-pages');
+		var path = require('path');
+		ghpages.publish(path.join(__dirname, 'build'), function (error) {
+			if (error) {
+				grunt.log.error('Error running `gh-pages` task: ', error);
+			}
+		});
+	})
 
 	// grunt plugins
 	grunt.loadNpmTasks('grunt-angular-templates');
@@ -364,4 +399,7 @@ module.exports = function(grunt) {
 
 	// serve task
 	grunt.registerTask('serve', tasks.serve);
+
+	// deploy to gh-pages task
+	grunt.registerTask('deploy', tasks.deploy);
 };
