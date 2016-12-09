@@ -32,4 +32,8 @@ app
 				url: '/creating-a-widget',
 				templateUrl: 'library/creating-a-widget.tpl.html'
 			})
+			.state('cards', {
+				url: '/cards',
+				templateUrl: 'cards/cards.tpl.html'
+			})
 	});

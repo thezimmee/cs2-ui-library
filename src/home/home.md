@@ -14,6 +14,7 @@ by doing the following:
 
 ## Release History
 
+- 12/9/2016: Added card element.
 - 12/8/2016: Moved CS2 documentation here.
 
 ## Upcoming
@@ -25,8 +26,14 @@ by doing the following:
     - [ ] modals
     - [ ] buttons
 - [ ] Add plugin to only process modified files in grunt build.
+- [ ] Add markdown plugins:
+    - [ ] todo boxes
+    - [ ] html containers
+- [ ] Convert @spu to rem units
+- [ ] Add plugin (nodemon?) to auto-restart after errors (like with less)
 - [ ] Review documentation for up-to-date accuracy.
     - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
 - [ ] Automate process of creating a "/library" document (with navigation).
 - [ ] Add global search functionality
+- [ ] Add markdown documentation editing (with prose.io?)
 - [ ] Generators (?) to build common features, such as pages, components, etc.
