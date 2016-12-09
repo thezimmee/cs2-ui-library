@@ -14,15 +14,19 @@ by doing the following:
 
 ## Release History
 
-- Moved CS2 documentation here.
-- Added layout modules including:
-    - navbar
-    - header
-    - footer
+- 12/8/2016: Moved CS2 documentation here.
 
 ## Upcoming
 
-- Add base modules, such as forms, menus, modals, buttons.
-- Add card module and other basic modules.
-- Generators (?) to build common features, such as pages, components, etc.
-- Better align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
+- [ ] Document base / global modules:
+    - [ ] cards
+    - [ ] forms
+    - [ ] menus
+    - [ ] modals
+    - [ ] buttons
+- [ ] Add plugin to only process modified files in grunt build.
+- [ ] Review documentation for up-to-date accuracy.
+    - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
+- [ ] Automate process of creating a "/library" document (with navigation).
+- [ ] Add global search functionality
+- [ ] Generators (?) to build common features, such as pages, components, etc.
