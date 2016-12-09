@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 		less: {},
 		js: {},
 		fonts: {},
+		assets: {},
 		html: {},
 		browserSync: {},
 		watch: {},
@@ -85,6 +86,12 @@ module.exports = function(grunt) {
 		],
 		dest: 'build/fonts/'
 	};
+	paths.assets = {
+		expand: true,
+		cwd: 'assets/',
+		src: ['**/*'],
+		dest: 'build/assets/'
+	};
 	paths.html = {
 		cwd: 'src/',
 		expand: true,
@@ -152,11 +159,20 @@ module.exports = function(grunt) {
 		vendor: paths.js.vendor,
 	};
 	/** markdown to html (then to templates) */
-	taskConfig.md2html = {
+	taskConfig.markdownit = {
 		all: {
 			options: {
-				highlightjs: {
-					enabled: true
+				highlightjs: true,
+				html: true,
+				plugins: {
+					'markdown-it-anchor': {
+						level: 1
+					},
+					'markdown-it-table-of-contents': {
+						includeLevel: [2,3],
+						containerClass: 'toc-test',
+					},
+					'markdown-it-attrs': {},
 				}
 			},
 			files: [paths.markdown],
@@ -206,6 +222,7 @@ module.exports = function(grunt) {
 	/** copy stuff to build directory */
 	taskConfig.copy = {
 		fonts: paths.fonts,
+		assets: paths.assets,
 		html: paths.html
 	};
 	/** serve it up */
@@ -240,7 +257,7 @@ module.exports = function(grunt) {
 			'clean:temp',
 			'clean:build',
 			// js
-			'md2html',
+			'markdownit',
 			'ngtemplates',
 			'concat:vendor',
 			'ngAnnotate:dev',
@@ -282,7 +299,7 @@ module.exports = function(grunt) {
 		// update watchers for dev
 		taskConfig.watch.templates = {
 			files: paths.js.templates.watch,
-			tasks: ['md2html', 'ngtemplates'],
+			tasks: ['markdownit', 'ngtemplates'],
 			options: {
 				spawn: false
 			}
@@ -332,13 +349,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-md2html');
+	grunt.loadNpmTasks('grunt-markdown-it');
 	grunt.loadNpmTasks('grunt-ng-annotate');
 	grunt.loadNpmTasks('grunt-replace');
 
 	// default task
 	grunt.registerTask('default', tasks.default);
-	grunt.registerTask('md', 'md2html');
 
 	// dev build task
 	grunt.registerTask('dev', tasks.dev);

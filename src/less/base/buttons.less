@@ -11,23 +11,56 @@
 	outline-width: 2px;
 }
 
-.button {
+.ds-button {
 	appearance: none;
-	background-color: transparent;
+	.bg(lighten(@c-gray, 20%));
 	border-radius: 0;
 	border-style: solid;
 	border-width: 0;
-	color: inherit;
 	cursor: pointer;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	font-family: inherit;
 	font-weight: normal;
+	height: @spu * 2;
 	margin: 0;
-	padding: 0;
+	padding: 0 @spu;
 	text-align: center;
 	text-decoration: none;
 	white-space: nowrap;
 	transition-property: background-color;
-	transition-duration: @transition__duration;
-	transition-timing-function: @transition__timing;
+	transition-duration: @transition__duration--hover;
+
+	&:hover,
+	&:focus {
+		background-color: lighten(@c-gray, 10%);
+	}
+}
+
+
+.ds-button--small {
+
+}
+
+
+.ds-button--clear {
+	background-color: transparent;
+	color: inherit;
+
+	&:hover,
+	&:focus {
+		background-color: transparent;
+	}
+}
+
+
+.ds-button--active {
+	.bg(@c-blue-gray);
+
+	&:hover,
+	&:focus {
+		background-color: @c-blue-gray;
+		cursor: default;
+	}
 }

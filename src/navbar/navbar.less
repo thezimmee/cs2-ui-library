@@ -10,7 +10,7 @@
 
 
 .ds-navbar {
-	background-color: #fff;
+	background-color: lighten(@c-gray, 35%);
 	height: 100vh;
 	min-width: @navbar__width;
 	margin-left: -@navbar__width;
@@ -145,4 +145,46 @@
 			transform: scale(1);
 		}
 	}
+}
+
+
+.ds-navbar__header {
+	&:extend(.ds-row--large);
+	background-color: @c-blue-gray;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ds-navbar__logo {
+	display: inline-block;
+	max-height: 80%;
+	max-width: 100%;
+}
+
+.ds-navbar__menu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ds-navbar__link {
+	&:extend(.ds-row--medium);
+	color: @c-dark;
+	text-decoration: none;
+	transition: background @transition__duration--hover;
+
+	&:hover,
+	&:focus {
+		background-color: lighten(@c-dark--light, 50%);
+	}
+}
+
+.ds-navbar__menu-icon {
+	color: @c-blue-gray;
+	display: inline-block;
+	font-size: 24px;
+	margin-left: @spu * .75;
+	margin-right: @spu * .5;
+	width: 32px;
 }
