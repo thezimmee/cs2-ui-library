@@ -31,6 +31,9 @@ body {
 		overflow-y: auto;
 	}
 }
+code {
+	background-color: #f8f8f8;
+}
 
 /** main window */
 .ds-main {
@@ -58,7 +61,9 @@ body {
 
 /** main content area */
 .ds-main__content {
-	padding: (@spu * 2) (@spu * 2) (@spu * 4);
+	// padding: (@spu * 2) (@spu * 2) (@spu * 4);
+	display: flex;
+	flex-direction: column;
 	width: 100vw;
 	transition: width @transition__duration;
 
@@ -71,9 +76,22 @@ body {
 	& when (@header--fixed = true) {
 		height: ~"calc(100vh - @{header__height})";
 		overflow-y: auto;
+
+		@media (min-width: 768px) {
+			height: ~"calc(100vh - @{header__height--768})";
+		}
 	}
 
 	.ds-navbar--open & {
 		width: 100vw;
 	}
+}
+
+
+/** inner content area */
+.ds-main__content-inner {
+	flex-grow: 1;
+	max-width: 50em;
+	margin-left: auto;
+	margin-right: auto;
 }
