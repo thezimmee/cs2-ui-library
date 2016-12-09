@@ -20,8 +20,9 @@ by doing the following:
     - header
     - footer
 
-## Upcoming Features
+## Upcoming
 
 - Add base modules, such as forms, menus, modals, buttons.
 - Add card module and other basic modules.
 - Generators (?) to build common features, such as pages, components, etc.
+- Better align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
