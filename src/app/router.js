@@ -16,4 +16,20 @@ app
 				url: '/developer-workflow',
 				templateUrl: 'library/developer-workflow.tpl.html',
 			})
+			.state('client-setup', {
+				url: '/client-setup',
+				templateUrl: 'library/client-setup.tpl.html'
+			})
+			.state('developer-setup', {
+				url: '/developer-setup',
+				templateUrl: 'library/developer-setup.tpl.html'
+			})
+			.state('developer-faq', {
+				url: '/developer-faq',
+				templateUrl: 'library/developer-faq.tpl.html'
+			})
+			.state('creating-a-widget', {
+				url: '/creating-a-widget',
+				templateUrl: 'library/creating-a-widget.tpl.html'
+			})
 	});
