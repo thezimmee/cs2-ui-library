@@ -31,3 +31,9 @@ Current features to help with development are as follows:
 - `grunt`: runs a development build with _non-optimized assets_.
 - `grunt -P` or `grunt --prod`: runs a production build with _optimized assets_.
 - `grunt deploy`: runs a production build and automatically deploys to the `gh-pages` branch for GitHub pages.
+
+## To do
+
+- [ ] Add plugin to only process modified files in grunt build.
+- [ ] Automate process of creating a "/library" document.
+- [ ] Add global search functionality
