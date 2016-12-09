@@ -37,7 +37,7 @@ function appController($scope) {
 		//    angular.element('html').addClass('ismobile');
 		// }
 
-		$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+		$scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 			closeDrawers();
 			// @todo: put this somewhere else
 			// $('pre code').each(function(i, block) {
