@@ -20,7 +20,7 @@ by doing the following:
 ## Upcoming
 
 - [ ] Document base / global modules:
-    - [ ] cards
+    - [x] cards
     - [ ] forms
     - [ ] menus
     - [ ] modals
@@ -35,5 +35,6 @@ by doing the following:
     - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
 - [ ] Automate process of creating a "/library" document (with navigation).
 - [ ] Add global search functionality
+- [ ] Look into adding auto build with githooks (grunt-githooks?)
 - [ ] Add markdown documentation editing (with prose.io?)
 - [ ] Generators (?) to build common features, such as pages, components, etc.
