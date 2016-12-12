@@ -243,7 +243,7 @@ module.exports = function(grunt) {
 		},
 		html: {
 			files: paths.html.watch,
-			tasks: ['copy:html'],
+			tasks: ['newer:copy:html'],
 			options: {
 				spawn: false
 			}
@@ -269,18 +269,18 @@ module.exports = function(grunt) {
 			'clean:temp',
 			'clean:dev',
 			// js
-			'markdownit',
-			'ngtemplates',
-			'concat:vendor',
-			'ngAnnotate:dev',
+			'newer:markdownit',
+			'newer:ngtemplates',
+			'newer:concat:vendor',
+			'newer:ngAnnotate:dev',
 			// css
 			'less',
 			// copy stuff
-			'copy',
+			'newer:copy',
 		],
 		prod: [
-			'uglify:prod',
-			'replace:prod',
+			'newer:uglify:prod',
+			'newer:replace:prod',
 			'clean:prod'
 		],
 		deploy: [
@@ -313,7 +313,7 @@ module.exports = function(grunt) {
 				paths.js.app.watch,
 				paths.js.templates.watch,
 			],
-			tasks: ['concat:vendor', 'ngtemplates', 'ngAnnotate:dev', 'uglify:prod'],
+			tasks: ['newer:concat:vendor', 'newer:ngtemplates', 'newer:ngAnnotate:dev', 'uglify:prod'],
 			options: {
 				spawn: false
 			}
@@ -324,21 +324,21 @@ module.exports = function(grunt) {
 		// update watchers for dev
 		taskConfig.watch.templates = {
 			files: paths.js.templates.watch,
-			tasks: ['markdownit', 'ngtemplates'],
+			tasks: ['newer:markdownit', 'newer:ngtemplates'],
 			options: {
 				spawn: false
 			}
 		};
 		taskConfig.watch.vendorjs = {
 			files: paths.js.vendor.watch,
-			tasks: ['concat:vendor'],
+			tasks: ['newer:concat:vendor'],
 			options: {
 				spawn: false
 			}
 		};
 		taskConfig.watch.appjs = {
 			files: paths.js.app.watch,
-			tasks: ['ngAnnotate:dev'],
+			tasks: ['newer:ngAnnotate:dev'],
 			options: {
 				spawn: false
 			}
@@ -387,6 +387,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-markdown-it');
+	grunt.loadNpmTasks('grunt-newer');
 	grunt.loadNpmTasks('grunt-ng-annotate');
 	grunt.loadNpmTasks('grunt-replace');
 

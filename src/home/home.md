@@ -14,7 +14,7 @@ by doing the following:
 
 ## Release History
 
-- 12/9/2016: Added card element.
+- 12/9/2016: Added `.ds-card` element.
 - 12/8/2016: Moved CS2 documentation here.
 
 ## Upcoming
@@ -25,7 +25,7 @@ by doing the following:
     - [ ] menus
     - [ ] modals
     - [ ] buttons
-- [ ] Add plugin to only process modified files in grunt build.
+- [x] Add plugin to only process modified files in grunt build.
 - [ ] Add markdown plugins:
     - [ ] todo boxes
     - [ ] html containers
