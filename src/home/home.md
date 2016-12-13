@@ -14,10 +14,10 @@ by doing the following:
 
 ## Release History
 
-- 12/13/2016:
-    - Edit pages on GitHub.
+- 12/13/2016: Edit pages on GitHub.
+- 12/12/2016:
     - Add html containers in markdown files with this syntax: `span(class="test this" id="my-id" data-ng-class="{'sometimes': onlySometimes()}")`.
-    - Incremental builds.
+    - Speedier, incremental builds.
 - 12/9/2016: Added card element (`.ds-card`).
 - 12/8/2016: Moved CS2 documentation here.
 
