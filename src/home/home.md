@@ -26,15 +26,16 @@ by doing the following:
     - [ ] modals
     - [ ] buttons
 - [x] Add plugin to only process modified files in grunt build.
-- [ ] Add markdown plugins:
+- [x] Add markdown plugins:
     - [ ] todo boxes
-    - [ ] html containers
+    - [x] html containers
 - [ ] Convert @spu to rem units
 - [ ] Add plugin (nodemon?) to auto-restart after errors (like with less)
 - [ ] Review documentation for up-to-date accuracy.
     - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
 - [ ] Automate process of creating a "/library" document (with navigation).
-- [ ] Add global search functionality
-- [ ] Look into adding auto build with githooks (grunt-githooks?)
 - [ ] Add markdown documentation editing (with prose.io?)
+- [ ] Add global search functionality
+- [ ] Add grunt-concurrent to speed up build?
+- [ ] Look into adding auto build with githooks (grunt-githooks?)
 - [ ] Generators (?) to build common features, such as pages, components, etc.

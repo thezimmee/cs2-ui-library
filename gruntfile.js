@@ -176,6 +176,28 @@ module.exports = function(grunt) {
 						containerClass: 'toc-test',
 					},
 					'markdown-it-attrs': {},
+					'markdown-it-container': function (md) {
+						var container = require('markdown-it-container');
+						var tags = [];
+						md.use(container, 'html', {
+							validate: function (name) {
+								return name.trim().match(/([a-z]+)?\(.*\)/);
+							},
+							render: function (tokens, idx) {
+								if (tokens[idx].nesting === 1) {
+									var info = tokens[idx].info.trim();
+									var attrs = info.match(/\(.*\)/) ? info.match(/\(.*\)/)[0] : null;
+									var tag = info.split('(')[0];
+									tags.push(tag);
+									return '<' + tag + (attrs ?  ' ' + attrs.slice(1, attrs.length - 1) : '') + '>\n';
+								} else {
+									var html = '</' + tags[tags.length - 1] + '>\n';
+									tags.pop();
+									return html;
+								}
+							}
+						});
+					}
 				}
 			},
 			files: [paths.markdown],
