@@ -2,13 +2,18 @@ var app = angular.module('cs2', [
 	'ui.router',
 ]);
 
-app.controller('appCtrl', appController);
+app
+	.controller('appCtrl', appController)
+	.controller('mainCtrl', mainController);
 
-function appController($scope) {
+
+function appController($scope, $state) {
 	// avoid $scope
 	var appCtrl = this;
+	// console.log('editUrl: ', $state.current);
 
 	// bindings
+	$scope.state = $state;
 	// appCtrl.showGlobalSearch = false;
 	// isTouch detects touch devices
 	appCtrl.isTouch = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -26,24 +31,17 @@ function appController($scope) {
 	appCtrl.toggleDrawer = toggleDrawer;
 	appCtrl.openDrawer = openDrawer;
 	appCtrl.closeDrawers = closeDrawers;
+	appCtrl.$state = $state;
 
 	// init
 	init();
 
-	// init
+	/**
+	 * init
+	 */
 	function init() {
-		// Detact Mobile Browser
-		// if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		//    angular.element('html').addClass('ismobile');
-		// }
-
 		$scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 			closeDrawers();
-			// @todo: put this somewhere else
-			// $('pre code').each(function(i, block) {
-			// 	console.log('bloc: ', block);
-			// 	hljs.highlightBlock(block);
-			// });
 		});
 	}
 
@@ -76,4 +74,8 @@ function appController($scope) {
 			}
 		}
 	}
+}
+
+function mainController($scope, $state) {
+	console.log('mainCtrl');
 }

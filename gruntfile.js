@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 		options: {
 			module: 'cs2',
 			url: function (url) {
-				return url.replace('src/', '').replace('.temp/', '').replace('.md.html', '.tpl.html');
+				return url.replace('src/', '').replace('.temp/', '').replace('.md.html', '').replace('.tpl.html', '');
 			},
 			htmlmin: {
 				collapseWhitespace: true,
