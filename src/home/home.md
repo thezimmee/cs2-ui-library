@@ -16,7 +16,16 @@ by doing the following:
 
 - 12/13/2016: Edit pages on GitHub.
 - 12/12/2016:
-    - Add html containers in markdown files with this syntax: `span(class="test this" id="my-id" data-ng-class="{'sometimes': onlySometimes()}")`.
+    - Add html containers in markdown files with this syntax:
+        ```md
+        :::: a(href="#link-me" title="I am a link. The span on the next line gets nested.")
+        ::: span(class="test this" data-ng-class="{'sometimes': onlySometimes()}")
+
+        <!-- other content here -->
+
+        :::
+        ::::
+        ```
     - Speedier, incremental builds.
 - 12/9/2016: Added card element (`.ds-card`).
 - 12/8/2016: Moved CS2 documentation here.
