@@ -25,6 +25,7 @@
     "markdown-it-anchor": "^2.6.0",
     "markdown-it-attrs": "^0.8.0",
     "markdown-it-container": "^2.0.0",
+    "markdown-it-include": "0.0.2",
     "markdown-it-table-of-contents": "^0.3.1",
     "time-grunt-nowatch": "^1.0.1"
   }

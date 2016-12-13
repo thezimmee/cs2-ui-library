@@ -168,6 +168,7 @@ module.exports = function(grunt) {
 				highlightjs: true,
 				html: true,
 				plugins: {
+					'markdown-it-include': 'src/',
 					'markdown-it-anchor': {
 						level: 1
 					},

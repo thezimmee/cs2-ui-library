@@ -4,7 +4,7 @@ The goals of the UI Library are to:
 
 - unify the CS2 UI.
 - speed up development time.
-- make the CS2 UI stunningly beautiful and a joy for the end-user to work in.
+- make the CS2 UI stunningly beautiful and a joy (e.g., **speed**) for the end-user to work in.
 
 by doing the following:
 
@@ -21,7 +21,7 @@ by doing the following:
         :::: a(href="#link-me" title="I am a link. The span on the next line gets nested.")
         ::: span(class="test this" data-ng-class="{'sometimes': onlySometimes()}")
 
-        <!-- other content here -->
+        <!-- other markdown tags here -->
 
         :::
         ::::
@@ -35,6 +35,7 @@ by doing the following:
 - [x] Add markdown documentation editing
 - [ ] Review documentation for up-to-date accuracy.
     - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
+    - [ ] Find a place for `learn-cs2.md`.
 - [ ] Automate process of creating a "/library" document (with navigation).
 - [ ] Document base / global modules:
     - [x] cards

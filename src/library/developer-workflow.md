@@ -17,11 +17,11 @@ For more information on using git, see the following:
 
 ### 1. **Create a feature branch**
 
+<div class="ds-example__header">
+    <a class="ds-button" data-ng-click="activeTool.branch = 'CLI'" data-ng-class="{'ds-button--active': activeTool.branch === 'CLI'}">Command Line</a>
+    <a class="ds-button" data-ng-click="activeTool.branch = 'VS'" data-ng-class="{'ds-button--active': activeTool.branch === 'VS'}">Visual Studio</a>
+</div>
 <div class="ds-example" data-ng-init="activeTool = {}; activeTool.branch = 'CLI'">
-    <div class="ds-example__header">
-        <a class="ds-button" data-ng-click="activeTool.branch = 'CLI'" data-ng-class="{'ds-button--active': activeTool.branch === 'CLI'}">Command Line</a>
-        <a class="ds-button" data-ng-click="activeTool.branch = 'VS'" data-ng-class="{'ds-button--active': activeTool.branch === 'VS'}">Visual Studio</a>
-    </div>
 
 <div data-ng-if="activeTool.branch === 'CLI'">
 
@@ -55,11 +55,11 @@ While working on a story, make sure to regularly push and pull code so you and o
 
 When committing code, include the task # in each commit.
 
+<div class="ds-example__header">
+    <a class="ds-button" data-ng-click="activeTool.push = 'CLI'" data-ng-class="{'ds-button--active': activeTool.push === 'CLI'}">Command Line</a>
+    <a class="ds-button" data-ng-click="activeTool.push = 'VS'" data-ng-class="{'ds-button--active': activeTool.push === 'VS'}">Visual Studio</a>
+</div>
 <div class="ds-example" data-ng-init="activeTool.push = 'CLI'">
-    <div class="ds-example__header">
-        <a class="ds-button" data-ng-click="activeTool.push = 'CLI'" data-ng-class="{'ds-button--active': activeTool.push === 'CLI'}">Command Line</a>
-        <a class="ds-button" data-ng-click="activeTool.push = 'VS'" data-ng-class="{'ds-button--active': activeTool.push === 'VS'}">Visual Studio</a>
-    </div>
 
 <div data-ng-if="activeTool.push === 'CLI'">
 
@@ -106,11 +106,11 @@ When story is complete, make sure all changes have been pushed and create a Gith
 
 _How to create a pull request:_
 
+<div class="ds-example__header">
+    <a class="ds-button" data-ng-click="activeTool.pullRequest = 'CLI'" data-ng-class="{'ds-button--active': activeTool.pullRequest === 'CLI'}">Command Line</a>
+    <a class="ds-button" data-ng-click="activeTool.pullRequest = 'VS'" data-ng-class="{'ds-button--active': activeTool.pullRequest === 'VS'}">Visual Studio</a>
+</div>
 <div class="ds-example" data-ng-init="activeTool.pullRequest = 'CLI'">
-    <div class="ds-example__header">
-        <a class="ds-button" data-ng-click="activeTool.pullRequest = 'CLI'" data-ng-class="{'ds-button--active': activeTool.pullRequest === 'CLI'}">Command Line</a>
-        <a class="ds-button" data-ng-click="activeTool.pullRequest = 'VS'" data-ng-class="{'ds-button--active': activeTool.pullRequest === 'VS'}">Visual Studio</a>
-    </div>
 
 <div data-ng-if="activeTool.pullRequest === 'CLI'">
 
@@ -129,11 +129,11 @@ _How to create a pull request:_
 
 Once your pull request has been approved, merge it to the `dev` branch.
 
+<div class="ds-example__header">
+    <a class="ds-button" data-ng-click="activeTool.merge = 'CLI'" data-ng-class="{'ds-button--active': activeTool.merge === 'CLI'}">Command Line</a>
+    <a class="ds-button" data-ng-click="activeTool.merge = 'VS'" data-ng-class="{'ds-button--active': activeTool.merge === 'VS'}">Visual Studio</a>
+</div>
 <div class="ds-example" data-ng-init="activeTool.merge = 'CLI'">
-    <div class="ds-example__header">
-        <a class="ds-button" data-ng-click="activeTool.merge = 'CLI'" data-ng-class="{'ds-button--active': activeTool.merge === 'CLI'}">Command Line</a>
-        <a class="ds-button" data-ng-click="activeTool.merge = 'VS'" data-ng-class="{'ds-button--active': activeTool.merge === 'VS'}">Visual Studio</a>
-    </div>
 
 <div data-ng-if="activeTool.merge === 'CLI'">
 
@@ -158,11 +158,11 @@ Fix any QA bugs directly on the `dev` branch. Make sure to add the bug # to each
 
 Once all bugs are complete and QA deems the feature "production ready", merge dev branch to master branch. master branch should always be production-ready, and is deployable at any time.
 
+<div class="ds-example__header">
+    <a class="ds-button" data-ng-click="activeTool.master = 'CLI'" data-ng-class="{'ds-button--active': activeTool.master === 'CLI'}">Command Line</a>
+    <a class="ds-button" data-ng-click="activeTool.master = 'VS'" data-ng-class="{'ds-button--active': activeTool.master === 'VS'}">Visual Studio</a>
+</div>
 <div class="ds-example" data-ng-init="activeTool.master = 'CLI'">
-    <div class="ds-example__header">
-        <a class="ds-button" data-ng-click="activeTool.master = 'CLI'" data-ng-class="{'ds-button--active': activeTool.master === 'CLI'}">Command Line</a>
-        <a class="ds-button" data-ng-click="activeTool.master = 'VS'" data-ng-class="{'ds-button--active': activeTool.master === 'VS'}">Visual Studio</a>
-    </div>
 
 <div data-ng-if="activeTool.master === 'CLI'">
 
@@ -186,11 +186,11 @@ git mergetool
 
 ### 7. **Delete the feature branch**
 
+<div class="ds-example__header">
+    <a class="ds-button" data-ng-click="activeTool.delete = 'CLI'" data-ng-class="{'ds-button--active': activeTool.delete === 'CLI'}">Command Line</a>
+    <a class="ds-button" data-ng-click="activeTool.delete = 'VS'" data-ng-class="{'ds-button--active': activeTool.delete === 'VS'}">Visual Studio</a>
+</div>
 <div class="ds-example" data-ng-init="activeTool.delete = 'CLI'">
-    <div class="ds-example__header">
-        <a class="ds-button" data-ng-click="activeTool.delete = 'CLI'" data-ng-class="{'ds-button--active': activeTool.delete === 'CLI'}">Command Line</a>
-        <a class="ds-button" data-ng-click="activeTool.delete = 'VS'" data-ng-class="{'ds-button--active': activeTool.delete === 'VS'}">Visual Studio</a>
-    </div>
 
 <div data-ng-if="activeTool.delete === 'CLI'">
 
