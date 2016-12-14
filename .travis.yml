@@ -3,8 +3,8 @@ node_js:
   - "node"
 before_install: npm install -g grunt-cli && npm install -g bower
 install: npm install
-before_script: grunt -P
-script: grunt deploy
+before_script: grunt prod
+script: grunt deploy --nobuild
 notifications:
   email:
     recipients:

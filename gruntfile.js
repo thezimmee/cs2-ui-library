@@ -284,10 +284,9 @@ module.exports = function(grunt) {
 
 
 	/**
-	 * default tasks (to be registered)
+	 * build tasks
 	 */
 	var tasks = {
-		default: ['dev'],
 		dev: [
 			'clean:temp',
 			'clean:dev',
@@ -302,16 +301,14 @@ module.exports = function(grunt) {
 			'newer:copy',
 		],
 		prod: [
+			'dev',
 			'newer:uglify:prod',
-			'newer:replace:prod',
+			'replace:prod',
 			'clean:prod'
 		],
-		deploy: [
-			'dev',
-			'prod',
-			'ghpages'
-		],
-		serve: ['browserSync', 'watch']
+		deploy: ['prod', 'ghpages'],
+		serve: ['browserSync', 'watch'],
+		default: ['dev', 'serve']
 	};
 
 
@@ -319,30 +316,36 @@ module.exports = function(grunt) {
 	 * task modifications / variations (passed as CLI args)
 	 */
 	var mode = 'DEVELOPMENT';
-	// --prod or -P flag vs default (dev)
-	if (grunt.cli.tasks[0] === 'deploy') {
+	// production task
+	if (grunt.cli.tasks[0] === 'prod') {
+		// update mode
+		mode = 'PRODUCTION';
+		// --watch or -W argument
+		if (grunt.option('watch') || grunt.option('W')) {
+			// add serve task
+			tasks.prod.push('serve');
+			// update watchers for prod
+			taskConfig.watch.js = {
+				files: [
+					paths.js.vendor.watch,
+					paths.js.app.watch,
+					paths.js.templates.watch,
+				],
+				tasks: ['newer:concat:vendor', 'newer:ngtemplates', 'newer:ngAnnotate:dev', 'uglify:prod'],
+				options: {
+					spawn: false
+				}
+			};
+		}
+	// deploy task
+	} else if (grunt.cli.tasks[0] === 'deploy') {
+		// update mode
 		mode = 'DEPLOY';
 		// --nobuild or -N
-		if (grunt.option('nobuild') || grunt.option('N')) {
-			mode: 'DEPLOY, NO BUILD'
-			tasks.deploy = ['deploy'];
+		if (grunt.option('N') || grunt.option('nobuild')) {
+			tasks.deploy = ['ghpages'];
 		}
-	} else if (grunt.option('prod') || grunt.option('P')) {
-		mode = 'PRODUCTION';
-		// update watchers for prod
-		taskConfig.watch.js = {
-			files: [
-				paths.js.vendor.watch,
-				paths.js.app.watch,
-				paths.js.templates.watch,
-			],
-			tasks: ['newer:concat:vendor', 'newer:ngtemplates', 'newer:ngAnnotate:dev', 'uglify:prod'],
-			options: {
-				spawn: false
-			}
-		};
-		// add prod tasks
-		tasks.default.push('prod');
+	// default (dev) task
 	} else {
 		// update watchers for dev
 		taskConfig.watch.templates = {
@@ -367,26 +370,13 @@ module.exports = function(grunt) {
 			}
 		};
 	}
-	// --build or -B: build only
-	if (grunt.option('build') || grunt.option('B')) {
-		mode += ', BUILD-ONLY';
-	} else if (grunt.cli.tasks[0] !== 'deploy') {
-		tasks.default.push('serve');
-	}
 
 	// log mode to console
-	grunt.log.write('Running in [%s] mode (%s)...\n', mode, grunt.cli.tasks[0] === 'deploy' ? 'dev,prod,deploy' : tasks.default);
+	grunt.log.write('Running in [%s] mode...\n', mode);
 
 
 	// init grunt config
 	grunt.initConfig(taskConfig);
-
-	// on watch event
-	// grunt.event.on('watch', function (action, filepath) {
-		// grunt.config('copy.assets.src', filepath.replace('src/', ''));
-		// grunt.config('copy.js.src', filepath.replace('src/', ''));
-		// grunt.config('copy.html.src', filepath.replace('src/', ''));
-	// });
 
 	// gh-pages task
 	grunt.registerTask('ghpages', 'deploys to gh-pages', function () {
