@@ -1,19 +1,19 @@
 language: node_js
 node_js:
 - node
-before_install: npm install -g grunt-cli && npm install -g bower
+before_install: npm install -g grunt-cli bower gh-pages
 install: npm install
 before_script: grunt prod
 script:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis CI"
   - echo "Deploying cs2-ui-library to gh-pages..."
-  - node_modules/gh-pages/bin/gh-pages -d build -m "Auto deploy to gh-pages from Travis CI"
+  - gh-pages --dist build --message "Auto deploy to gh-pages from Travis CI"
 after_success:
   - echo "[OK] Deployed to GitHub pages!"
 notifications:
   email:
     recipients:
-    - thezimmee@gmail.com
+      - thezimmee@gmail.com
     on_success: always
     on_failure: always
