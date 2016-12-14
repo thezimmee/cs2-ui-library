@@ -33,6 +33,7 @@ by doing the following:
 ## Upcoming
 
 - [x] Add markdown documentation editing
+- [ ] Look into adding auto build with githooks (grunt-githooks?)
 - [ ] Review documentation for up-to-date accuracy.
     - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
     - [ ] Find a place for `learn-cs2.md`.
@@ -52,5 +53,4 @@ by doing the following:
 - [ ] Add plugin (nodemon?) to auto-restart after errors (like with less)
 - [ ] Add global search functionality
 - [ ] Add grunt-concurrent to speed up build?
-- [ ] Look into adding auto build with githooks (grunt-githooks?)
 - [ ] Generators (?) to build common features, such as pages, components, etc.
