@@ -23,7 +23,7 @@ See also the [CSS at Scale Presentation](https://docs.google.com/a/virtuosobrand
 
 _Guidelines:_
 
-- Organize code by module, not file type. Follow the “[7-1 pattern”](http://sass-guidelin.es/#the-7-1-pattern).
+- Organize code by module, not file type. We follow the “[7-1 pattern”](http://sass-guidelin.es/#the-7-1-pattern).
 - If a file is not part of a component or view (such as a CSS reset, mixins, etc.), these should be placed in a separate folder that corresponds to its file type, such as /css.
 
 _Example directory structure:_
