@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "node"
+before_install: npm install -g grunt-cli
+install: npm install
+before_script: grunt -P
+script: grunt deploy
+notifications:
+  email:
+    recipients:
+      - thezimmee@gmail.com
+    on_success: always
+    on_failure: always
