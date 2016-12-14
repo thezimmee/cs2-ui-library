@@ -8,7 +8,7 @@ script:
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis CI"
   - echo "Deploying cs2-ui-library to gh-pages..."
-  - gh-pages --dist build --message "Auto deploy to gh-pages from Travis CI"
+  - gh-pages --dist build --message "Auto deploy to gh-pages from Travis CI" --repo "https://${GH_TOKEN}@github.com/thezimmee/cs2-ui-library"
 after_success:
   - echo "[OK] Deployed to GitHub pages!"
 notifications:
