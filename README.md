@@ -1,5 +1,7 @@
 # CS2 UI Library
 
+[![Build Status](https://travis-ci.org/thezimmee/cs2-ui-library.svg?branch=master)](https://travis-ci.org/thezimmee/cs2-ui-library)
+
 The goals of the UI Library are to:
 
 - unify the CS2 UI.
