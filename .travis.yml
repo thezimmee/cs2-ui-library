@@ -12,7 +12,7 @@ script:
   - git init
   - git add .
   - git commit -m "Auto deploy to GitHub pages from Travis CI"
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/thezimmee/cs2-ui-library" master:gh-pages > /dev/null 2>$1
+  - git push --force --quiet "https://${GH_TOKEN}@github.com/thezimmee/cs2-ui-library" master:gh-pages
 after_success:
   - echo "[OK] Deployed to GitHub pages!"
 notifications:
