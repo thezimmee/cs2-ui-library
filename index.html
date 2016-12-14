@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html data-ng-app="cs2" data-ng-controller="appCtrl as appCtrl">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CloudSpark UI Library</title>
+	<link href="css/app.min.css" rel="stylesheet" id="app-level">
+</head>
+
+<body data-ng-class="{'ds--is-touch': appCtrl.isTouch}">
+
+	<div class="ds-main" data-ng-class="{'ds-navbar--open': appCtrl.drawers.navbar.open}">
+		<aside class="ds-navbar" data-ng-include src="'navbar/navbar'"></aside>
+
+		<main class="ds-main__container">
+			<header class="ds-header" data-ng-include src="'header/header'" data-ng-controller="headerCtrl as hCtrl"></header>
+
+			<div class="ds-main__content">
+				<div class="ds-main__content-inner ds-main__pagebar" data-ng-if="appCtrl.$state.current.data.editable">
+					<div class="ds-main__pagebar-label">edit page: </div>
+					<a class="ds-button ds-button--small" target="_blank" data-ng-href="https://github.com/thezimmee/cs2-ui-library/edit/master/src/{{appCtrl.$state.current.templateUrl + '.md'}}" title="Edit this page on GitHub">
+						<span class="zmdi zmdi-github"></span>
+					</a>
+				</div>
+
+				<div class="ds-main__content-inner" ui-view></div>
+
+				<footer class="ds-footer" data-ng-include src="'app/footer'"></footer>
+			</div>
+
+			<div class="ds-overlay" ng-class="{'ds-overlay--active': appCtrl.drawers.navbar.open}" ng-click="appCtrl.drawers.navbar.open = false;"></div>
+		</main>
+
+		<aside class="chatbar" data-ng-include src="'template/chat.html'" data-ng-class="{'chatbar--open': appCtrl.drawers.chatbar.open}"></aside>
+	</div>
+
+	<script src="js/app.min.js"></script>
+</body>
+</html>
