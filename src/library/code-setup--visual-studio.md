@@ -4,22 +4,33 @@
 
 These are instructions for developers to get set up to run and work in the CS2 code from a Windows machine with Visual Studio.
 
-- Download and install Git: https://git-scm.com/download
-- Install the GitHub Visual Studio extension: https://visualstudio.github.com/
+- Download and install [git](https://git-scm.com/download){target="_blank"}.
+- Install the [GitHub Visual Studio extension](https://visualstudio.github.com/){target="_blank"}.
     - ~~Or go to Visual Studio extensions and search for GitHub Extension.~~ _Edit_: actually I tried this first and it didn't seem to work. I then installed it from the website and then I could see the GitHub option in the Team Explorer.
-- Go to Team Explorer. Click the green "Connect" icon and you should see the option to log in to GitHub. Log in.
-    - You may need to disconnect from TFS and go to Tools | Options | Source Control | Plug-in Selection and switch to Git
-- Click the Clone option and clone DS-Admin-v2.75, DS-Enrollment-v2.75, DS-WebOffice-v2.75.
-    - The other repos (DS-API-V2.75 and DS-Weboffice-Material-Design-V2.75) are no longer used.
-- The API solution is in Visual Studio Team Services at $/CloudSpark2/API.
-- The website npm script uses the 'sh' command which isn't available on Windows by default. Add the git bin directory to your path
-    - WinKey+Pause / Change settings / Advanced / Environment Variables / Add "C:\Git\bin" (or whatever the Git location on your computer is--you may want to use the Browse feature) to PATH
-- Open a command line window and run this command: npm -g install grunt-cli bower
-- Website
+}
+- Go to Team Explorer. Click the green _Connect_ icon and you should see the option to log in to GitHub. Log in.
+    - You may need to disconnect from TFS and go to _Tools_ | _Options_ | _Source Control_ | _Plug-in Selection_ and switch to Git
+- Click the Clone option and clone DS-Admin-v2.75, DS-Enrollment-v2.75, and DS-WebOffice-v2.75 (the other repos DS-API-V2.75 and DS-Weboffice-Material-Design-V2.75 are no longer used).
+- The API solution is in Visual Studio Team Services at `$/CloudSpark2/API`.
+- The website npm script uses the 'sh' command which isn't available on Windows by default. Add the git bin directory to your path:
+    - `WinKey+Pause` / _Change settings_ / _Advanced_ / _Environment Variables_ / Add `"C:\Git\bin"` (or whatever the Git location on your computer is -- you may want to use the Browse feature) to PATH.
+- Open a command line window and run this command:
+
+    ```bash
+    npm -g install grunt-cli bower
+    ```
+
+- Website:
     - The Enrollment site has a branch for each client. You can switch branches in VisualStudio to the site you want to work in. 
-    - When you switch to a different branch or when you clone a repo for the first time, it overwrites your files on disk so you need to run these commands
-        - npm install
-- Open the website with File | Open | Web Site and then select the src folder. **Note: This is important. If you do not open the sites this way, Resharper will most likely crash trying to read the files in the other folders.**
+    - When you switch to a different branch or when you clone a repo for the first time, it overwrites your files on disk so you need to run these commands:
+
+    ```bash
+    npm install
+    ```
+
+- Open the website with _File_ | _Open_ | _Web Site_ and select the `src` folder.
+
+    **Note: This is important. If you do not open the sites this way, Resharper will most likely crash trying to read the files in the other folders.**
 
 ### Development commands
 
@@ -44,7 +55,7 @@ V275 Admin is different from the Office site.
 
 - Pull the latest code.
 - Don't run `grunt watch`.
-- Find the code in `app.js` that kinda looks like this and make line 70 look exactly like this:
+- Find the code in `app.js` that kinda looks like this and make _line 70_ look exactly like this:
 
     ```js
         var urlForV3 = "";
@@ -61,10 +72,9 @@ V275 Admin is different from the Office site.
         // return urlForV3;
     ```
 
-- In IIS, add a new site. Do not give it a hostname, but give it a physical path of "[Your V275 code folder]\DS-Admin-v2.75\build\" and a port of 23101.
-- Download [this archive](https://drive.google.com/a/virtuosobranding.com/file/d/0B6gT7wMrloDfM1VzOWZSNDN1MWs/view?usp=sharing)
-- Unpack the archive and use the files within to overwrite the files in "[Your V275 code folder]\DS-Admin-v2.75\build\".
-- Visit [http://localhost:23101/index.html#/Login](http://localhost:23101/index.html#/Login)
-- You should see a login screen.
-- If you need to test different clients, use port 23101 for Wakaya, port 23201 for Divvee, and port 23301 for Sunera.
-- Don't use grunt for anything. Change the code in DS-Admin-v2.75\src\ and when you want to see your changes, copy the src\ folder to DS-Admin-v2.75\build\.
+- In IIS, add a new site. Do not give it a hostname, but give it a physical path of `"[Your V275 code folder]\DS-Admin-v2.75\build\"` and a port of `23101`.
+- Download [this archive](https://drive.google.com/a/virtuosobranding.com/file/d/0B6gT7wMrloDfM1VzOWZSNDN1MWs/view?usp=sharing){target="_blank"}.
+- Unpack the archive and use the files within to overwrite the files in `"[Your V275 code folder]\DS-Admin-v2.75\build\"`.
+- Visit [http://localhost:23101/index.html#/Login](http://localhost:23101/index.html#/Login){target="_blank"}. You should see a login screen.
+- If you need to test different clients, use port `23101` for Wakaya, port `23201` for Divvee, and port `23301` for Sunera.
+- Don't use grunt for anything. Change the code in `DS-Admin-v2.75\src\` and when you want to see your changes, copy the `src\` folder to `DS-Admin-v2.75\build\`.
