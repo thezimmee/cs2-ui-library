@@ -6,12 +6,12 @@ app
 		$stateProvider
 			.state ('home', {
 				url: '/home',
-				templateUrl: 'home/home',
+				templateUrl: 'home/home.html.md',
 				controller: 'homeCtrl as ctrl',
 			})
 			.state ('developer-standards', {
 				url: '/developer-standards',
-				templateUrl: 'library/developer-standards',
+				templateUrl: 'library/developer-standards.html.md',
 				controller: 'libraryCtrl as ctrl',
 				data: {
 					editable: true
@@ -19,7 +19,7 @@ app
 			})
 			.state ('developer-workflow', {
 				url: '/developer-workflow',
-				templateUrl: 'library/developer-workflow',
+				templateUrl: 'library/developer-workflow.html.md',
 				controller: 'libraryCtrl as ctrl',
 				data: {
 					editable: true
@@ -27,23 +27,20 @@ app
 			})
 			.state('client-setup', {
 				url: '/client-setup',
-				templateUrl: 'library/client-setup',
+				templateUrl: 'library/client-setup.html.md',
 				controller: 'libraryCtrl as ctrl',
 				data: {
 					editable: true
 				}
 			})
-			.state('developer-setup', {
-				url: '/developer-setup',
-				templateUrl: 'library/developer-setup',
+			.state('code-setup', {
+				url: '/code-setup',
+				templateUrl: 'library/code-setup.html.md',
 				controller: 'libraryCtrl as ctrl',
-				data: {
-					editable: true
-				}
 			})
 			.state('developer-faq', {
 				url: '/developer-faq',
-				templateUrl: 'library/developer-faq',
+				templateUrl: 'library/developer-faq.html.md',
 				controller: 'libraryCtrl as ctrl',
 				data: {
 					editable: true
@@ -51,7 +48,7 @@ app
 			})
 			.state('creating-a-widget', {
 				url: '/creating-a-widget',
-				templateUrl: 'library/creating-a-widget',
+				templateUrl: 'library/creating-a-widget.html.md',
 				controller: 'libraryCtrl as ctrl',
 				data: {
 					editable: true
@@ -59,7 +56,7 @@ app
 			})
 			.state('cards', {
 				url: '/cards',
-				templateUrl: 'cards/cards',
+				templateUrl: 'cards/cards.html.md',
 				controller: 'libraryCtrl as ctrl',
 				data: {
 					editable: true

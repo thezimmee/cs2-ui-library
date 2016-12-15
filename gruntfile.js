@@ -32,24 +32,29 @@ module.exports = function(grunt) {
 		dest: 'build/js/vendor.js'
 	};
 	paths.markdown = {
-		expand: true,
-		src: 'src/**/*.md',
-		dest: '.temp/',
-		ext: '.md.html',
-		rename: function (dest, src) {
-			return dest + src.replace('src/', '');
+		src: {
+			expand: true,
+			src: 'src/**/*.html.md',
+			dest: '.temp/',
+			rename: function (dest, src) {
+				return dest + src.replace('src/', '');
+			}
+		},
+		temp: {
+			expand: true,
+			src: '.temp/**/*.html.md',
 		}
 	};
 	paths.js.templates = {
 		src: [
 			'src/**/*.tpl.html',
-			'.temp/**/*.md.html',
+			'.temp/**/*.html.md',
 		],
 		dest: 'build/js/templates.js',
 		options: {
 			module: 'cs2',
 			url: function (url) {
-				return url.replace('src/', '').replace('.temp/', '').replace('.md.html', '').replace('.tpl.html', '');
+				return url.replace('src/', '').replace('.temp/', '');
 			},
 			htmlmin: {
 				collapseWhitespace: true,
@@ -161,14 +166,37 @@ module.exports = function(grunt) {
 		},
 		vendor: paths.js.vendor,
 	};
+	/** process includes */
+	taskConfig.includereplace = {
+		markdown: {
+			files: [paths.markdown.src],
+			options: {
+				processIncludeContents: function (contents, data, filepath) {
+					var path = require('path');
+					var mm = require('micromatch');
+					var relativePath = path.relative('.', filepath);
+					var editableFiles = ['src/**/*.md', '!*.html.md'];
+					if (mm(relativePath, editableFiles).length) {
+						contents = '<div class="ds-section"> <div class="ds-section__edit"> <div class="ds-pagebar__label">edit: </div> <a class="ds-button ds-button--small" target="_blank" data-ng-href="https://github.com/thezimmee/cs2-ui-library/edit/master/' + relativePath + '" title="Edit this section on GitHub"> <span class="zmdi zmdi-github"></span> </a> </div>\n\n' + contents + '\n\n</div>';
+					}
+					return contents;
+				},
+				globals: {},
+				prefix: '@@',
+				suffix: '',
+				includesDir: 'src/',
+				// docroot: '.',
+			}
+		}
+	};
 	/** markdown to html (then to templates) */
 	taskConfig.markdownit = {
 		all: {
+			files: [paths.markdown.temp],
 			options: {
 				highlightjs: true,
 				html: true,
 				plugins: {
-					'markdown-it-include': 'src/',
 					'markdown-it-anchor': {
 						level: 1
 					},
@@ -201,7 +229,6 @@ module.exports = function(grunt) {
 					}
 				}
 			},
-			files: [paths.markdown],
 		}
 	};
 	/** concatenate & register angular templates */
@@ -284,15 +311,16 @@ module.exports = function(grunt) {
 
 
 	/**
-	 * build tasks
+	 * define default tasks
 	 */
 	var tasks = {
 		dev: [
 			'clean:temp',
 			'clean:dev',
 			// js
+			'includereplace',
 			'newer:markdownit',
-			'newer:ngtemplates',
+			'ngtemplates',
 			'newer:concat:vendor',
 			'newer:ngAnnotate:dev',
 			// css
@@ -331,7 +359,7 @@ module.exports = function(grunt) {
 					paths.js.app.watch,
 					paths.js.templates.watch,
 				],
-				tasks: ['newer:concat:vendor', 'newer:ngtemplates', 'newer:ngAnnotate:dev', 'uglify:prod'],
+				tasks: ['newer:concat:vendor', 'ngtemplates', 'newer:ngAnnotate:dev', 'uglify:prod'],
 				options: {
 					spawn: false
 				}
@@ -350,7 +378,7 @@ module.exports = function(grunt) {
 		// update watchers for dev
 		taskConfig.watch.templates = {
 			files: paths.js.templates.watch,
-			tasks: ['newer:markdownit', 'newer:ngtemplates'],
+			tasks: ['includereplace', 'newer:markdownit', 'ngtemplates'],
 			options: {
 				spawn: false
 			}
@@ -399,6 +427,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-include-replace');
 	grunt.loadNpmTasks('grunt-markdown-it');
 	grunt.loadNpmTasks('grunt-newer');
 	grunt.loadNpmTasks('grunt-ng-annotate');
@@ -409,6 +438,7 @@ module.exports = function(grunt) {
 
 	// dev build task
 	grunt.registerTask('dev', tasks.dev);
+	grunt.registerTask('ir', ['includereplace']);
 
 	// prepare for production
 	grunt.registerTask('prod', tasks.prod);

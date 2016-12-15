@@ -65,6 +65,7 @@ code {
 	// padding: (@spu * 2) (@spu * 2) (@spu * 4);
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 	padding-top: 1rem;
 	width: 100vw;
 	transition: width @transition__duration;
@@ -101,12 +102,30 @@ code {
 
 
 /** page toolbar */
-.ds-main__pagebar {
+.ds-pagebar {
 	&:extend(.ds-row--small);
 	justify-content: flex-end;
-	flex-grow: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -3rem;
+	max-width: 50em;
+	padding-top: 1rem;
+	width: 100%;
 }
-.ds-main__pagebar-label {
+.ds-pagebar__label {
 	font-size: .8rem;
 	margin-right: 0.5rem;
+}
+
+
+/** sections */
+.ds-section {
+	padding-top: 1rem;
+	position: relative;
+}
+.ds-section__edit {
+	&:extend(.ds-row--small);
+	position: absolute;
+	right: 0;
+	top: 1.5rem;
 }

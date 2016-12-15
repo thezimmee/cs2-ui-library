@@ -15,6 +15,7 @@
     "grunt-contrib-less": "^1.3.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-include-replace": "^5.0.0",
     "grunt-markdown-it": "^0.2.1",
     "grunt-newer": "^1.2.0",
     "grunt-ng-annotate": "^3.0.0",
@@ -25,8 +26,8 @@
     "markdown-it-anchor": "^2.6.0",
     "markdown-it-attrs": "^0.8.0",
     "markdown-it-container": "^2.0.0",
-    "markdown-it-include": "0.0.2",
     "markdown-it-table-of-contents": "^0.3.1",
+    "micromatch": "^2.3.11",
     "time-grunt-nowatch": "^1.0.1"
   }
 }
