@@ -17,12 +17,6 @@
 			<header class="ds-header" data-ng-include src="'header/header.tpl.html'" data-ng-controller="headerCtrl as hCtrl"></header>
 
 			<div class="ds-main__content">
-				<div class="ds-pagebar" data-ng-if="appCtrl.$state.current.data.editable">
-					<div class="ds-pagebar__label">edit: </div>
-					<a class="ds-button ds-button--small" target="_blank" data-ng-href="https://github.com/thezimmee/cs2-ui-library/edit/master/src/{{appCtrl.$state.current.templateUrl}}" title="Edit this section on GitHub">
-						<span class="zmdi zmdi-github"></span>
-					</a>
-				</div>
 
 				<div class="ds-main__content-inner" ui-view></div>
 

@@ -1,4 +1,4 @@
-# CS2 Developer Standards
+@@include('library/_edit-partial-title.md', {"title": "# Developer Standards", "path": "src/library/developer-standards.html.md"})
 
 [[TOC]]
 

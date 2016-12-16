@@ -6,8 +6,13 @@
     - [x] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
     - [x] Find a place for `learn-cs2.md`.
 - [ ] Automate process of creating a "/library" document (with navigation).
+- [ ] Add linters:
+    - [ ] js
+    - [ ] css
+    - [ ] html
 - [ ] Document base / global modules:
     - [x] cards
+    - [ ] layout
     - [ ] forms
     - [ ] menus
     - [ ] modals

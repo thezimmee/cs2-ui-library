@@ -1,4 +1,4 @@
-## Setup for CLI / macOS users
+@@include('library/_edit-partial-title.md', {"title": "## Setup for CLI / macOS users", "path": "src/library/code-setup--cli.md"})
 
 1. Make sure [node and npm](https://nodejs.org/en/download){target="_blank"} and [git](https://git-scm.com/downloads){target="_blank"} are installed. Verify installation with the following commands:
 

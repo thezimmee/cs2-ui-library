@@ -171,16 +171,16 @@ module.exports = function(grunt) {
 		markdown: {
 			files: [paths.markdown.src],
 			options: {
-				processIncludeContents: function (contents, data, filepath) {
-					var path = require('path');
-					var mm = require('micromatch');
-					var relativePath = path.relative('.', filepath);
-					var editableFiles = ['src/**/*.md', '!*.html.md'];
-					if (mm(relativePath, editableFiles).length) {
-						contents = '<div class="ds-section"> <div class="ds-section__edit"> <div class="ds-pagebar__label">edit: </div> <a class="ds-button ds-button--small" target="_blank" data-ng-href="https://github.com/thezimmee/cs2-ui-library/edit/master/' + relativePath + '" title="Edit this section on GitHub"> <span class="zmdi zmdi-github"></span> </a> </div>\n\n' + contents + '\n\n</div>';
-					}
-					return contents;
-				},
+				// processIncludeContents: function (contents, data, filepath) {
+				// 	var path = require('path');
+				// 	var mm = require('micromatch');
+				// 	var relativePath = path.relative('.', filepath);
+				// 	var editableFiles = ['src/**/*.md', '!src/**/_*.md'];
+				// 	if (mm(relativePath, editableFiles).length) {
+				// 		contents = '<div class="ds-section"> <div class="ds-section__edit"> <div class="ds-pagebar__label">edit: </div> <a class="ds-button ds-button--small" target="_blank" data-ng-href="https://github.com/thezimmee/cs2-ui-library/edit/master/' + relativePath + '" title="Edit this section on GitHub"> <span class="zmdi zmdi-github"></span> </a> </div>\n\n' + contents + '\n\n</div>';
+				// 	}
+				// 	return contents;
+				// },
 				globals: {},
 				prefix: '@@',
 				suffix: '',

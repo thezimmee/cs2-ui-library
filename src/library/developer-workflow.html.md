@@ -1,4 +1,4 @@
-# Developer Workflow
+@@include('library/_edit-partial-title.md', {"title": "# Developer Workflow", "path": "src/library/developer-workflow.html.md"})
 
 _Taking a feature from development to production in CS2._
 
