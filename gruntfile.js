@@ -204,6 +204,7 @@ module.exports = function(grunt) {
 						includeLevel: [2,3],
 						containerClass: 'toc-test',
 					},
+					'markdown-it-footnote': {},
 					'markdown-it-attrs': {},
 					'markdown-it-container': function (md) {
 						var container = require('markdown-it-container');

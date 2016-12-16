@@ -1,155 +1,230 @@
 # CS2 Developer Standards
 
-## Goals
+[[TOC]]
 
-- Allow easy maintenance of a large codebase over time.
-Easily add or remove portions of the codebase (“modules”) without - affecting the rest of the UI.
-- Easily modify components without affecting other parts of the UI.
-- Flexible tooling and implementation to meet the needs of any developer.
-- Rapid design iteration.
+## Front End Methodology
 
-## General Coding Standards
+### Goals
 
-See also the [CSS at Scale Presentation](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit), which provides a step by step approach to CSS methodology.
+- A stunningly beautiful and joyful experience (e.g., **speed**) for the end-user.
+- Unity and speed of development.
+- Easy maintenance... easily add, change, or remove elements of the UI without affecting anything else.
+- Make it easy and predictable to deal with CSS specificity.
+- Flexible tooling.
 
-### Modular Methodology
+_Resources:_ To learn more about front-end methodologies:
 
-**Everything we build should be modular**, meaning it is self-contained and reusable. Modules make our codebase maintainable, easier to understand, and reusable. For our purposes, there are two types of modules:
+- [CSS at DirectScale presentation](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit){target="_blank"}
+- [SMACSS](https://smacss.com){target="_blank"}
+- [BEM](https://en.bem.info/methodology/){target="_blank"}
+- [BEM](https://en.bem.info/methodology/){target="_blank"}
+- [OOCSS](http://oocss.org/){target="_blank"}
+- [7-1 pattern”](http://sass-guidelin.es/#the-7-1-pattern){target="_blank"}
 
-- _Component_: any self-contained module not connected to other components. (_i.e., buttons, dialogs, card, etc._)
-- _View_: any larger, self-contained block of content that contains and connects multiple components. (_i.e., contact page, home page, tree viewer, etc._)
+### Concept 1: Element Namespacing
 
-### Code / Directory Organization
+_Each "element" or class receives its own unique namespace._
 
-_Guidelines:_
+_Why:_ Isolating each element with a unique namespace allows us to add, change, or remove elements without affecting the rest of the UI.
 
-- Organize code by module, not file type. We follow the “[7-1 pattern”](http://sass-guidelin.es/#the-7-1-pattern).
-- If a file is not part of a component or view (such as a CSS reset, mixins, etc.), these should be placed in a separate folder that corresponds to its file type, such as /css.
-
-_Example directory structure:_
+_How:_ A unique namespace is made up of the following:
 
 ```bash
-/app
-    /Views
-        /Home
-        /Home.html
-        /Home.less
-        /HomeController.js
-    /Components
-        /Modal
-        /Modal.less
-        /Modal.tpl.html
-        /Modal.js
-    /css
-        Reset.less
-        mixins.less
-        functions.less
-        main.less
+[prefix-][base][__child][--modifier]
 ```
 
-_Benefits:_
+| Element    | Description                                   |
+| :-         | :-                                            |
+| _prefix_   | used to distinguish or version the namespace. |
+| _block_    | base element.                                 |
+| _child_    | child element.                                |
+| _modifier_ | creates a variation.                          |
 
+_Example:_
+
+```css
+/* base with prefix */
+.ds-card {}
+/* child elements */
+.ds-card__header {}
+.ds-card__body {}
+.ds-card__footer {}
+/* modifiers */
+.ds-card--bordered {}
+.ds-card--colored {}
+```
+
+_Note: while these naming conventions are especially useful for CSS, it should also be applied to JS code where possible._
+
+### Concept 2: Code Bundles
+
+_Each file is organized into a bundle._
+
+_Why:_
+
+- Categorizing code helps us make decisions on a bundle should be treated. For example, we can easily determine appropriate source order for CSS and JS files according to its bundle.
+- Helps maintain a large codebase.
+- Makes it easy to find stuff.
+- Works well with front end tooling.
+- ...
 - Easy to find stuff. All you need is the name of the module.
 - Flexible. Easy to add or remove modules with confidence other parts of the UI won’t be affected.
 
-### Naming Conventions
+_How:_
 
-_Guidelines:_
+1. Each file gets organized into one of the following bundles:
+    - _vendor_: Code not managed or modified by us. Managed by [NPM](https://www.npmjs.com/) or [Bower](https://bower.io). _Examples: angular, jQuery, plugins, etc._
+    - _abstracts_: Code that does not produce actual source code. _Examples: variables, mixins, etc._
+    - _core_: Core or global components that may be consumed by components or views. _Examples: resets, typography, utilities, buttons, forms, etc._
+    - _components_: Isolated and self-contained code with no dependencies outside of vendor, abstracts, or core elements. _Examples: cards, modals, header, navbar, etc._
+    - _views_: Isolated and self-contained, like components, but views purpose are to provide a mechanism to modify components for a particular view. _Examples: pages, states, or anything you choose so long as it has its own unique namespace element._
 
-- Naming conventions follow the [BEM](https://en.bem.info/) (block, element, modifier). For example:
-    - `.[namespace-][block][__element][--modifier]`
-    - _Namespace_ (optional): can be used to differentiate from 3rd party classes.
-    - _**B**lock_: root element.
-    - _**E**lement_: any child element.
-    - _**M**odifier_: any modifier, such as a variation on the module or a state modifier.
-- _Never use tags or IDs in class names_. This puts all classes on an even playing field when it comes to specificity.
-- _Never use multiple attached classes (i.e., .class1.class2)_. Use modifiers instead.
+2. Files are organized by bundles, not by file extension. Directory structure should look like:
 
-### Code Encapsulation (“single source of truth”)
+    ```bash
+    src/
+        less/
+            // core css
+            core/
+            // abstracts bundle
+            abstracts/
+            main.less
+        js/
+            // core js
+            core/
+        // views bundle
+        home/
+            home.js
+            home.less
+            home.tpl.html
+        about/
+            about.js
+            about.less
+            about.tpl.html
+        // components bundle
+        card/
+            card.js
+            card.less
+            card.tpl.html
+        modal/
+            modal.js
+            modal.less
+            modal.tpl.html
+    // vendor bundle
+    vendor/
+    ```
 
-_Guidelines:_
+### Concept 3: Mobile First
 
-- Each module must be self-contained. Any dependencies are connected through a form of dependency injector.
-- To self contain a module, each gets a _“single source of truth”_ (the ‘B’ in BEM).
+_Make mobile a first class citizen... always._
 
-### Code Commenting
+_Why:_ Ensures a responsive UI and places more focus on performance.
+
+_How:_
+
+1. Default styles are for mobile.
+2. Modify styles for other screen sizes with the following `@media` queries:
+    - `@media screen only and (min-width: 480px) {...}`
+    - `@media screen only and (min-width: 768px) {...}`
+    - `@media screen only and (min-width: 960px) {...}`
+    - `@media screen only and (min-width: 1280px) {...}`
+3. When necessary, do not hesitate to style to content and create a custom `min-width` query.
+
+### Concept 4: "Mix" Components and Views
+
+_Components and views can be "mixed"._
+
+_Why:_ Keeps components and views isolated, and keeps code more DRY.
+
+_How:_
+
+1. When mixing two components, simply add the base component classes.
+2. In some cases you may need to create a view class, which may be mixed with other view or component classes.
+
+_Example:_
+
+HTML:
+```html
+<!-- in views/about/about.html -->
+<!-- view mix: mixes views and/or components (.ds-card and .ds-about-page__card) -->
+<div class=”ds-card ds-about-page__card”>
+    <!-- component mix: mixes multiple components (.ds-card__button and .ds-button -->
+    <button class=”ds-card__button ds-button” type=”button”>...</button>
+    <!-- more markup -->
+</div>
+```
+
+CSS:
+```css
+/* in less/base/buttons.less */
+.ds-button { // .button styles }
+
+/* in components/card/card.less */
+.ds-card {}
+.ds-card__button {}
+
+/* in views/about/about.less */
+/* view mixes are applied in the "views" bundle */
+.ds-about-page__card {}
+```
+
+### Concept 5: Utility classes
+
+_Where possible, utility classes should be part of the "abstracts" bundle and applied in CSS, not in HTML._
+
+_Why:_ Keeps classes on an element to a minimum, which helps with readability and maintainability.
+
+_How:_
+
+1. Utility classes are part of either the abstracts or core bundle, depending on the pre/post processor you use.
+2. Use mixins, functions, or extends to apply utility classes.
+3. Never apply a utility class on an HTML element if it already has a class.
+
+_Example:_
+
+```less
+/* in less/core/utility.less */
+.ds-row { display: flex; }
+
+/* in views/ds-grid/ds-grid.less */
+.ds-grid {
+    &:extend(.row);
+    /* more styles */
+}
+```
+
+## Coding Style Guide
+
+Because all CSS and JS gets minified, we do not impose many coding styles and preferences during development. We believe in freedom of code expression during development, and any prefences we impose should have tooling to make implementation as simple as possible.
+
+**The rules and guidelines we have selected below, however, are deemed important enough for all team members to follow.**
+
+### Comments
 
 - Comment as much as possible.
 - Comment all “magic numbers”.
 
-## CSS
+## CSS Style Guide
 
-### CSS Preprocessors:
+- **Encoding**: Add `@charset ‘utf-8’;` to each stylesheet to avoid potential character encoding issues.
+- **Nesting**: Never nest CSS selectors more than _2-3 levels deep_.
+- **Variables**: Use variables for _colors, sizes, and z-index values_.
+- **Mobile first**: _Always_ style for for smallest screens first; use `min-width` @media queries for larger screens.
+- **`!important`**: Avoid it like the plague.
 
-- Never nest CSS selectors more than _2-3 deep_.
-- Use variables for _colors, sizes, and z-index values_.
+## Angular Style Guide
 
-### Media Queries:
+We generally follow [John Papa’s style guide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md){target="_blank"} for all Angular code. The important rules to point out:
 
-- _Mobile first… always_. Default styles should always be written for the smallest screens.
-- _Use min-width media queries_ to adjust styles for larger screens.
-
-### Utility “classes”:
-
-A utility class is a single-purpose class… something that only modifies one property of an element. For example:
-
-```css
-.m-top-0 { margin-top: 0; }
-```
-
-Because utility classes are single purpose, they are not part of any particular module and should be used cautiously. Use the following guidelines:
-
-- _Do not insert utility classes into actual HTML_. Rather create utility mixins or extends “functions”, which can then later be used in any actual class (not HTML). For example:
-
-    ```less
-    // utilities.less
-    // this is a utility “extend” class; only apply to other classes, not to HTML.
-    .my-utility-class { margin-top: 0; }
-            
-    // mixins.less
-    .my-mixin-utility() {
-        &:hover {
-            border: 1px solid red;
-        }
-    }
-
-    // card.less
-    .card {
-        &:extend(.my-utility-class);
-    }
-    .card__button {
-        .my-mixin-utility();
-    }       
-    ```
-
-- _Never apply more than two utility classes to an element_. In some cases it may be helpful to insert a utility class to HTML markup, but if more than two utility classes are needed, simply create or update a module for that element and apply utility mixins or extends in the module’s CSS.
-
-### Encoding:
-
-- Add `@charset ‘utf-8’;` to each stylesheet to avoid potential character encoding issues.
-
-### !important:
-
-Avoid it.
-
-## Angular
-
-### Coding style guide:
-- Follow John Papa’s style guide.
-- Additional specifications:
-    - Use 'controller as' syntax instead of `$scope`
-        - Use `var ctrl = this;` as the first line, then always refer to the controller using `ctrl`.
-    - Services/Factories
-        - Use the name `Service` (ex: NavService)
-        - Use `module.factory` instead of `module.service` to create Services/Factories
-    - Controllers
-        - Only include values and functions that are used directly by the view
-    - Directives
-        - Any DOM manipulation must go in a directive (no exceptions)
-
-### Angular Routing:
-
-- URLs:
-    - Use a nested URL structure for “content”. i.e., `http://domain.com/#/page/subpage`
-        - Examples of “content” include tabs, dialogs, etc.
-    - Use query parameters for “data”. i.e., `http://domain.com/#/page?user=username`
+- Controllers:
+    - Use [`controller as` syntax](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#controllers){target="_blank"}.
+    - Only bind data that is used directly by the view.
+- Services/Factories:
+    - Add "Service" to the end of each service (e.g., _NavService_).
+    - We generally prefer [factories](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#factories){target="_blank"} to [services](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#services){target="_blank"}.
+- Directives:
+    - Any DOM manipulation must go inside a directive, _no exceptions_.
+    - Directives should [clean up after themselves](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#directives){target="_blank"}.
+- Routing:
+    - Use a nested URL structure for “content”. i.e., `http://domain.com/#/page/subpage` (e.g., tabs, dialogs, etc.).
+    - Use query parameters for “data”. i.e., `http://domain.com/#/page?user=username`.
