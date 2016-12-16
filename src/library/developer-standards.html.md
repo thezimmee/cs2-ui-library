@@ -207,6 +207,8 @@ Because all CSS and JS gets minified, we do not impose many coding styles and pr
 ## CSS Style Guide
 
 - **Encoding**: Add `@charset ‘utf-8’;` to each stylesheet to avoid potential character encoding issues.
+- **Never use IDs** (e.g., `#myidselector`) or tags (i.e., `div`) in CSS selectors. This evens the playing field with CSS specificity. IDs should only be added if they are needed for other reasons (anchor links, JavaScript, etc).
+- **Never attach classes** (e.g., `.class1.class2`). Use modifiers instead.
 - **Nesting**: Never nest CSS selectors more than _2-3 levels deep_.
 - **Variables**: Use variables for _colors, sizes, and z-index values_.
 - **Mobile first**: _Always_ style for for smallest screens first; use `min-width` @media queries for larger screens.

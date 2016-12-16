@@ -2,9 +2,9 @@
 
 - [x] Add markdown documentation editing
 - [x] Add auto build with Travis CI
-- [ ] Review documentation for up-to-date accuracy.
-    - [ ] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
-    - [ ] Find a place for `learn-cs2.md`.
+- [x] Review documentation for up-to-date accuracy.
+    - [x] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
+    - [x] Find a place for `learn-cs2.md`.
 - [ ] Automate process of creating a "/library" document (with navigation).
 - [ ] Document base / global modules:
     - [x] cards
