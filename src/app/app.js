@@ -7,7 +7,7 @@ app
 	.controller('mainCtrl', mainController);
 
 
-function appController($scope, $state) {
+function appController($scope, $rootScope, $state, $location) {
 	// avoid $scope
 	var appCtrl = this;
 	// console.log('editUrl: ', $state.current);
@@ -41,7 +41,14 @@ function appController($scope, $state) {
 	 */
 	function init() {
 		$scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+			// close drawers
 			closeDrawers();
+		});
+		$rootScope.$on('$locationChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+			// scroll to top if no hash detected
+			if (!$location.hash()) {
+				angular.element('.ds-main__content').scrollTop(0);
+			}
 		});
 	}
 

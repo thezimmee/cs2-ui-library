@@ -157,11 +157,6 @@
 	justify-content: center;
 }
 
-.ds-navbar__section {
-	& + .ds-navbar__section {
-		border-top: 1px solid lighten(@c-gray, 20%);
-	}
-}
 
 .ds-navbar__logo {
 	display: inline-block;
@@ -203,5 +198,26 @@
 		&:extend(.ds-row--small);
 		font-size: .9em;
 		padding-left: @navbar__menu-icon-width;
+	}
+}
+
+
+.ds-navbar__section {
+	& + .ds-navbar__section {
+		border-top: 1px solid lighten(@c-gray, 20%);
+	}
+}
+
+.ds-navbar__subsection {
+	.ds-navbar__menu {
+		display: none;
+	}
+	.ds-navbar__link {
+		&:extend(.ds-row--small);
+		font-size: .9em;
+		padding-left: @navbar__menu-icon-width;
+	}
+	& > .ds-navbar__link {
+		font-style: italic;
 	}
 }

@@ -202,7 +202,7 @@ module.exports = function(grunt) {
 					},
 					'markdown-it-table-of-contents': {
 						includeLevel: [2,3],
-						containerClass: 'toc-test',
+						containerClass: 'ds-toc',
 					},
 					'markdown-it-footnote': {},
 					'markdown-it-attrs': {},

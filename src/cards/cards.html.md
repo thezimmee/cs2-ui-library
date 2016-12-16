@@ -1,9 +1,11 @@
 # Cards
 
+[[TOC]]
+
 ## Details
 
-_Category_:		`base` <br/>
-_Base_: 		`.ds-card` <br/>
+_Class_: 		`.ds-card` <br/>
+_Bundle_:		`components` <br/>
 
 <div>
 <button class="ds-button ds-button--small" type="button" show-hide-toggle>Elements</button>
@@ -37,7 +39,7 @@ _Base_: 		`.ds-card` <br/>
 
 ## Examples
 
-Card with all options.
+### Card with all options.
 
 _Note: the card element has a fluid width. Use layout classes to confine the width of a card._
 
@@ -70,7 +72,7 @@ _Note: the card element has a fluid width. Use layout classes to confine the wid
 </div>
 ```
 
-Simple text card:
+### Simple text card
 
 <div class="ds-card">
 	<div class="ds-card__body--pad">
