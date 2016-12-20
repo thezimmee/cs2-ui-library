@@ -157,7 +157,7 @@ HTML:
 CSS:
 ```css
 /* in less/base/buttons.less */
-.ds-button { // .button styles }
+.ds-button {}
 
 /* in components/card/card.less */
 .ds-card {}
