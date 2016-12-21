@@ -11,16 +11,16 @@
 <body data-ng-class="{'ds--is-touch': appCtrl.isTouch}">
 
 	<div class="ds-main" data-ng-class="{'ds-navbar--open': appCtrl.drawers.navbar.open}">
-		<aside class="ds-navbar" data-ng-include src="'navbar/navbar.tpl.html'"></aside>
+		<aside class="ds-navbar" data-ng-include src="'views/layout/navbar.tpl.html'"></aside>
 
 		<main class="ds-main__container">
-			<header class="ds-header" data-ng-include src="'header/header.tpl.html'" data-ng-controller="headerCtrl as hCtrl"></header>
+			<header class="ds-header" data-ng-include src="'views/layout/header.tpl.html'" data-ng-controller="headerCtrl as hCtrl"></header>
 
 			<div class="ds-main__content">
 
 				<div class="ds-main__content-inner" ui-view></div>
 
-				<footer class="ds-footer" data-ng-include src="'app/footer.tpl.html'"></footer>
+				<footer class="ds-footer" data-ng-include src="'views/layout/footer.tpl.html'"></footer>
 			</div>
 
 			<div class="ds-overlay" ng-class="{'ds-overlay--active': appCtrl.drawers.navbar.open}" ng-click="appCtrl.drawers.navbar.open = false;"></div>

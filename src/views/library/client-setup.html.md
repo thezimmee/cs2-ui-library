@@ -1,4 +1,4 @@
-@@include('library/_edit-partial-title.md', {"title": "# Client Setup", "path": "src/library/client-setup.html.md"})
+@@include('views/library/_edit-partial-title.md', {"title": "# Client Setup", "path": "src/library/client-setup.html.md"})
 
 Admin Urls will be:
 

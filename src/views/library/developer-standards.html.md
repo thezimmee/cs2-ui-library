@@ -1,4 +1,4 @@
-@@include('library/_edit-partial-title.md', {"title": "# Developer Standards", "path": "src/library/developer-standards.html.md"})
+@@include('views/library/_edit-partial-title.md', {"title": "# Developer Standards", "path": "src/library/developer-standards.html.md"})
 
 [[TOC]]
 

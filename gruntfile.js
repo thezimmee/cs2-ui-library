@@ -15,9 +15,25 @@ module.exports = function(grunt) {
 		watch: {},
 	};
 	paths.less = {
-		src: 'src/less/app.less',
-		dest: 'build/css/app.min.css',
+		app: {
+			src: 'src/app.less',
+			dest: 'build/css/app.min.css',
+		},
 		watch: ['src/**/*.less']
+	};
+	paths.markdown = {
+		app: {
+			expand: true,
+			src: 'src/**/*.html.md',
+			dest: '.temp/',
+			rename: function (dest, src) {
+				return dest + src.replace('src/', '');
+			}
+		},
+		temp: {
+			expand: true,
+			src: '.temp/**/*.html.md',
+		}
 	};
 	paths.js.vendor = {
 		src: [
@@ -30,20 +46,6 @@ module.exports = function(grunt) {
 			'vendors/highlightjs/highlight.pack.min.js',
 		],
 		dest: 'build/js/vendor.js'
-	};
-	paths.markdown = {
-		src: {
-			expand: true,
-			src: 'src/**/*.html.md',
-			dest: '.temp/',
-			rename: function (dest, src) {
-				return dest + src.replace('src/', '');
-			}
-		},
-		temp: {
-			expand: true,
-			src: '.temp/**/*.html.md',
-		}
 	};
 	paths.js.templates = {
 		src: [
@@ -66,7 +68,7 @@ module.exports = function(grunt) {
 	paths.js.app = {
 		src: [
 			// app js (angular)
-			'src/app/app.js',
+			'src/app.js',
 			'src/**/*.js',
 		],
 		dest: 'build/js/app.annotated.js',
@@ -100,13 +102,10 @@ module.exports = function(grunt) {
 		dest: 'build/assets/'
 	};
 	paths.html = {
-		cwd: 'src/',
-		expand: true,
-		src: [
-			// '*.html'
-			'index.html'
-		],
-		dest: 'build/',
+		index: {
+			src: 'src/app.html',
+			dest: 'build/index.html',
+		},
 		watch: ['src/index.html']
 	};
 	paths.browserSync = {
@@ -157,7 +156,7 @@ module.exports = function(grunt) {
 				new (require('less-plugin-clean-css'))()
 			]
 		},
-		app: paths.less
+		app: paths.less.app
 	};
 	/** concatenate files */
 	taskConfig.concat = {
@@ -169,7 +168,7 @@ module.exports = function(grunt) {
 	/** process includes */
 	taskConfig.includereplace = {
 		markdown: {
-			files: [paths.markdown.src],
+			files: [paths.markdown.app],
 			options: {
 				// processIncludeContents: function (contents, data, filepath) {
 				// 	var path = require('path');
@@ -277,7 +276,7 @@ module.exports = function(grunt) {
 	taskConfig.copy = {
 		fonts: paths.fonts,
 		assets: paths.assets,
-		html: paths.html
+		html: paths.html.index
 	};
 	/** serve it up */
 	taskConfig.browserSync = {

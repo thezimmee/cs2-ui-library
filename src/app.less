@@ -5,7 +5,7 @@
  *
  * GUIDELINES:
  *  - style categories:
- *      - vendor / 3rd party
+ *      - vendor (3rd party)
  *      - abstracts
  *      - base
  *      - components
@@ -33,9 +33,9 @@
  * -------------------------
  * code not managed by us. should never be modified, only imported with package manager.
  */
-@import (inline) '../../vendors/normalize-css/normalize.css';
-@import (inline) '../../vendors/material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
-@import (inline) '../../vendors/highlightjs/styles/github.css';
+@import (inline) '../vendors/normalize-css/normalize.css';
+@import (inline) '../vendors/material-design-iconic-font/dist/css/material-design-iconic-font.min.css';
+@import (inline) '../vendors/highlightjs/styles/github.css';
 
 
 /**
@@ -49,31 +49,25 @@
 
 
 /**
- * base styles
+ * core styles
  * -----------
- * base styles, such as reset, buttons, forms, anything else deemed "global".
+ * core styles, such as reset, buttons, forms, or any other components that need to be globally shared.
  */
-@import 'base/fonts';
-@import 'base/typography';
-@import 'base/flex';
-@import 'base/spacing';
-@import 'base/rows';
-@import 'base/buttons';
-@import '../cards/cards';
-@import '../layout/example';
-@import '../layout/layout';
-@import '../layout/overlay';
-@import '../layout/footer';
-@import '../header/header';
-@import '../navbar/navbar';
+@import 'core/fonts';
+@import 'core/typography';
+@import 'core/flex';
+@import 'core/spacing';
+@import 'core/rows';
+@import 'core/buttons';
 
 
 
 /**
  * component styles
  * ----------------
- * a component = isolated, self-contained, and contains no dependencies outside of vendor or base styles.
+ * a component = isolated, self-contained, and contains no dependencies outside of vendor or core styles.
  */
+@import 'components/cards/cards';
 
 
 
@@ -82,3 +76,9 @@
  * ------------
  * contains or connects multiple components. also isolated and self-contained.
  */
+@import 'views/layout/example';
+@import 'views/layout/layout';
+@import 'views/layout/overlay';
+@import 'views/layout/footer';
+@import 'views/layout/header';
+@import 'views/layout/navbar';

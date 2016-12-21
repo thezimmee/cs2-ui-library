@@ -6,9 +6,9 @@
 </div>
 
 :::: div(data-ng-if="activeTab === 'CLI'")
-@@include('library/code-setup--cli.md')
+@@include('views/library/code-setup--cli.md')
 ::::
 
 :::: div(data-ng-if="activeTab === 'VS'")
-@@include('library/code-setup--visual-studio.md')
+@@include('views/library/code-setup--visual-studio.md')
 ::::

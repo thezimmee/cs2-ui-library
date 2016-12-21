@@ -3,10 +3,13 @@ var app = angular.module('cs2', [
 ]);
 
 app
-	.controller('appCtrl', appController)
-	.controller('mainCtrl', mainController);
+	.config(appConfig)
+	.controller('appCtrl', appController);
 
 
+/**
+ * main app controller
+ */
 function appController($scope, $rootScope, $state, $location) {
 	// avoid $scope
 	var appCtrl = this;
@@ -83,6 +86,12 @@ function appController($scope, $rootScope, $state, $location) {
 	}
 }
 
-function mainController($scope, $state) {
-	console.log('mainCtrl');
+
+/**
+ * main app configuration
+ */
+function appConfig($stateProvider, $urlRouterProvider){
+	$urlRouterProvider.when('', '/home');
+	$urlRouterProvider.when('/', '/home');
+	// $urlRouterProvider.otherwise('/home');
 }

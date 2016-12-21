@@ -1,4 +1,4 @@
-@@include('library/_edit-partial-title.md', {"title": "## Setup for Visual Studio  Windows users", "path": "src/library/code-setup--visual-studio.md"})
+@@include('views/library/_edit-partial-title.md', {"title": "## Setup for Visual Studio  Windows users", "path": "src/library/code-setup--visual-studio.md"})
 
 ### Setup instructions
 

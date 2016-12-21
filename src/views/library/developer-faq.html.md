@@ -1,4 +1,4 @@
-@@include('library/_edit-partial-title.md', {"title": "# FAQ", "path": "src/library/developer-faq.html.md"})
+@@include('views/library/_edit-partial-title.md', {"title": "# FAQ", "path": "src/library/developer-faq.html.md"})
 
 :::: div(class="ds-content--faq")
 
