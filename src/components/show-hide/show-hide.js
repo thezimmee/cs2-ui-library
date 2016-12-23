@@ -19,5 +19,5 @@ function showHideToggleDirective() {
 				element.off('click');
 			});
 		}
-	}
+	};
 }

@@ -33,8 +33,8 @@ _How:_ A unique namespace is made up of the following:
 [prefix-][base][__child][--modifier]
 ```
 
-| Element    | Description                                   |
-| :-         | :-                                            |
+|  Element   |                  Description                  |
+|------------|-----------------------------------------------|
 | _prefix_   | used to distinguish or version the namespace. |
 | _block_    | base element.                                 |
 | _child_    | child element.                                |

@@ -8,16 +8,20 @@ function headerController($scope, $timeout) {
 	hCtrl.openSearch = function(){
 		appCtrl.showGlobalSearch = true;
 		angular.element('.header__search').find('input').focus();
-	}
+	};
 
 	hCtrl.closeSearch = function(){
 		appCtrl.showGlobalSearch = false;
 		angular.element('.header__search').find('input').blur();
-	}
+	};
 
 	hCtrl.toggleSearch = function(){
-		appCtrl.showGlobalSearch ? hCtrl.closeSearch() : hCtrl.openSearch();
-	}
+		if (appCtrl.showGlobalSearch) {
+			hCtrl.closeSearch();
+		} else {
+			hCtrl.openSearch();
+		}
+	};
 
 	// Get messages and notification for header
 	// this.img = messageService.img;
@@ -48,12 +52,12 @@ function headerController($scope, $timeout) {
 					z.remove();
 				});
 			}, w+=150);
-		})
+		});
 
 		$timeout(function(){
 			angular.element('#notifications').addClass('empty');
 		}, (z*150)+200);
-	}
+	};
 
 	// Clear Local Storage
 	this.clearLocalStorage = function() {
@@ -71,8 +75,7 @@ function headerController($scope, $timeout) {
 			localStorage.clear();
 			swal("Done!", "localStorage is cleared", "success");
 		});
-
-	}
+	};
 
 	//Fullscreen View
 	this.fullScreen = function() {
@@ -106,5 +109,5 @@ function headerController($scope, $timeout) {
 		else {
 			launchIntoFullscreen(document.documentElement);
 		}
-	}
+	};
 }

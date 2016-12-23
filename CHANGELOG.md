@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/thezimmee/cs2-ui-library.svg?branch=master)](https://travis-ci.org/thezimmee/cs2-ui-library)
 
+- 12/23/2016: Add js, css, and html linters.
 - 12/14/2016: Auto-build when any file changes with Travis CI.
 - 12/13/2016: Edit pages on GitHub.
 - 12/12/2016:

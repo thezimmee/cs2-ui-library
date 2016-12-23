@@ -5,11 +5,10 @@
 - [x] Review documentation for up-to-date accuracy.
     - [x] Align `developer-standards` with [CSS at Scale](https://docs.google.com/a/virtuosobranding.com/presentation/d/1HFf8cDV6W4iIvL3PjPrOKO0On8NwIReO0lNnpfTiJ-I/edit) presentation.
     - [x] Find a place for `learn-cs2.md`.
-- [ ] Automate process of creating a "/library" document (with navigation).
-- [ ] Add linters:
-    - [ ] js
-    - [ ] css
-    - [ ] html
+- [x] Add linters:
+    - [x] js
+    - [x] css
+    - [x] html
 - [ ] Document base / global modules:
     - [x] cards
     - [ ] layout
@@ -17,11 +16,14 @@
     - [ ] menus
     - [ ] modals
     - [ ] buttons
+    - [ ] spacing
+- [ ] Automate process of creating a "/library" document (with navigation).
 - [x] Add plugin to only process modified files in grunt build.
 - [x] Add markdown plugins:
     - [ ] todo boxes
     - [x] html containers
 - [ ] Convert @spu to rem units
+- [ ] Add UI testing ([BackstopJS](https://garris.github.io/BackstopJS/) or [PhantomCSS](https://github.com/Huddle/PhantomCSS)?)
 - [ ] Add plugin (nodemon?) to auto-restart after errors (like with less)
 - [ ] Add global search functionality
 - [ ] Add grunt-concurrent to speed up build?

@@ -8,5 +8,5 @@ function dsTocDirective($location) {
 				element.attr('href', '#' + $location.path() + attrs.href);
 			}
 		}
-	}
+	};
 }

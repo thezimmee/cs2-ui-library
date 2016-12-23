@@ -1,0 +1,15 @@
+{
+	"curly": true,
+	"immed": false,
+	"newcap": false,
+	"noarg": true,
+	"sub": true,
+	"boss": true,
+	"eqnull": true,
+	"scripturl": true,
+	"loopfunc": true,
+	"validthis": true,
+	"evil": true,
+	"es5": true,
+	"smarttabs":true
+}

@@ -1,0 +1,156 @@
+{
+	"fileExtensions": [".less", ".css"],
+	"excludedFiles": ["vendors/**/*"],
+	"attributeQuotes": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"borderZero": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"comment": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"decimalZero": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"depthLevel": {
+		"enabled": true,
+		"severity": "error",
+		"depth": 3
+	},
+	"duplicateProperty": {
+		"enabled": true,
+		"severity": "error",
+		"exclude": []
+	},
+	"emptyRule": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"finalNewline": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"hexLength": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"hexNotation": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"hexValidation": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"idSelector": {
+		"enabled": true,
+		"severity": "error",
+		"exclude": []
+	},
+	"importantRule": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"importPath": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"maxCharPerLine": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"newlineAfterBlock": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"propertyOrdering": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"propertyUnits": {
+		"enabled": false,
+		"severity": "error",
+		"valid": ["rem", "em"],
+		"invalid": ["pt"],
+		"properties": {
+			"line-height": []
+		}
+	},
+	"qualifyingElement": {
+		"enabled": true,
+		"severity": "error",
+		"allowWithAttribute": true
+	},
+	"selectorNaming": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"singleLinePerProperty": {
+		"enabled": true,
+		"severity": "error",
+		"allowSingleLineRules": true
+	},
+	"singleLinePerSelector": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceAfterPropertyColon": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceAfterPropertyName": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceAfterPropertyValue": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceAroundComma": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceAroundOperator": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceBeforeBrace": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"spaceBetweenParens": {
+		"enabled": true,
+		"severity": "error",
+		"style": "no_space"
+	},
+	"stringQuotes": {
+		"enabled": true,
+		"severity": "error",
+		"style": "single"
+	},
+	"trailingSemicolon": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"trailingWhitespace": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"urlFormat": {
+		"enabled": false,
+		"severity": "error"
+	},
+	"urlQuotes": {
+		"enabled": true,
+		"severity": "error"
+	},
+	"zeroUnit": {
+		"enabled": true,
+		"severity": "error"
+	}
+}
