@@ -7,6 +7,22 @@
 
 .ds-footer {
 	background-color: lighten(@c-gray, 30%);
-	margin-top: @spu * 4;
-	padding: (@spu * 2);
+	margin-top: 4rem;
+	margin-left: -1rem;
+	margin-right: -1rem;
+	padding: 2rem;
+
+	& when (@navbar__pin-on-wide = true) {
+		@media @navbar__pin-at {
+			margin-left: -2rem;
+			margin-right: -2rem;
+		}
+	}
+
+	& when (@header--fixed = true) {
+		@media (min-width: 768px) {
+			margin-left: -2rem;
+			margin-right: -2rem;
+		}
+	}
 }

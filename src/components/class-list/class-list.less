@@ -1,0 +1,54 @@
+/**
+ * class-list.less
+ * ---------------
+ * table to display list of classes for a particular component
+ */
+
+
+.ds-class-list {
+	// border: 2px solid @c-blue-gray;
+	// margin-bottom: 0;
+	// margin-top: 0;
+	table-layout: fixed;
+	width: 100%;
+
+	code {
+		background-color: transparent;
+	}
+
+	tr:nth-child(even) {
+		background-color: lighten(@c-gray, 35%);
+	}
+
+	.ds-flex__row {
+		padding: 0.5rem;
+
+		&:nth-child(odd) {
+			background-color: lighten(@c-gray, 35%);
+		}
+	}
+}
+
+.ds-class-list__heading {
+	background-color: @c-blue-gray;
+	// border: 2px solid lighten(@c-gray, 20%);
+	color: #fff;
+	font-size: 1rem;
+
+	td {
+		padding: 0.5rem 1rem;
+
+		&:first-child {
+			white-space: nowrap;
+		}
+		&:last-child {
+			font-size: .9rem;
+			padding-left: 0.4rem;
+		}
+	}
+}
+
+.ds-class-list__modifier {
+	font-style: italic;
+	padding-left: 2rem;
+}

@@ -4,14 +4,20 @@ function showHideToggleDirective() {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
+			var showHideElement = element.next();
+
+			if (!showHideElement.hasClass('ds--is-active')) {
+				showHideElement.slideToggle(200);
+			}
+
 			element.on('click', function(){
-				element.next().slideToggle(200);
-				if (element.hasClass('ds--is-toggled')) {
-					element.next().removeClass('ds--is-toggled');
-					element.removeClass('ds--is-toggled');
+				showHideElement.slideToggle(200);
+				if (element.hasClass('ds--is-active')) {
+					showHideElement.removeClass('ds--is-active');
+					element.removeClass('ds--is-active');
 				} else {
-					element.next().addClass('ds--is-toggled');
-					element.addClass('ds--is-toggled');
+					showHideElement.addClass('ds--is-active');
+					element.addClass('ds--is-active');
 				}
 			});
 

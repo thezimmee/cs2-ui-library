@@ -1,30 +1,7 @@
 /**
  * app.less
  * --------
- * main controller for css/less files.
- *
- * GUIDELINES:
- *  - style categories:
- *      - vendor (3rd party)
- *      - abstracts
- *      - base
- *      - components
- *      - views
- *  - class identifiers: each "component" or "view" gets a unique, base class ("single source of truth"). class naming conventions are as follows:
- *      - .[namespace-][block][__element][--modifier]
- *      - namespace: version or namespace to differentiate our classes from others.
- *      - block: unique, base identifying class.
- *      - element: child element of the base parent.
- *      - modifier: state or variation of the base parent.
- *  - file organization:
- *      - vendor files are managed by package manager and placed in a separate vendor/ directory.
- *      - base and abstract styles are inside of main less/ directory.
- *      - styles for components and views should be placed with other files related to that view or component (e.g., views/home/home.less).
- *  - it's okay to "mix" classes. a "mix" is when multiple components, or views and components, are applied to an element.
- *  - utility classes:
- *      - apply utility classes as mixins are "extends" whenever possible.
- *      - never apply a utility class on an element that already has a class (update the styles for that class instead).
- *      - do not apply more than 2 utility classes to any given element. when more than 2 utility classes are needed, create a view or component class instead.
+ * main css/less controller. import all css files here.
  */
 
 
@@ -55,6 +32,7 @@
  */
 @import 'core/fonts';
 @import 'core/typography';
+@import 'core/tables';
 @import 'core/flex';
 @import 'core/spacing';
 @import 'core/rows';
@@ -68,6 +46,7 @@
  * a component = isolated, self-contained, and contains no dependencies outside of vendor or core styles.
  */
 @import 'components/cards/cards';
+@import 'components/class-list/class-list';
 
 
 

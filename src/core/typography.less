@@ -34,10 +34,21 @@ pre {
 }
 
 
-.hljs,
+.hljs {
+	background-color: lighten(@c-gray, 33%);
+	border-radius: 3px;
+	overflow-x: auto;
+}
 code {
 	background-color: lighten(@c-gray, 33%);
 	border-radius: 3px;
+	padding-left: .3rem;
+	padding-right: .3rem;
+}
+.hljs code {
+	background-color: transparent;
+	border-radius: 0;
+	padding: 0;
 }
 
 
@@ -54,8 +65,6 @@ code {
 }
 
 .ds-faq__answer {
-	display: none;
-
 	> :first-child {
 		margin-top: 0;
 	}
