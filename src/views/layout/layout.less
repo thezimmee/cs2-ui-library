@@ -71,7 +71,7 @@ code {
 	transition: width @transition__duration;
 
 	& when (@navbar__pin-on-wide = true) {
-		@media (min-width: 1280px) {
+		@media @navbar__pin-at {
 			width: ~"calc(100vw - @{navbar__width})";
 		}
 	}
