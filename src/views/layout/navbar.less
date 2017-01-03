@@ -169,6 +169,7 @@
 	&:extend(.ds-row--medium);
 	color: @c-dark;
 	cursor: pointer;
+	position: relative;
 	text-decoration: none;
 	transition: background @transition__duration--hover;
 
@@ -177,6 +178,38 @@
 	&.ds--active {
 		background-color: lighten(@c-dark--light, 50%);
 		outline: 0;
+	}
+
+	&[show-hide-toggle] {
+		&:before,
+		&:after {
+			background-color: @c-grey;
+			content: ' ';
+			display: inline-block;
+			position: absolute;
+			right: 1rem;
+			top: 50%;
+
+			.ds-navbar__subsection & {
+				content: none;
+			}
+		}
+		&:before {
+			height: 2px;
+			width: 12px;
+			margin-top: -1px;
+		}
+		&:after {
+			height: 12px;
+			width: 2px;
+			margin-top: -6px;
+			right: ~"calc(1rem + 5px)";
+			transform: scale(1);
+			transition: transform @transition__duration--hover;
+		}
+		&.ds--is-toggled:after {
+			transform: scale(0);
+		}
 	}
 }
 
