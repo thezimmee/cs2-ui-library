@@ -370,7 +370,7 @@ module.exports = function(grunt) {
 				files: paths.js.templates.watch,
 				tasks: [
 					'includereplace',
-					'changed:markdownit',
+					'markdownit',
 					'changed:htmlhintplus',
 					'changed:jshint:dev',
 					'ngtemplates',
