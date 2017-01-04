@@ -1,0 +1,27 @@
+/**
+ * tags.less
+ * ---------
+ * tags used in the UI library
+ */
+
+.ds-tag {
+	.bg(@c-blue-grey);
+	border-radius: .1rem;
+	font-size: .92rem;
+	padding: 0.1rem 0.5rem;
+}
+
+.ds-tag--deprecated {
+	&:extend(.ds-tag);
+	.bg(@c-red);
+}
+
+.ds-tag--in-progress {
+	&:extend(.ds-tag);
+	.bg(@c-green);
+}
+
+.ds-tag--needs-update {
+	&:extend(.ds-tag);
+	.bg(@c-orange);
+}

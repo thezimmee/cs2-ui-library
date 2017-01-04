@@ -4,11 +4,11 @@
 
 ## Details
 
-|              |                                                                                                                         |
-|--------------|-------------------------------------------------------------------------------------------------------------------------|
-| Status       | __in progress__{.ds-tag--in-progress}                                                                                   |
-| Base         | `.ds-card`                                                                                                              |
-| Bundle       | `components`                                                                                                            |
+|              |                                                                                                                        |
+|--------------|------------------------------------------------------------------------------------------------------------------------|
+| Status       | <span class="ds-tag--needs-update">needs update</span>                                                                  |
+| Base         | `.ds-card`                                                                                                             |
+| Bundle       | `components`                                                                                                           |
 | Dependencies | [cards.less](https://github.com/thezimmee/cs2-ui-library/edit/master/src/components/cards/cards.less){target="_blank"} |
 
 ## Class list

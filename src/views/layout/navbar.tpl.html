@@ -47,25 +47,28 @@
 	<div class="ds-navbar__section">
 		<a class="ds-navbar__link ds--is-active" show-hide-toggle>
 			<span class="ds-navbar__menu-icon zmdi zmdi-image-alt"></span>
-			<span class="ds-navbar__menu-label">Live Styles</span>
+			<span class="ds-navbar__menu-label">Living Style Guide</span>
 		</a>
 		<div class="ds-navbar__subsection ds--is-active">
-			<a class="ds-navbar__link">Vendor</a>
+			<a class="ds-navbar__link" ui-sref="vendor">Vendor code</a>
+			<ul class="ds-navbar__menu">
+				<li>
+					<a class="ds-navbar__link" ui-sref-active="ds--active" ui-sref="bootstrap">Bootstrap</a>
+				</li>
+			</ul>
+			<a class="ds-navbar__link" ui-sref="abstracts">Abstracts</a>
 			<ul class="ds-navbar__menu">
 			</ul>
-			<a class="ds-navbar__link">Abstracts</a>
+			<a class="ds-navbar__link" ui-sref="core">CS2 Core</a>
 			<ul class="ds-navbar__menu">
 			</ul>
-			<a class="ds-navbar__link">Core</a>
-			<ul class="ds-navbar__menu">
-			</ul>
-			<a class="ds-navbar__link">Components</a>
+			<a class="ds-navbar__link" ui-sref="components">Components</a>
 			<ul class="ds-navbar__menu">
 				<li>
 					<a class="ds-navbar__link" ui-sref-active="ds--active" ui-sref="cards">Cards</a>
 				</li>
 			</ul>
-			<a class="ds-navbar__link">Views</a>
+			<a class="ds-navbar__link" ui-sref="views">Views</a>
 			<ul class="ds-navbar__menu">
 			</ul>
 		</div>
