@@ -5,11 +5,11 @@ app
 function stylesConfig($stateProvider, $urlRouterProvider) {
 	$stateProvider
 		.state('styles', {
-			url: '/styles',
+			url: '/style-guide',
 			template: '<ui-view></ui-view>',
 			controller: 'stylesCtrl as ctrl'
 		})
-		.state('vendor', {
+		.state('vendors', {
 			parent: 'styles',
 			url: '/vendor',
 			templateUrl: 'views/styles/vendor.html.md',
@@ -39,18 +39,12 @@ function stylesConfig($stateProvider, $urlRouterProvider) {
 			templateUrl: 'views/styles/views.html.md',
 			controller: 'stylesCtrl as ctrl'
 		})
-		.state('cards', {
+		<% _.each(styles, function (style, name) { %>.state('<%= name %>', {
 			parent: 'styles',
-			url: '/cards',
-			templateUrl: 'components/cards/cards.html.md',
+			url: '/<%= name %>',
+			templateUrl: 'views/styles/<%= name %>.html.md',
 			controller: 'stylesCtrl as ctrl'
-		})
-		.state('bootstrap', {
-			parent: 'styles',
-			url: '/bootstrap',
-			templateUrl: 'views/styles/bootstrap.html.md',
-			controller: 'stylesCtrl as ctrl'
-		});
+		})<% }) %>;
 }
 
 function stylesController($scope, $state) {}

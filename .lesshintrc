@@ -20,7 +20,7 @@
 	"depthLevel": {
 		"enabled": true,
 		"severity": "error",
-		"depth": 3
+		"depth": 6
 	},
 	"duplicateProperty": {
 		"enabled": true,
@@ -112,7 +112,7 @@
 		"severity": "error"
 	},
 	"spaceAroundComma": {
-		"enabled": true,
+		"enabled": false,
 		"severity": "error"
 	},
 	"spaceAroundOperator": {
@@ -129,7 +129,7 @@
 		"style": "no_space"
 	},
 	"stringQuotes": {
-		"enabled": true,
+		"enabled": false,
 		"severity": "error",
 		"style": "single"
 	},
@@ -150,7 +150,7 @@
 		"severity": "error"
 	},
 	"zeroUnit": {
-		"enabled": true,
+		"enabled": false,
 		"severity": "error"
 	}
 }

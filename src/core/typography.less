@@ -5,6 +5,18 @@
  */
 
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	small {
+		font-size: 1rem;
+		margin-left: .5em;
+	}
+}
+
 h1 {
 	margin: 0;
 }
@@ -34,21 +46,16 @@ pre {
 }
 
 
-.hljs {
-	background-color: lighten(@c-gray, 33%);
-	border-radius: 3px;
-	overflow-x: auto;
-}
 code {
-	background-color: lighten(@c-gray, 33%);
-	border-radius: 3px;
-	padding-left: .3rem;
-	padding-right: .3rem;
-}
-.hljs code {
-	background-color: transparent;
-	border-radius: 0;
-	padding: 0;
+	background-color: lighten(@c-gray, 30%);
+	border-radius: 2px;
+	padding: 0 0.4rem 0.15rem;
+
+	.hljs & {
+		background-color: transparent;
+		border-radius: 0;
+		padding: 0;
+	}
 }
 
 

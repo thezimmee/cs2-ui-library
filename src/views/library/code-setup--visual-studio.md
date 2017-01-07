@@ -16,17 +16,17 @@ These are instructions for developers to get set up to run and work in the CS2 c
     - `WinKey+Pause` / _Change settings_ / _Advanced_ / _Environment Variables_ / Add `"C:\Git\bin"` (or whatever the Git location on your computer is -- you may want to use the Browse feature) to PATH.
 - Open a command line window and run this command:
 
-    ```bash
-    npm -g install grunt-cli bower
-    ```
+```bash
+npm -g install grunt-cli bower
+```
 
 - Website:
     - The Enrollment site has a branch for each client. You can switch branches in VisualStudio to the site you want to work in. 
     - When you switch to a different branch or when you clone a repo for the first time, it overwrites your files on disk so you need to run these commands:
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
 - Open the website with _File_ | _Open_ | _Web Site_ and select the `src` folder.
 
@@ -57,20 +57,20 @@ V275 Admin is different from the Office site.
 - Don't run `grunt watch`.
 - Find the code in `app.js` that kinda looks like this and make _line 70_ look exactly like this:
 
-    ```js
-        var urlForV3 = "";
-        if (domain !-- "localhost") {
+```js
+    var urlForV3 = "";
+    if (domain !-- "localhost") {
 
-            urlForV3 = window.location.protocol + "//" + window.location.host.replace("admin2", 'admin') + '/#/';
-        }
-        else {
-            urlForV3 = 'http://' + domain + ':23101/index.html#/';
-        }
+        urlForV3 = window.location.protocol + "//" + window.location.host.replace("admin2", 'admin') + '/#/';
+    }
+    else {
+        urlForV3 = 'http://' + domain + ':23101/index.html#/';
+    }
 
 
-        return urlForV3;
-        // return urlForV3;
-    ```
+    return urlForV3;
+    // return urlForV3;
+```
 
 - In IIS, add a new site. Do not give it a hostname, but give it a physical path of `"[Your V275 code folder]\DS-Admin-v2.75\build\"` and a port of `23101`.
 - Download [this archive](https://drive.google.com/a/virtuosobranding.com/file/d/0B6gT7wMrloDfM1VzOWZSNDN1MWs/view?usp=sharing){target="_blank"}.

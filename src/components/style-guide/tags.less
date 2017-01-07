@@ -11,6 +11,11 @@
 	padding: 0.1rem 0.5rem;
 }
 
+.ds-tag--complete {
+	&:extend(.ds-tag);
+	.bg(@c-green);
+}
+
 .ds-tag--deprecated {
 	&:extend(.ds-tag);
 	.bg(@c-red);
@@ -18,10 +23,20 @@
 
 .ds-tag--in-progress {
 	&:extend(.ds-tag);
-	.bg(@c-green);
+	.bg(@c-blue);
 }
 
 .ds-tag--needs-update {
 	&:extend(.ds-tag);
 	.bg(@c-orange);
+}
+
+.ds-tag--needs-implementation {
+	&:extend(.ds-tag);
+	.bg(@c-orange);
+}
+
+.ds-tag--unknown {
+	&:extend(.ds-tag);
+	.bg(@c-blue-gray);
 }

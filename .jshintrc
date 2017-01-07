@@ -11,5 +11,6 @@
 	"validthis": true,
 	"evil": true,
 	"es5": true,
-	"smarttabs":true
+	"smarttabs":true,
+	"-W032": true
 }

@@ -4,7 +4,8 @@ module.exports = function(grunt) {
 	 */
 	var flags = {};
 		flags.task = grunt.cli.tasks[0] || 'dev';
-		flags.isProd = flags.task === 'prod';
+		flags.isProd = (flags.task === 'prod' || grunt.option('prod'));
+
 
 	/**
 	 * load grunt plugins
@@ -18,128 +19,13 @@ module.exports = function(grunt) {
 		htmlhintplus: 'grunt-htmlhint-plus',
 		ngtemplates: 'grunt-angular-templates'
 	});
+	var _ = require('lodash');
 
 
 	/**
-	 * path configuration
+	 * import global configuration
 	 */
-	var paths = {};
-		paths.less = {
-			app: {
-				src: ['src/app.less'],
-				dest: 'build/css/app.min.css',
-			},
-			watch: ['src/**/*.less']
-		};
-		paths.html = {
-			index: {
-				src: 'src/app.html',
-				dest: 'build/index.html',
-			},
-			watch: ['src/index.html']
-		};
-		paths.markdown = {
-			app: {
-				expand: true,
-				src: 'src/**/*.html.md',
-				dest: '.temp/',
-				rename: function (dest, src) {
-					return dest + src.replace('src/', '');
-				}
-			},
-			temp: {
-				expand: true,
-				src: '.temp/**/*.html.md',
-			}
-		};
-		paths.js = {};
-		paths.js.vendor = {
-			src: [
-				// jquery
-				'vendors/jquery/dist/jquery.min.js',
-				// angular
-				'vendors/angular/angular.min.js',
-				'vendors/angular-ui-router/release/angular-ui-router.min.js',
-				// other
-				'vendors/highlightjs/highlight.pack.min.js',
-			],
-			dest: 'build/js/vendor.js'
-		};
-		paths.js.templates = {
-			src: [
-				'src/**/*.tpl.html',
-				'.temp/**/*.html.md',
-			],
-			dest: 'build/js/templates.js',
-			options: {
-				module: 'cs2',
-				url: function (url) {
-					return url.replace('src/', '').replace('.temp/', '');
-				},
-				htmlmin: {
-					collapseWhitespace: true,
-					collapseBooleanAttributes: true
-				}
-			},
-			watch: ['src/**/*.tpl.html', 'src/**/*.md', '*.md']
-		};
-		paths.js.app = {
-			src: [
-				// app js (angular)
-				'src/app.js',
-				'src/**/*.js',
-			],
-			dest: 'build/js/app.annotated.js',
-			watch: ['src/**/*.js']
-		};
-		paths.js.prod = {
-			src: [
-				paths.js.vendor.dest,
-				paths.js.app.dest,
-				paths.js.templates.dest,
-			],
-			dest: 'build/js/app.min.js'
-		};
-		paths.fonts = {
-			cwd: '.',
-			flatten: true,
-			expand: true,
-			src: [
-				'vendors/material-design-iconic-font/dist/fonts/**/*',
-				'vendors/roboto-fontface/fonts/Roboto/Roboto-Light.*',
-				'vendors/roboto-fontface/fonts/Roboto/Roboto-Regular.*',
-				'vendors/roboto-fontface/fonts/Roboto/Roboto-Medium.*',
-				'vendors/roboto-fontface/fonts/Roboto/Roboto-Bold.*'
-			],
-			dest: 'build/fonts/'
-		};
-		paths.assets = {
-			expand: true,
-			cwd: 'assets/',
-			src: ['**/*'],
-			dest: 'build/assets/'
-		};
-		paths.browserSync = {
-			bsFiles: {
-				src: [
-					'build/css/*.css',
-					'build/js/*.js',
-					'build/**/*.html',
-					'build/fonts/**/*',
-				]
-			},
-			options: {
-				watchTask: true,
-				server: 'build',
-				port: 8080
-			}
-		};
-
-		// paths.init() is to apply certain config properties programatically
-		paths.init = function () {
-			paths.js.vendor.watch = paths.js.vendor.src;
-		};
-		paths.init();
+	var globals = require('./gruntfile.config.js');
 
 
 	/**
@@ -148,8 +34,7 @@ module.exports = function(grunt) {
 	var taskConfig = {};
 		/** clean up old stuff */
 		taskConfig.clean = {
-			dev: 'build',
-			prod: paths.js.prod.src,
+			build: 'build',
 			temp: '.temp'
 		};
 		/** less pre-compiler */
@@ -169,32 +54,52 @@ module.exports = function(grunt) {
 					new (require('less-plugin-clean-css'))()
 				]
 			},
-			app: paths.less.app
-		};
-		/** concatenate files */
-		taskConfig.concat = {
-			options: {
-				separator: ';',
-			},
-			vendor: paths.js.vendor
+			app: {
+				src: 'src/app.less',
+				dest: 'build/css/app.min.css',
+			}
 		};
 		/** process includes */
 		taskConfig.includereplace = {
-			markdown: {
-				files: [paths.markdown.app],
-				options: {
-					globals: {},
-					prefix: '@@',
-					suffix: '',
-					includesDir: 'src/',
-					// docroot: '.',
+			md: {
+				cwd: 'src/',
+				expand: true,
+				// @todo: try removing array from globs?
+				src: '**/*.html.md',
+				dest: '.temp/md/',
+			},
+			styles: {
+				cwd: '.temp/style-guide/',
+				expand: true,
+				src: '**/*.html.md',
+				dest: '.temp/md/',
+			},
+			options: {
+				globals: globals.data,
+				prefix: '@@',
+				suffix: '',
+				includesDir: 'src/',
+				// docroot: '.',
+				processIncludeContents: function (content, tplData, filepath) {
+					// tplData.globals is a path for a property in globals.data (e.g., if tplData.globals === 'styles.bootstrap', this will grab globals.data.styles.bootstrap and merge it with the rest of tplData)
+					if (tplData.globals) {
+						var dataProperties = tplData.globals.split('/');
+						var data = globals.data;
+						for (var i = 0; i < dataProperties.length; i += 1) {
+							data = data[dataProperties[i]];
+						}
+						// data = _.merge(tplData, data);
+						content = _.template(content)(data);
+					}
+					return content;
 				}
 			}
 		};
 		/** markdown to html (then to templates) */
 		taskConfig.markdownit = {
-			all: {
-				files: [paths.markdown.temp],
+			md: {
+				expand: true,
+				src: '.temp/md/**/*.html.md',
 				options: {
 					highlightjs: true,
 					html: true,
@@ -204,7 +109,7 @@ module.exports = function(grunt) {
 						},
 						'markdown-it-table-of-contents': {
 							includeLevel: [2,3],
-							containerClass: 'ds-toc',
+							containerClass: 'dss-toc',
 						},
 						'markdown-it-footnote': {},
 						'markdown-it-attrs': {},
@@ -234,9 +139,48 @@ module.exports = function(grunt) {
 				},
 			}
 		};
+		/** process templates */
+		taskConfig.template = {
+			options: {
+				data: globals.data
+			},
+			md: {
+				expand: true,
+				cwd: '.temp/md/',
+				src: '**/*.html.md',
+				dest: '.temp/templates/'
+			},
+			html: {
+				expand: true,
+				cwd: 'src/',
+				src: '**/*.tpl.html',
+				dest: '.temp/templates/',
+			},
+			js: {
+				expand: true,
+				cwd: 'src/',
+				src: [
+					'app.js',
+					'**/*.js',
+					'!components/data/**/*.js'
+				],
+				dest: '.temp/app/'
+			}
+		};
 		/** concatenate & register angular templates */
 		taskConfig.ngtemplates = {
-			app: paths.js.templates
+			app: {
+				cwd: '.temp/templates',
+				src: ['**/*.html.md', '**/*.tpl.html'],
+				dest: '.temp/js/templates.js'
+			},
+			options: {
+				module: 'cs2',
+				htmlmin: {
+					collapseWhitespace: true,
+					collapseBooleanAttributes: true
+				}
+			},
 		};
 		/** properly inject angular dependencies */
 		taskConfig.ngAnnotate = {
@@ -244,14 +188,30 @@ module.exports = function(grunt) {
 				singleQuotes: true
 			},
 			app: {
-				files: [paths.js.app]
+				src: ['.temp/app/app.js', '.temp/app/**/*.js'],
+				dest: '.temp/js/app.annotated.js'
+			}
+		};
+		/** concatenate files */
+		taskConfig.concat = {
+			options: {
+				separator: ';',
+			},
+			dev: {
+				src: [
+					globals.vendorJs,
+					'.temp/js/app.annotated.js',
+					'.temp/js/templates.js'
+				],
+				dest: 'build/js/app.min.js'
 			}
 		};
 		/** minify js */
 		taskConfig.uglify = {
 			options: {},
 			prod: {
-				files: [paths.js.prod]
+				expand: true,
+				src: 'build/js/app.min.js'
 			}
 		};
 		/** replace text patterns */
@@ -271,121 +231,193 @@ module.exports = function(grunt) {
 				},
 				files: [{
 					expand: true,
-					src: ['build/**/*.html']
+					src: 'build/**/*.html'
 				}]
 			}
 		};
 		/** copy stuff to build directory */
 		taskConfig.copy = {
-			fonts: paths.fonts,
-			assets: paths.assets,
-			html: paths.html.index
+			fonts: {
+				cwd: '.',
+				flatten: true,
+				expand: true,
+				src: globals.fonts,
+				dest: 'build/fonts/'
+			},
+			assets: {
+				expand: true,
+				cwd: 'assets/',
+				src: '**/*',
+				dest: 'build/assets/'
+			},
+			index: {
+				src: 'src/app.html',
+				dest: 'build/index.html',
+			}
 		};
 		/** jshint */
 		taskConfig.jshint = {
-			dev: ['src/**/*.js'],
-			gruntfile: ['gruntfile.js'],
+			gruntfile: [
+				'gruntfile.js',
+				'gruntfile.config.js',
+				'src/components/data/**/*.js'
+			],
+			dev: ['.temp/**/*.js'],
 			options: {
-	            jshintrc: '.jshintrc',
-	            force: !flags.isProd
-	        }
+				jshintrc: '.jshintrc',
+				force: false
+			}
 		};
 		/** lesshint */
 		taskConfig.lesshint = {
 			prod: {
-				src: paths.less.app.src,
+				src: 'src/**/*.less',
 				options: {
 					lesshintrc: '.lesshintrc',
-					force: flags.isProd
+					force: false
 				}
 			},
 		};
 		/** html hint */
 		taskConfig.htmlhintplus = {
 			prod: {
-				src: paths.js.templates.src,
-				options: {
-					htmlhintrc: '.htmlhintrc',
-					force: flags.isProd
-				}
+				src: [
+					'.temp/**/*.tpl.html',
+					'.temp/**/*.html.md',
+				],
+			},
+			options: {
+				htmlhintrc: '.htmlhintrc',
+				force: true
 			}
 		};
 		/** serve it up */
 		taskConfig.browserSync = {
-			dev: paths.browserSync
+			dev: {
+				bsFiles: {
+					src: [
+						'build/css/*.css',
+						'build/js/*.js',
+						'build/*.html',
+						'build/fonts/**/*',
+					]
+				},
+				options: {
+					watchTask: true,
+					server: 'build',
+					port: 8080
+				}
+			}
 		};
 		/** watch files for changes and build incrementally */
 		taskConfig.watch = {
 			less: {
-				files: paths.less.watch,
+				files: ['src/**/*.less'],
+				// @todo: test with changed:
 				tasks: ['lesshint', 'less'],
 				options: {
 					spawn: false
 				}
 			},
-			html: {
-				files: paths.html.watch,
-				tasks: [(flags.isProd ? 'changed:' : '') + 'copy:html'],
+			index: {
+				files: ['src/app.html'],
+				tasks: ['copy:index'],
 				options: {
 					spawn: false
 				}
 			},
-			// test
-			gruntfile: {
-				files: ['gruntfile.js'],
-				tasks: ['jshint:gruntfile', flags.isProd ? 'prod' : 'dev'],
-				options: {
-					spawn: false,
-					reload: true
-				}
-			}
-		};
-		if (flags.isProd) {
-			taskConfig.watch.js_prod = {
-				files: [
-					paths.js.vendor.watch,
-					paths.js.app.watch,
-					paths.js.templates.watch,
-				],
+			md2temp: {
+				files: ['src/**/*.html.md'],
 				tasks: [
-					'jshint',
-					'ngtemplates',
-					'concat',
-					'ngAnnotate',
-					'uglify',
-				],
-				options: {
-					spawn: false
-				}
-			};
-		} else {
-			taskConfig.watch.js_vendor = {
-				files: paths.js.vendor.watch,
-				tasks: ['concat'],
-				options: {
-					spawn: false
-				}
-			};
-			taskConfig.watch.js_templates = {
-				files: paths.js.templates.watch,
-				tasks: [
-					'includereplace',
-					'markdownit',
+					'changed:includereplace',
+					'changed:markdownit',
+					'changed:template:md',
 					'changed:htmlhintplus',
 					'changed:jshint:dev',
 					'ngtemplates',
+					'concat:dev'
 				],
 				options: {
 					spawn: false
 				}
-			};
-			taskConfig.watch.js_app = {
-				files: paths.js.app.watch,
-				tasks: ['changed:jshint:dev', 'ngAnnotate'],
+			},
+			mdPartials2temp: {
+				files: [
+					'src/**/*.md',
+					'*.md',
+					'!src/**/*.html.md'
+				],
+				tasks: [
+					'data',
+					'styleguide',
+					'includereplace',
+					'markdownit:md',
+					'template:md',
+					'changed:htmlhintplus',
+					'changed:jshint:dev',
+					'ngtemplates',
+					'ngAnnotate',
+					'concat:dev'
+				],
 				options: {
 					spawn: false
 				}
-			};
+			},
+			html2templates: {
+				files: ['src/**/*.tpl.html'],
+				tasks: [
+					'data',
+					'changed:template:html',
+					'changed:htmlhintplus',
+					'changed:jshint:dev',
+					'ngtemplates',
+					'concat:dev'
+				],
+				options: {
+					spawn: false
+				}
+			},
+			js2templates: {
+				files: ['src/**/*.js', '!src/components/data/**/*.js'],
+				tasks: [
+					'changed:template:js',
+					'changed:htmlhintplus',
+					'changed:jshint:dev',
+					'ngAnnotate',
+					'concat:dev'
+				],
+				options: {
+					spawn: false
+				}
+			},
+			data2temp: {
+				files: [
+					'gruntfile.js',
+					'gruntfile.config.js',
+					'src/components/data/**/*.js'
+				],
+				tasks: [
+					'data',
+					'changed:jshint:gruntfile',
+					'styleguide',
+					'includereplace',
+					'markdownit',
+					'template',
+					'changed:htmlhintplus',
+					'changed:jshint:dev',
+					'ngtemplates',
+					'ngAnnotate',
+					'concat:dev',
+				]
+			},
+		};
+		// if production mode, add uglify to watchers
+		if (flags.isProd) {
+			taskConfig.watch.md2temp.tasks.push('uglify');
+			taskConfig.watch.mdPartials2temp.tasks.push('uglify');
+			taskConfig.watch.html2templates.tasks.push('uglify');
+			taskConfig.watch.js2templates.tasks.push('uglify');
+			taskConfig.watch.data2temp.tasks.push('uglify');
 		}
 		/** gh-pages deployment */
 		taskConfig['gh-pages'] = {
@@ -394,7 +426,7 @@ module.exports = function(grunt) {
 				message: grunt.option('msg') || '[Auto-generated commit]',
 				tag: grunt.option('tag') || ''
 			},
-			src: ['build/**/*']
+			src: 'build/**/*'
 		};
 
 
@@ -402,8 +434,9 @@ module.exports = function(grunt) {
 	 * task modifications / variations (passed as CLI args)
 	 */
 	// log mode to console
-	var mode = flags.task.toUpperCase();
-	grunt.log.write('Running in [%s] mode...\n', mode);
+	var task = flags.task.toUpperCase();
+	var mode = flags.isProd ? 'PRODUCTION' : 'DEVELOPMENT';
+	grunt.log.write('\nRunning [%s] in [%s] mode...\n', task, mode);
 
 
 	/**
@@ -417,18 +450,22 @@ module.exports = function(grunt) {
 	grunt.registerTask('deploy', ['prod', 'ghpages']);
 	grunt.registerTask('serve', ['browserSync', 'watch']);
 	grunt.registerTask('dev', [
+		// lint gruntfile
+		'jshint:gruntfile',
 		// clean old build
-		'clean:temp',
-		'clean:dev',
-		// markdown templates
+		'clean',
+		// process markdown templates
+		'styleguide',
 		'includereplace',
 		'markdownit',
+		// process lodash templates
+		'template',
 		// js / angular templates
 		'htmlhintplus',
-		'jshint',
+		'jshint:dev',
 		'ngtemplates',
-		'concat',
 		'ngAnnotate',
+		'concat',
 		// css
 		'lesshint',
 		'less',
@@ -436,27 +473,8 @@ module.exports = function(grunt) {
 		'copy',
 	]);
 	grunt.registerTask('prod', [
-		// clean old build
-		'clean:temp',
-		'clean:dev',
-		// markdown templates
-		'includereplace',
-		'markdownit',
-		// js / angular templates
-		'htmlhintplus',
-		'jshint',
-		'ngtemplates',
-		'concat',
-		'ngAnnotate',
+		'dev',
 		'uglify',
-		// css
-		'lesshint',
-		'less',
-		// assets
-		'copy',
-		'replace',
-		// clean up
-		'clean:prod'
 	]);
 	// deploy to gh-pages task
 	grunt.registerTask('ghpages', 'deploys to gh-pages', function () {
@@ -467,6 +485,65 @@ module.exports = function(grunt) {
 			if (error) {
 				grunt.log.error('Error running `gh-pages` task: ', error);
 			}
+		});
+	});
+	// refresh data
+	grunt.registerTask('data', function () {
+		delete require.cache[require.resolve('./src/components/data/styles.js')];
+		delete require.cache[require.resolve('./gruntfile.config.js')];
+		globals = require('./gruntfile.config.js');
+		// reset tasks that consume any data in globals
+		grunt.config.set('includereplace.options.globals', globals.data);
+		grunt.config.set('template.options.data', globals.data);
+		grunt.config.set('copy.fonts.src', globals.data);
+	});
+	// create a file for each styleguide component with metadata from globals.data and append the component's content from /src/views/styles (if a file for the component exists)
+	grunt.registerTask('styleguide', function () {
+		// create vendor files
+		_.each(globals.data.styles, function (style, key) {
+			// transform classes from globals.data.styles
+			if (style.classes) {
+				_.each(style.classes, function (value, className) {
+					if (typeof value === 'string') {
+						style.classes[className] = {
+							usage: value
+						};
+					}
+					style.classes[className].name = className;
+					// if it's a modifier, push to parent
+					if (className.indexOf('--') > -1) {
+						var parent = className.split('--')[0];
+						if (!style.classes[parent].modifiers) {
+							style.classes[parent].modifiers = [];
+						}
+						if (style.classes[parent].modifiers.indexOf(className) === -1) {
+							style.classes[parent].modifiers.push(className);
+						}
+					}
+				});
+			}
+			// if style.name doesn't exist already, use the file name
+			style.name = style.name || (key[0].toUpperCase() + key.slice(1).toLowerCase()).replace(/-/g, ' ');
+			// make sure style.related is an array
+			if (typeof style.related === 'string') {
+				style.related = [style.related];
+			}
+			// make sure certain properties exist
+			style.intro = style.intro || '';
+			style.content = style.content || '';
+			// create style page
+			// var content = '@@include(\'views/component-details/component-details.md\', {"globals": "styles/' + key + '"})\n\n';
+			content = _.template(grunt.file.read('src/views/component-details/component-details.md'))(style);
+			var files = grunt.file.expand('src/views/styles/_' + key + '.md');
+			if (files.length) {
+				_.each(files, function (filepath) {
+					content += grunt.file.read(filepath);
+				});
+			} else {
+				// if no file(s), add placeholder for "Examples" section
+				content += '## Examples\n\nWe are working on adding live examples for this style block... stay tuned.';
+			}
+			grunt.file.write('.temp/style-guide/views/styles/' + key + '.html.md', content);
 		});
 	});
 };

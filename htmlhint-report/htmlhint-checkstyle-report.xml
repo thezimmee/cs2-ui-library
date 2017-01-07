@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<checkstyle version="4.3">
+<file name=".temp/views/layout/footer.tpl.html">
+
+</file>
+<file name=".temp/views/layout/header.tpl.html">
+
+</file>
+<file name=".temp/views/layout/navbar.tpl.html">
+
+</file>
+<file name=".temp/views/home/home.html.md">
+
+</file>
+<file name=".temp/views/library/client-setup.html.md">
+
+</file>
+<file name=".temp/views/library/code-setup.html.md">
+
+</file>
+<file name=".temp/views/library/creating-a-widget.html.md">
+
+</file>
+<file name=".temp/views/library/developer-faq.html.md">
+
+</file>
+<file name=".temp/views/library/developer-standards.html.md">
+
+</file>
+<file name=".temp/views/library/developer-workflow.html.md">
+
+</file>
+<file name=".temp/views/styles/abstracts.html.md">
+
+</file>
+<file name=".temp/views/styles/alasql.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-bootstrap.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-chosen-localytics.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-cookies.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-filter.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-nouislider.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-resource.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-sanitize.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-swipe.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-translate-storage-cookie.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-translate-storage-local.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-translate.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-ui-router.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-ui-utils.html.md">
+
+</file>
+<file name=".temp/views/styles/angular-ui.html.md">
+
+</file>
+<file name=".temp/views/styles/angular.html.md">
+
+</file>
+<file name=".temp/views/styles/animate.css.html.md">
+
+</file>
+<file name=".temp/views/styles/background-color.html.md">
+
+</file>
+<file name=".temp/views/styles/bootstrap-daterangepicker.html.md">
+
+</file>
+<file name=".temp/views/styles/bootstrap-sweetalert.html.md">
+
+</file>
+<file name=".temp/views/styles/bootstrap.html.md">
+
+</file>
+<file name=".temp/views/styles/bower-angular-translate-loader-static-files.html.md">
+
+</file>
+<file name=".temp/views/styles/buttons.html.md">
+
+</file>
+<file name=".temp/views/styles/cards.html.md">
+
+</file>
+<file name=".temp/views/styles/chosen.html.md">
+
+</file>
+<file name=".temp/views/styles/circliful.html.md">
+
+</file>
+<file name=".temp/views/styles/clipboard.html.md">
+
+</file>
+<file name=".temp/views/styles/colors.html.md">
+
+</file>
+<file name=".temp/views/styles/components.html.md">
+
+</file>
+<file name=".temp/views/styles/core.html.md">
+
+</file>
+<file name=".temp/views/styles/cryptojslib.html.md">
+
+</file>
+<file name=".temp/views/styles/dragscroll.html.md">
+
+</file>
+<file name=".temp/views/styles/easy-pie-chart.html.md">
+
+</file>
+<file name=".temp/views/styles/eonasdan-bootstrap-datetimepicker.html.md">
+
+</file>
+<file name=".temp/views/styles/fingerprintjs2.html.md">
+
+</file>
+<file name=".temp/views/styles/flex.html.md">
+
+</file>
+<file name=".temp/views/styles/font-face.html.md">
+
+</file>
+<file name=".temp/views/styles/fonts.html.md">
+
+</file>
+<file name=".temp/views/styles/footer.html.md">
+
+</file>
+<file name=".temp/views/styles/fullcalendar.html.md">
+
+</file>
+<file name=".temp/views/styles/header.html.md">
+
+</file>
+<file name=".temp/views/styles/html2canvas.html.md">
+
+</file>
+<file name=".temp/views/styles/imagesloaded.html.md">
+
+</file>
+<file name=".temp/views/styles/isotope-packery.html.md">
+
+</file>
+<file name=".temp/views/styles/isotope.html.md">
+
+</file>
+<file name=".temp/views/styles/jquery-sortable.html.md">
+
+</file>
+<file name=".temp/views/styles/jquery-tokeninput.html.md">
+
+</file>
+<file name=".temp/views/styles/jquery.html.md">
+
+</file>
+<file name=".temp/views/styles/jquery.scrollTo.html.md">
+
+</file>
+<file name=".temp/views/styles/jspdf.html.md">
+
+</file>
+<file name=".temp/views/styles/layout.html.md">
+
+</file>
+<file name=".temp/views/styles/lightgallery.html.md">
+
+</file>
+<file name=".temp/views/styles/material-design-iconic-font.html.md">
+
+</file>
+<file name=".temp/views/styles/mdi.html.md">
+
+</file>
+<file name=".temp/views/styles/moment-timezone.html.md">
+
+</file>
+<file name=".temp/views/styles/moment.html.md">
+
+</file>
+<file name=".temp/views/styles/navbar.html.md">
+
+</file>
+<file name=".temp/views/styles/ng-img-crop.html.md">
+
+</file>
+<file name=".temp/views/styles/ng-table.html.md">
+
+</file>
+<file name=".temp/views/styles/ngclipboard.html.md">
+
+</file>
+<file name=".temp/views/styles/nouislider.html.md">
+
+</file>
+<file name=".temp/views/styles/ocLazyLoad.html.md">
+
+</file>
+<file name=".temp/views/styles/qtip2.html.md">
+
+</file>
+<file name=".temp/views/styles/remarkable-bootstrap-notify.html.md">
+
+</file>
+<file name=".temp/views/styles/show-hide.html.md">
+
+</file>
+<file name=".temp/views/styles/spacing.html.md">
+
+</file>
+<file name=".temp/views/styles/summernote.html.md">
+
+</file>
+<file name=".temp/views/styles/tables.html.md">
+
+</file>
+<file name=".temp/views/styles/tablesaw.html.md">
+
+</file>
+<file name=".temp/views/styles/tmsolution-tableheaderfixer.html.md">
+
+</file>
+<file name=".temp/views/styles/typography.html.md">
+
+</file>
+<file name=".temp/views/styles/underscore.html.md">
+
+</file>
+<file name=".temp/views/styles/vendor.html.md">
+
+</file>
+<file name=".temp/views/styles/views.html.md">
+
+</file>
+<file name=".temp/views/styles/waves.html.md">
+
+</file>
+</checkstyle>

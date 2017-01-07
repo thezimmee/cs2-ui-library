@@ -2,25 +2,25 @@
 
 1. Make sure [node and npm](https://nodejs.org/en/download){target="_blank"} and [git](https://git-scm.com/downloads){target="_blank"} are installed. Verify installation with the following commands:
 
-    ```bash
-    node -v
-    npm -v
-    git --version
-    ```
+```bash
+node -v
+npm -v
+git --version
+```
 
 2. Install grunt command line tools:
 
-    ```bash
-    npm -g install grunt-cli bower
-    ```
+```bash
+npm -g install grunt-cli bower
+```
 
 3. Clone project & install local dependencies:
 
-    ```bash
-    git clone https://github.com/wsimlm/DS-WebOffice-V2.75.git <myprojectfolder>
-    cd <myprojectfolder>
-    npm install
-    ```
+```bash
+git clone https://github.com/wsimlm/DS-WebOffice-V2.75.git <myprojectfolder>
+cd <myprojectfolder>
+npm install
+```
 
 4. Run `grunt watch` to watch your files for development.
 
