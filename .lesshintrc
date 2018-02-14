@@ -141,6 +141,10 @@
 		"enabled": true,
 		"severity": "error"
 	},
+	"universalSelector": {
+		"enabled": false,
+		"severity": "error"
+	},
 	"urlFormat": {
 		"enabled": false,
 		"severity": "error"
